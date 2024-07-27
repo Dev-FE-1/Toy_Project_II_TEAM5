@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
-import Modal, { ModalContext } from '../../components/shared/Modal'
-import Flex from '../../components/shared/Flex'
 import { useContext } from 'react'
+import styled from 'styled-components'
+import Flex from '@components/shared/Flex'
+import Modal, { ModalContext } from '@components/shared/Modal'
 
 function HomePage() {
   return (
@@ -19,6 +19,8 @@ const Button = styled.button`
   width: 94px;
   height: 32px;
   box-sizing: border-box;
+  margin: 20px;
+  margin-left: 40px;
   padding: 6px 8px;
   background-color: #4fd1c5;
   color: white;
@@ -48,6 +50,12 @@ const Form = styled.div`
 `
 
 const Title = styled.h2`
+  display: block;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  unicode-bidi: isolate;
   font-size: 18px;
   font-weight: bold;
   padding-left: 41px;
@@ -116,7 +124,7 @@ function Contents() {
   `
 
   function SubmitButton({ children }) {
-    const handleClick = (e) => {
+    const handleClick = () => {
       setIsOpen(false)
     }
 
@@ -142,4 +150,15 @@ function Contents() {
   )
 }
 
+export const Headding = styled.h1`
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-left: 40px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+`
 export default HomePage

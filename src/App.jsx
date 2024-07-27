@@ -1,9 +1,9 @@
+import Navbar from '@components/Navbar/Navbar'
+import HomePage from '@pages/home/home-page'
+import SalaryManagementPage from '@pages/salary-management/salary-management-page'
+import SigninPage from '@pages/signin/signin-page'
+import TaskManagementPage from '@pages/task-management/taskManagement-page'
 import { Route, Routes } from 'react-router-dom'
-import Navbar from './components/Navbar/Navbar'
-import HomePage from './pages/home/home-page'
-import SalaryManagementPage from './pages/salary-management/salary-management-page'
-import SigninPage from './pages/signin/signin-page'
-import TaskManagementPage from './pages/task-management/taskManagement-page'
 
 function App() {
   return (
