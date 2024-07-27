@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
-import Modal from '../../components/shared/Modal'
+import Modal, { ModalContext } from '../../components/shared/Modal'
 import Flex from '../../components/shared/Flex'
+import { useContext } from 'react'
 
 function HomePage() {
   return (
@@ -59,6 +60,8 @@ const Horizon = styled.hr`
 `
 
 function Contents() {
+  const { setIsOpen } = useContext(ModalContext)
+
   const Container = styled.div`
     padding: 28px 40px;
   `
@@ -112,6 +115,14 @@ function Contents() {
     font-size: 20px;
   `
 
+  function SubmitButton({ children }) {
+    const handleClick = (e) => {
+      setIsOpen(false)
+    }
+
+    return <Button onClick={handleClick}>{children}</Button>
+  }
+
   return (
     <Container>
       <Title>날짜</Title>
@@ -125,7 +136,7 @@ function Contents() {
       <Title>내용</Title>
       <TextArea />
       <Flex>
-        <Button>완료</Button>
+        <SubmitButton>완료</SubmitButton>
       </Flex>
     </Container>
   )
