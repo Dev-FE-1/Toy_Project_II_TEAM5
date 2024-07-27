@@ -78,9 +78,7 @@ export default function Payslip2() {
   )
 }
 
-const Company = styled.div`
-  margin-bottom: 20px;
-`
+const Company = styled.div``
 const Detail = styled.div``
 const EmployeeItem = styled.div`
   width: 100%;
