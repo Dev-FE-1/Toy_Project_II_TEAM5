@@ -1,7 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
+import { colorVariables } from './Colors'
 
 const GlobalStyle = createGlobalStyle`
 
+  ${colorVariables}
+  
   /* reset css */
   html,
   body,
