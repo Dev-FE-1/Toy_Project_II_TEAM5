@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import styled from 'styled-components'
 import Flex from '@components/shared/Flex'
 import Modal, { ModalContext } from '@components/shared/Modal'
+import { colors } from '@styles/Colors'
 
 function HomePage() {
   return (
@@ -153,6 +154,7 @@ function Contents() {
 export const Headding = styled.h1`
   display: block;
   font-size: 2em;
+  color: ${colors.primary};
   margin-block-start: 0.67em;
   margin-block-end: 0.67em;
   margin-inline-start: 0px;
