@@ -57,7 +57,7 @@ const PayslipContainer = styled.div`
   height: 868px;
   border: 1px solid #e0e0e0;
   padding: 25px 16px;
-  border-radius: 8px;
+  border-radius: 20px;
   background-color: #ffffff;
 `
 
