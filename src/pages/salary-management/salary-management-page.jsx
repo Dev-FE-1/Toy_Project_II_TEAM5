@@ -1,7 +1,10 @@
-import { Headding } from '@pages/home/home-page'
-
+import Calendar from "../../components/Calendar/Calendar"
 function SalaryManagementPage() {
-  return <Headding>급여관리</Headding>
+  return (
+  <>
+    <h1>급여관리</h1>
+    <Calendar></Calendar>
+  </>)
 }
 
 export default SalaryManagementPage
