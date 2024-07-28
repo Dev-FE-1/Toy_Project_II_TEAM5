@@ -43,7 +43,7 @@ const ScheduleContainer = styled.div`
   width: 510px;
   height: auto;
   padding: 20px 50px;
-  border: 1px solid #d2d2d2;
+  border: 1px solid #e0e0e0;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
