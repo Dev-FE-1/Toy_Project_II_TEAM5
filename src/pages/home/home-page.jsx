@@ -136,7 +136,7 @@ function Contents() {
     <Container>
       <Title>날짜</Title>
       <Content>
-        <Flex gap="60px" justify="flex-start">
+        <Flex $gap="60px" $justify="flex-start">
           <DateSelect data={years} />
           <DateSelect data={months} />
           <DateSelect data={days} />
