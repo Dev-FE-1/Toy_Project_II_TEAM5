@@ -14,7 +14,7 @@ const scheduleItems = [
 export default function Schedule() {
   return (
     <ScheduleContainer>
-      <h1>Today Schedule</h1>
+      <h2>Today Schedule</h2>
       <ScheduleList>
         {scheduleItems.map((item, index) => (
           <ScheduleItem key={index}>
