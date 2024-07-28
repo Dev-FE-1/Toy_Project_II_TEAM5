@@ -1,8 +1,14 @@
 import { colors } from '@styles/Colors'
 import styled from 'styled-components'
+import EmployeeListrow from '../../components/Listrow/EmployeeListrow'
 
 function HomePage() {
-  return <Headding>Home</Headding>
+  return (
+    <>
+      <Headding>Home</Headding>
+      <EmployeeListrow />
+    </>
+  )
 }
 
 export const Headding = styled.h1`

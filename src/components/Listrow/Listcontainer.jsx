@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { colors } from '@styles/Colors'
 
 export const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomPositionCell}) => {
   return (
@@ -61,7 +62,7 @@ const ListRowText = styled.span`
     ${props => props.status === 'Online' && css `
       width: 80px;
       justify-content: center;
-      color: #fff;
+      color: ${colors.white};
       background: #48bb78;
       text-align: center;
       border-radius: 8px;
@@ -69,7 +70,7 @@ const ListRowText = styled.span`
     ${props => props.status === 'Offline' && css `
       width: 80px;
       justify-content: center;
-      color: #fff;
+      color: ${colors.white};
       background: #cbd5e0;
       text-align: center;
       border-radius: 8px;

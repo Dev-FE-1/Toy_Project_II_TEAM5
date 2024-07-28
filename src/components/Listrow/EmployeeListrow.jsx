@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from '@styles/Colors'
 import { employeeLists } from '../Constant/employeeLists'
 import { Listcontainer } from './Listcontainer'
 import { Fragment } from 'react'
@@ -42,7 +43,7 @@ export const EmployeeListrow = () => {
 
   return (
     <EmployeeList>
-      <h3>직원 목록</h3>
+      <Title>직원 목록</Title>
       <Listcontainer
         lists={employeeLists}
         rows={rows}
@@ -53,9 +54,15 @@ export const EmployeeListrow = () => {
   )
 }
 
+const Title = styled.h3`
+  font-size: 24px;
+  font-weight: bold;
+`
+
 const EmployeeList = styled.div`
   width: 50%;
   border-radius: 15px;
+  padding: 20px 15px;
   box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.1);
 `
 
@@ -70,7 +77,7 @@ const EmployeeProfileImg = styled.img`
 
 const EmployeeEmail = styled.span`
   display: block;
-  color: #718096;
+  color: ${colors.gray};
   font-size: 12px;
 `
 
@@ -79,7 +86,7 @@ const EmployeePosition = styled.div`
   flex-direction: column;
 `
 const EmployeePosition2 = styled.span`
-  color: #718096;
+  color: ${colors.gray};
   font-size: 12px;
 `
 
