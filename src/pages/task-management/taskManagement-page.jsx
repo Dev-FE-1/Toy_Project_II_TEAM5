@@ -1,5 +1,7 @@
+import { Headding } from '@pages/home/home-page'
+
 function TaskManagementPage() {
-  return <h1>업무 관리</h1>
+  return <Headding>업무 관리</Headding>
 }
 
 export default TaskManagementPage
