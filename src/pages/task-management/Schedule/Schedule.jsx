@@ -129,12 +129,12 @@ const ButtonContainer = styled.div`
 `
 
 const AddButton = styled.button`
-  font-weight: bold;
+  font-weight: 500;
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #4fd1c5;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
 `
