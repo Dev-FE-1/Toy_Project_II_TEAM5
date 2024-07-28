@@ -1,5 +1,7 @@
+import { Headding } from '@pages/home/home-page'
+
 function SalaryManagementPage() {
-  return <h1>급여관리</h1>
+  return <Headding>급여관리</Headding>
 }
 
 export default SalaryManagementPage

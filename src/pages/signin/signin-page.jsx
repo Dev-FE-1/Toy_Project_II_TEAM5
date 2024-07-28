@@ -1,5 +1,7 @@
+import { Headding } from '@pages/home/home-page'
+
 function SigninPage() {
-  return <h1>Sign in</h1>
+  return <Headding>Sign in</Headding>
 }
 
 export default SigninPage
