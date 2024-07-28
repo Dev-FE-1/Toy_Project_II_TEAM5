@@ -13,7 +13,8 @@ export const colorVariables = css`
     --primary_800: #006e58;
     --primary_900: #00513b;
 
-    --white: #f8f9fa;
+    --white: #ffffff;
+    --lightGray: #f8f9fa;
     --gray: #718096;
     --black: #2d3748;
   }
@@ -32,6 +33,7 @@ export const colors = {
   primary_900: 'var(--primary_900)',
 
   white: 'var(--white)',
+  lightGray: 'var(--lightGray)',
   gray: 'var(--gray)',
   black: 'var(--black)',
 }
