@@ -5,10 +5,10 @@ const scheduleItems = [
   { time: '08.00am', task: 'Meeting with PaperCup Cafe', duration: '30min', color: 'pink' },
   { time: '12.00am', task: 'Lunch with Esther Wallace', duration: '1hr', color: '#4fd1c5' },
   { time: '02.00pm', task: 'Call babysitter for Saturday', duration: '10min', color: 'orange' },
-  { time: '02.30pm', task: 'Conference Call', duration: '1hr 30min', color: '#760000' },
-  { time: '03.45pm', task: 'Pick up kids', duration: '30min', color: '#4fd1c5' },
-  { time: '04.45pm', task: 'Pick up kids', duration: '30min', color: '#4fd1c5' },
-  { time: '05.45pm', task: 'Pick up kids', duration: '30min', color: '#4fd1c5' },
+  { time: '02.30pm', task: 'Conference Call', duration: '1hr 30min', color: 'pink' },
+  { time: '03.45pm', task: '강의 복습하기', duration: '2hr', color: '#4fd1c5' },
+  { time: '04.05pm', task: '코딩테스트 문제 풀기', duration: '30min', color: '#4fd1c5' },
+  { time: '05.45pm', task: 'Pick up kids', duration: '40min', color: '#4fd1c5' },
 ]
 
 export default function Schedule() {
@@ -121,6 +121,7 @@ const Time = styled.div`
 `
 
 const Duration = styled.div`
+  font-size: 15px;
   color: #848484;
   margin-right: 10px;
 `
