@@ -40,10 +40,10 @@ export default function Schedule() {
 }
 
 const ScheduleContainer = styled.div`
-  width: 510px;
+  width: 400px;
   height: auto;
   padding: 20px 50px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #d2d2d2;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -57,7 +57,7 @@ const ScheduleList = styled.div`
   width: 100%;
   padding-right: 10px;
   &::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.4);
   }
@@ -127,7 +127,7 @@ const Duration = styled.div`
 
 const Task = styled.div`
   font-size: 18px;
-  font-weight: 500;
+  /* font-weight: 500; */
   padding-bottom: 20px;
 `
 
