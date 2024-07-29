@@ -1,8 +1,14 @@
 import { colors } from '@styles/Colors'
 import styled from 'styled-components'
+import Lunch from './Lunch/Lunch'
 
 function HomePage() {
-  return <Headding>Home</Headding>
+  return (
+    <div>
+      <Headding>Home</Headding>
+      <Lunch />
+    </div>
+  )
 }
 
 export const Headding = styled.h1`
