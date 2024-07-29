@@ -57,6 +57,7 @@ const EmployeeListrow = () => {
 const Title = styled.h3`
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 25px;
 `
 
 const EmployeeList = styled.div`
@@ -80,6 +81,7 @@ const EmployeeEmail = styled.span`
   display: block;
   color: ${colors.gray};
   font-size: 12px;
+  margin-top: 5px;
 `
 
 const EmployeePosition = styled.div`

@@ -61,6 +61,7 @@ const ListRowUl = styled.ul`
 
 const ListRowTitleText = styled.span`
   color: #a0aec0;
+  font-size: 0.9em;
 `
 
 const ListRowContent = styled.li`
@@ -76,6 +77,7 @@ const ListRowText = styled.span`
   align-items: center;
   padding: 10px 15px;
   font-weight: bold;
+  position: relative;
   ${(props) =>
     props.status === 'Online' &&
     css`
@@ -96,6 +98,10 @@ const ListRowText = styled.span`
       text-align: center;
       border-radius: 8px;
     `}
+  a {
+    position: absolute;
+    left: 50%;
+  }
 `
 
 export default Listcontainer

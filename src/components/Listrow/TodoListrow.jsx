@@ -7,7 +7,7 @@ const rows = [
   { key: 'checklist', header: '체크리스트' },
   { key: 'status', header: '상태' },
   { key: 'completion', header: '진행상황' },
-  { key: 'more', header: '더보기' },
+  { key: 'more', header: '' },
 ]
 
 const TodoListrow = () => {
@@ -24,6 +24,7 @@ const TodoListrow = () => {
 const Title = styled.h3`
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 25px;
 `
 
 const TodoList = styled.div`
