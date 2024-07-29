@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { todoLists } from '@components/Constant/todoLists'
 import Listcontainer from './Listcontainer'
 import moreIcon from '../../assets/icon/more.svg'
@@ -15,10 +15,10 @@ const TodoListrow = () => {
   const createCustomChecklistCell = (item, row) => {
     if(row.key === 'checklist') {
       return (
-        <div>
-          <span status={item.classification}></span>
+        <ClassifyWrapper>
+          <ClassifyColor status={item.classification}></ClassifyColor>
           <span>{item.checklist}</span>
-        </div>
+        </ClassifyWrapper>
       )
     }
     return item[row.key]
@@ -45,5 +45,39 @@ const TodoList = styled.div`
   padding: 20px 15px;
   box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.1);
 `
+
+const ClassifyWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const ClassifyColor = styled.span`
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  margin-right: 10px;
+  ${(props) =>
+    props.status === 'meeting' &&
+    css`
+    background: rgba(255, 59, 59, 0.1);
+    `}
+  ${(props) =>
+    props.status === 'prepare' &&
+    css`
+    background: rgba(255, 150, 27, 0.1);
+    `}
+  ${(props) =>
+    props.status === 'external' &&
+    css`
+    background: rgba(0, 133, 255, 0.1);
+    `}
+  ${(props) =>
+    props.status === 'report' &&
+    css`
+    background: rgba(232, 232, 232, 1);
+    `}
+`
+
 
 export default TodoListrow
