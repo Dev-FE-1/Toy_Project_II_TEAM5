@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { colors } from '@styles/Colors'
 import { ProgressBar } from "react-step-progress-bar"
 import { todoLists } from '@components/Constant/todoLists'
 
 const CreateProgressbar = ({ completion }) => {
-  const [ percent, setPercent ] = useState(0)
+  const [percent, setPercent] = useState(0)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,9 +18,7 @@ const CreateProgressbar = ({ completion }) => {
   return (
     <ProgressBarWrapper>
       <ProgressPercent>{completion}%</ProgressPercent>
-      <ProgressBar
-        percent={percent}
-      />
+      <ProgressBar percent={percent} />
     </ProgressBarWrapper>
   )
 }
@@ -35,12 +34,12 @@ const ProgressBarWrapper = styled.div`
   .RSPBprogression {
     height: 100%;
     border-radius: 3px;
-    background: #4fd1c5;
-    transition: width .5s ease-in-out
+    background: ${colors.primary_200};
+    transition: width 0.5s ease-in-out;
   }
 `
 
-const ProgressPercent  = styled.span`
+const ProgressPercent = styled.span`
   color: #4fd1c5;
   font-size: 0.9em;
   position: relative;
