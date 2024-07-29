@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       {/* <Navbar /> */}
-      {/* <SideNav /> */}
+      <SideNav />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signin" element={<SigninPage />} />
