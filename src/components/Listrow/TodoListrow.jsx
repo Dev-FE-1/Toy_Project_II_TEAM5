@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 import { todoLists } from '@components/Constant/todoLists'
 import Listcontainer from './Listcontainer'
+import moreIcon from '../../assets/icon/more.svg'
 
 const rows = [
   { key: 'checklist', header: '체크리스트' },
   { key: 'status', header: '상태' },
   { key: 'completion', header: '진행상황' },
+  { key: 'more', header: '더보기' },
 ]
 
 const TodoListrow = () => {
@@ -16,6 +18,7 @@ const TodoListrow = () => {
         <Listcontainer
           lists={todoLists}
           rows={rows}
+          moreIcon={moreIcon}
         />
       </TodoList>
     </>

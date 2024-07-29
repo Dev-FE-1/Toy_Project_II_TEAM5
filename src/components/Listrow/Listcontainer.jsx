@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { colors } from '@styles/Colors'
 import CreateProgressbar from '@components/Progressbar/Progressbar'
 
-const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomPositionCell }) => {
+const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomPositionCell, moreIcon }) => {
   return (
     <Fragment>
       <ListRowTitle>
@@ -27,6 +27,8 @@ const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomPosition
                   ? createCustomPositionCell(item, row)
                   : row.key === 'completion'
                   ? <CreateProgressbar completion={item[row.key]} />
+                  : row.key === 'more'
+                  ? <a href="/tasks"><img src={moreIcon} alt="More" className="more" /></a>
                   : item[row.key]}
               </ListRowText>
             ))}
