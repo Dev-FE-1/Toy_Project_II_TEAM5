@@ -24,12 +24,14 @@ function Navbar() {
 
 const Nav = styled.nav`
   width: 100%;
+  margin-top: 16px;
 
   & ul {
     width: fit-content;
     list-style: none;
     display: flex;
     gap: 30px;
+    padding-left: 40px;
     & a {
       text-decoration: none;
     }
