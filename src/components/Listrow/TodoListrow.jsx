@@ -11,11 +11,23 @@ const rows = [
 ]
 
 const TodoListrow = () => {
+
+  const createCustomChecklistCell = (item, row) => {
+    if(row.key === 'checklist') {
+      return (
+        <div>
+          <span status={item.classification}></span>
+          <span>{item.checklist}</span>
+        </div>
+      )
+    }
+    return item[row.key]
+  }
   return (
     <>
       <TodoList>
         <Title>오늘의 할 일</Title>
-        <Listcontainer lists={todoLists} rows={rows} moreIcon={moreIcon} />
+        <Listcontainer lists={todoLists} rows={rows} moreIcon={moreIcon} createCustomChecklistCell={createCustomChecklistCell} />
       </TodoList>
     </>
   )

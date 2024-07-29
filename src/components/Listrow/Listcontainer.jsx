@@ -9,6 +9,7 @@ const Listcontainer = ({
   createCustomNameCell,
   createCustomPositionCell,
   moreIcon,
+  createCustomChecklistCell,
 }) => {
   return (
     <Fragment>
@@ -37,6 +38,8 @@ const Listcontainer = ({
                   <a href="/tasks">
                     <img src={moreIcon} alt="More" className="more" />
                   </a>
+                ) : row.key === 'checklist' ? (
+                  createCustomChecklistCell(item, row)
                 ) : (
                   item[row.key]
                 )}
