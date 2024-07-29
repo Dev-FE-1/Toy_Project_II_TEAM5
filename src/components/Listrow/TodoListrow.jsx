@@ -10,13 +10,15 @@ const rows = [
 
 const TodoListrow = () => {
   return (
-    <TodoList>
-      <Title>오늘의 할 일</Title>
-      <Listcontainer
-        lists={todoLists}
-        rows={rows}
-      />
-    </TodoList>
+    <>
+      <TodoList>
+        <Title>오늘의 할 일</Title>
+        <Listcontainer
+          lists={todoLists}
+          rows={rows}
+        />
+      </TodoList>
+    </>
   )
 }
 
@@ -26,7 +28,7 @@ const Title = styled.h3`
 `
 
 const TodoList = styled.div`
-  width: 100%;
+  width: 90%;
   border-radius: 15px;
   padding: 20px 15px;
   box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.1);

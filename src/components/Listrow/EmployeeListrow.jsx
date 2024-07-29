@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { colors } from '@styles/Colors'
 import { employeeLists } from '../Constant/employeeLists'
-import { Listcontainer } from './Listcontainer'
+import Listcontainer from './Listcontainer'
 import { Fragment } from 'react'
 
 const rows = [
@@ -11,7 +11,7 @@ const rows = [
   { key: 'date', header: '입사일' },
 ]
 
-export const EmployeeListrow = () => {
+const EmployeeListrow = () => {
   const createCustomNameCell = (item, row) => {
     if (row.key === 'name') {
       return (
@@ -67,8 +67,9 @@ const EmployeeList = styled.div`
 `
 
 const EmployeeProfile = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
+  margin-right: 5px;
 `
 
 const EmployeeProfileImg = styled.img`

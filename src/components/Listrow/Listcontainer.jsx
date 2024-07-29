@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components'
 import { colors } from '@styles/Colors'
+import { Fragment } from 'react'
+import CreateProgressbar from '@components/Progressbar/Progressbar'
 
-export const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomPositionCell}) => {
+const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomPositionCell }) => {
   return (
-    <ListRowContainer>
+    <Fragment>
       <ListRowTitle>
         {rows.map((row) => (
           <ListRowText key={row.key}>
@@ -11,7 +13,7 @@ export const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomP
           </ListRowText>
         ))}
       </ListRowTitle>
-      <ul>
+      <ListRowUl key={lists.id}>
         {lists.map((item) => (
           <ListRowContent key={item.id}>
             {rows.map((row) => (
@@ -23,25 +25,28 @@ export const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomP
                   ? createCustomNameCell(item, row)
                   : row.key === 'position1' && createCustomPositionCell
                   ? createCustomPositionCell(item, row)
+                  : row.key === 'completion'
+                  ? <CreateProgressbar completion={item[row.key]} />
                   : item[row.key]}
               </ListRowText>
             ))}
           </ListRowContent>
         ))}
-      </ul>
-    </ListRowContainer>
+      </ListRowUl>
+    </Fragment>
   )
 }
-
-const ListRowContainer = styled.div`
-  padding: 10px;
-`
 
 const ListRowTitle = styled.ul`
   display: grid;
   grid-template-columns: 3fr 1fr 1fr 1fr;
   border-bottom: 1px solid #e2e8f0;
 `
+
+const ListRowUl = styled.ul`
+  display: grid;
+`
+
 const ListRowTitleText = styled.span`
   color: #a0aec0;
 `
@@ -57,7 +62,7 @@ const ListRowText = styled.span`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 15px;
   font-weight: bold;
     ${props => props.status === 'Online' && css `
       width: 80px;
