@@ -72,7 +72,7 @@ const ScheduleItem = styled.div`
   display: flex;
   flex-direction: row;
   /* margin: 10px 0; */
-  position: relative;
+  /* position: relative; */
   cursor: pointer;
 `
 
@@ -81,7 +81,7 @@ const DotLineContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  /* position: relative; */
   margin-right: 10px;
 `
 
@@ -97,8 +97,8 @@ const Line = styled.div`
   width: 1px;
   height: 100%;
   background-color: #d2d2d2;
-  position: absolute;
-  top: 10px;
+  /* position: absolute; */
+  /* top: 10px; */
 `
 
 const ItemDetails = styled.div`
