@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { colors } from '@styles/Colors'
-import { ProgressBar } from "react-step-progress-bar"
+import { ProgressBar } from 'react-step-progress-bar'
 import { todoLists } from '@components/Constant/todoLists'
 
 const CreateProgressbar = ({ completion }) => {

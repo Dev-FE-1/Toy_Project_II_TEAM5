@@ -3,7 +3,13 @@ import styled, { css } from 'styled-components'
 import { colors } from '@styles/Colors'
 import CreateProgressbar from '@components/Progressbar/Progressbar'
 
-const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomPositionCell, moreIcon }) => {
+const Listcontainer = ({
+  lists,
+  rows,
+  createCustomNameCell,
+  createCustomPositionCell,
+  moreIcon,
+}) => {
   return (
     <Fragment>
       <ListRowTitle>
@@ -17,19 +23,23 @@ const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomPosition
         {lists.map((item) => (
           <ListRowContent key={item.id}>
             {rows.map((row) => (
-              <ListRowText 
+              <ListRowText
                 key={`${row.id}-${row.key}`}
                 status={row.key === 'status' ? item[row.key] : null}
               >
-                {row.key === 'name' && createCustomNameCell
-                  ? createCustomNameCell(item, row)
-                  : row.key === 'position1' && createCustomPositionCell
-                  ? createCustomPositionCell(item, row)
-                  : row.key === 'completion'
-                  ? <CreateProgressbar completion={item[row.key]} />
-                  : row.key === 'more'
-                  ? <a href="/tasks"><img src={moreIcon} alt="More" className="more" /></a>
-                  : item[row.key]}
+                {row.key === 'name' && createCustomNameCell ? (
+                  createCustomNameCell(item, row)
+                ) : row.key === 'position1' && createCustomPositionCell ? (
+                  createCustomPositionCell(item, row)
+                ) : row.key === 'completion' ? (
+                  <CreateProgressbar completion={item[row.key]} />
+                ) : row.key === 'more' ? (
+                  <a href="/tasks">
+                    <img src={moreIcon} alt="More" className="more" />
+                  </a>
+                ) : (
+                  item[row.key]
+                )}
               </ListRowText>
             ))}
           </ListRowContent>
@@ -66,7 +76,9 @@ const ListRowText = styled.span`
   align-items: center;
   padding: 10px 15px;
   font-weight: bold;
-    ${props => props.status === 'Online' && css `
+  ${(props) =>
+    props.status === 'Online' &&
+    css`
       width: 80px;
       justify-content: center;
       color: ${colors.white};
@@ -74,7 +86,9 @@ const ListRowText = styled.span`
       text-align: center;
       border-radius: 8px;
     `}
-    ${props => props.status === 'Offline' && css `
+  ${(props) =>
+    props.status === 'Offline' &&
+    css`
       width: 80px;
       justify-content: center;
       color: ${colors.white};

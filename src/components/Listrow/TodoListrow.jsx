@@ -15,11 +15,7 @@ const TodoListrow = () => {
     <>
       <TodoList>
         <Title>오늘의 할 일</Title>
-        <Listcontainer
-          lists={todoLists}
-          rows={rows}
-          moreIcon={moreIcon}
-        />
+        <Listcontainer lists={todoLists} rows={rows} moreIcon={moreIcon} />
       </TodoList>
     </>
   )
