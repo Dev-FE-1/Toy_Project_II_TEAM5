@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { todoLists } from '../Constant/todoLists'
+import { todoLists } from '@components/Constant/todoLists'
 import Listcontainer from './Listcontainer'
 
 const rows = [

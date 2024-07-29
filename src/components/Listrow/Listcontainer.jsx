@@ -1,6 +1,6 @@
+import { Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { colors } from '@styles/Colors'
-import { Fragment } from 'react'
 import CreateProgressbar from '@components/Progressbar/Progressbar'
 
 const Listcontainer = ({ lists, rows, createCustomNameCell, createCustomPositionCell }) => {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { ProgressBar } from "react-step-progress-bar"
-import { todoLists } from '../Constant/todoLists'
+import { todoLists } from '@components/Constant/todoLists'
 
 const CreateProgressbar = ({ completion }) => {
   const [ percent, setPercent ] = useState(0)

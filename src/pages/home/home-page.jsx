@@ -1,6 +1,6 @@
 import { colors } from '@styles/Colors'
 import styled from 'styled-components'
-import EmployeeListrow from '../../components/Listrow/EmployeeListrow'
+import EmployeeListrow from '@components/Listrow/EmployeeListrow'
 import TodoListrow from '@components/Listrow/TodoListrow'
 
 function HomePage() {

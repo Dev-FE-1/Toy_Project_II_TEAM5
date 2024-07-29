@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '@styles/Colors'
-import { employeeLists } from '../Constant/employeeLists'
+import { employeeLists } from '@components/Constant/employeeLists'
 import Listcontainer from './Listcontainer'
 import { Fragment } from 'react'
 
