@@ -48,6 +48,7 @@ const TodoList = styled.div`
   border-radius: 15px;
   padding: 20px 15px;
   box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 `
 
 const ClassifyWrapper = styled.div`

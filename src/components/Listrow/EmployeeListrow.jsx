@@ -61,10 +61,11 @@ const Title = styled.h3`
 `
 
 const EmployeeList = styled.div`
-  width: 50%;
+  width: 60%;
   border-radius: 15px;
   padding: 20px 15px;
   box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
 `
 
 const EmployeeProfile = styled.div`
