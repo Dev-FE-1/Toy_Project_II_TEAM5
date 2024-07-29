@@ -11,9 +11,8 @@ const rows = [
 ]
 
 const TodoListrow = () => {
-
   const createCustomChecklistCell = (item, row) => {
-    if(row.key === 'checklist') {
+    if (row.key === 'checklist') {
       return (
         <ClassifyWrapper>
           <ClassifyColor status={item.classification}></ClassifyColor>
@@ -27,7 +26,12 @@ const TodoListrow = () => {
     <>
       <TodoList>
         <Title>오늘의 할 일</Title>
-        <Listcontainer lists={todoLists} rows={rows} moreIcon={moreIcon} createCustomChecklistCell={createCustomChecklistCell} />
+        <Listcontainer
+          lists={todoLists}
+          rows={rows}
+          moreIcon={moreIcon}
+          createCustomChecklistCell={createCustomChecklistCell}
+        />
       </TodoList>
     </>
   )
@@ -60,24 +64,23 @@ const ClassifyColor = styled.span`
   ${(props) =>
     props.status === 'meeting' &&
     css`
-    background: rgba(255, 59, 59, 0.1);
+      background: rgba(255, 59, 59, 0.1);
     `}
   ${(props) =>
     props.status === 'prepare' &&
     css`
-    background: rgba(255, 150, 27, 0.1);
+      background: rgba(255, 150, 27, 0.1);
     `}
   ${(props) =>
     props.status === 'external' &&
     css`
-    background: rgba(0, 133, 255, 0.1);
+      background: rgba(0, 133, 255, 0.1);
     `}
   ${(props) =>
     props.status === 'report' &&
     css`
-    background: rgba(232, 232, 232, 1);
+      background: rgba(232, 232, 232, 1);
     `}
 `
-
 
 export default TodoListrow
