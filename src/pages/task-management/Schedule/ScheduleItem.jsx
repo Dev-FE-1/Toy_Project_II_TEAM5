@@ -20,6 +20,9 @@ const ItemContainer = styled.div`
   display: flex;
   flex-direction: row;
   cursor: pointer;
+  /* &:hover {
+    font-weight: 600;
+  } */
 `
 
 const DotLineContainer = styled.div`
@@ -54,6 +57,9 @@ const ItemDetails = styled.div`
 const Task = styled.div`
   font-size: 18px;
   padding-bottom: 25px;
+  &:hover {
+    font-weight: 600;
+  }
 `
 
 export default ScheduleItem
