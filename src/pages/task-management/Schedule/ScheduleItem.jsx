@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import TimeContainer from './TimeContainer'
 
 const ScheduleItem = ({ item }) => (
   <ItemContainer>
@@ -7,10 +8,7 @@ const ScheduleItem = ({ item }) => (
       <Line />
     </DotLineContainer>
     <ItemDetails>
-      <TimeContainer>
-        <Time>{item.time}</Time>
-        <Duration>{item.duration}</Duration>
-      </TimeContainer>
+      <TimeContainer time={item.time} duration={item.duration} />
       <Task>{item.task}</Task>
     </ItemDetails>
   </ItemContainer>
@@ -55,24 +53,6 @@ const ItemDetails = styled.div`
 const Task = styled.div`
   font-size: 18px;
   padding-bottom: 20px;
-`
-
-const TimeContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-`
-
-const Time = styled.div`
-  color: #848484;
-  margin-right: 10px;
-`
-
-const Duration = styled.div`
-  font-size: 15px;
-  color: #848484;
-  margin-right: 10px;
 `
 
 export default ScheduleItem
