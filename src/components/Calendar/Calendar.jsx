@@ -150,8 +150,11 @@ const ScheduleItem = styled.div`
   max-width: 70%;
   border-radius: 3px;
   font-size: 12px;
-  word-break: break-all; 
-  overflow-wrap: break-word;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* word-break: break-all; 
+  overflow-wrap: break-word; */
   background-color: ${props => {
     switch(props.type) {
       case '출근': return '#FFA500';
