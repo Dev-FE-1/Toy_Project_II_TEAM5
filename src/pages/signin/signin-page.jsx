@@ -1,18 +1,18 @@
 // import { Headding } from '@pages/home/home-page'
 // import React from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import styled from 'styled-components'
 
-const GlobalStyle = createGlobalStyle`
-  // * {
-  //   box-sizing: border-box;
-  // }
-  
-  // html, body {
-  //   width: 100%;
-  //   max-width: 1280px;
-  //   height: 100%;
-  //   margin: 0px auto;
-  // }`
+// const GlobalStyle = createGlobalStyle`
+//   * {
+//     box-sizing: border-box;
+//   }
+
+//   html, body {
+//     width: 100%;
+//     max-width: 1280px;
+//     height: 100%;
+//     margin: 0px auto;
+// }`
 
 const Bold = styled.div`
   font-weight: 700;
@@ -67,7 +67,7 @@ const LoginEmail = styled.div`
   flex-direction: column;
 `
 
-const LoginEmailInput = styled.input`
+const LoginInput = styled.input`
   border: 1px solid lightgray;
   border-radius: 15px;
   width: 100%;
@@ -82,23 +82,23 @@ const LoginPassword = styled.div`
   flex-direction: column;
 `
 
-const LoginPasswordInput = styled.input`
-  border: 1px solid lightgray;
-  border-radius: 15px;
-  width: 100%;
-  height: 50px;
-  margin-top: 5px;
-  padding-left: 5%;
-`
+// const LoginPasswordInput = styled.input`
+//   border: 1px solid lightgray;
+//   border-radius: 15px;
+//   width: 100%;
+//   height: 50px;
+//   margin-top: 5px;
+//   padding-left: 5%;
+// `
 
 const LoginToggle = styled.div`
   display: flex;
   align-items: center;
   margin: 10px 0;
 `
-const ColoredLoginToggle = styled(LoginToggle)`
-  color: #fff;
-`
+// const ColoredLoginToggle = styled(LoginToggle)`
+//   color: #fff;
+// `
 
 const ToggleCheckbox = styled.input.attrs({ type: 'checkbox' })`
   display: none;
@@ -170,34 +170,43 @@ const TeamNameFooter = styled.footer`
   align-items: center;
   color: #f0f0f1;
 `
+function LoginInputField({ title, type, placeholder }) {
+  return (
+    <>
+      <Bold>{title}</Bold>
+      <div>
+        <LoginInput type={type} placeholder={placeholder} />
+      </div>
+    </>
+  )
+}
 
 function SigninPage() {
   return (
     <>
-      {/* <GlobalStyle /> */}
       <LoginContainer>
         <LoginWrapper>
           <LoginTop>
-            <Bold>
-              <MainTitle>
+            <MainTitle>
+              <Bold>
                 <Txt32>Welcome Back</Txt32>
-              </MainTitle>
-              <SubTitle>
+              </Bold>
+            </MainTitle>
+            <SubTitle>
+              <Bold>
                 <Txt14>이메일과 비밀번호를 입력해주세요.</Txt14>
-              </SubTitle>
-            </Bold>
+              </Bold>
+            </SubTitle>
           </LoginTop>
           <LoginEmail>
-            <Bold>Email</Bold>
-            <div>
-              <LoginEmailInput type="text" placeholder="이메일을 입력해주세요." />
-            </div>
+            <LoginInputField title="Email" type="email" placeholder="이메일을 입력해주세요." />
           </LoginEmail>
           <LoginPassword>
-            <Bold>Password</Bold>
-            <div>
-              <LoginPasswordInput type="password" placeholder="12345678" />
-            </div>
+            <LoginInputField
+              title="Password"
+              type="password"
+              placeholder="패스워드를 입력해주세요."
+            />
           </LoginPassword>
           <LoginToggle>
             <ToggleCheckbox id="toggle" />
