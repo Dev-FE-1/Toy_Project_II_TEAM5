@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import ScheduleItem from './ScheduleItem'
+import { colors } from '@styles/Colors'
 
 const scheduleItems = [
   { time: '06.00am', task: 'Spin Class', duration: '45min', color: '#4fd1c5' },
@@ -30,8 +31,8 @@ export default function Schedule() {
 
 const ScheduleContainer = styled.div`
   width: 500px;
-  height: auto;
-  padding: 20px 50px;
+  height: 768px;
+  padding: 45px;
   border: 1px solid #d2d2d2;
   border-radius: 20px;
   display: flex;
@@ -40,12 +41,14 @@ const ScheduleContainer = styled.div`
   margin: 20px;
 `
 
-const Title = styled.h2`
-  margin-bottom: 20px;
+const Title = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
 `
 
 const ScheduleList = styled.div`
-  max-height: 510px;
+  max-height: 570px;
   overflow-y: auto;
   width: 100%;
   padding-right: 10px;
@@ -67,12 +70,15 @@ const ButtonContainer = styled.div`
 `
 
 const AddButton = styled.button`
-  font-weight: 500;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #4fd1c5;
+  margin-top: 30px;
+  padding: 9px 20px;
+  background-color: ${colors.primary_200};
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+
+  &:hover {
+    background-color: ${colors.primary_300};
+  }
 `

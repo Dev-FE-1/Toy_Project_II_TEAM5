@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from '@styles/Colors'
 
 const TimeContainer = ({ time, duration }) => (
   <TimeDetails>
@@ -11,17 +12,17 @@ const TimeDetails = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `
 
 const Time = styled.div`
-  color: #848484;
+  color: ${colors.gray};
   margin-right: 10px;
 `
 
 const Duration = styled.div`
   font-size: 15px;
-  color: #848484;
+  color: ${colors.gray};
   margin-right: 10px;
 `
 
