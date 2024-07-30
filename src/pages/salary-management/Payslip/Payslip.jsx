@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from '@styles/Colors'
 
 export default function Payslip() {
   const payrollData = {
@@ -23,16 +24,16 @@ export default function Payslip() {
           <PayrollValue>{payrollData.baseSalary?.toLocaleString()} 원</PayrollValue>
         </PayrollItem>
         <PayrollItem>
-          <PayrollLabel>식대</PayrollLabel>
-          <PayrollValue>{payrollData.mealAllowance.toLocaleString()} 원</PayrollValue>
-        </PayrollItem>
-        <PayrollItem>
           <PayrollLabel>연장수당</PayrollLabel>
           <PayrollValue>{payrollData.overtimePay.toLocaleString()} 원</PayrollValue>
         </PayrollItem>
         <PayrollItem>
           <PayrollLabel>근속수당</PayrollLabel>
           <PayrollValue>{payrollData.longevityAllowance.toLocaleString()} 원</PayrollValue>
+        </PayrollItem>
+        <PayrollItem>
+          <PayrollLabel>식대</PayrollLabel>
+          <PayrollValue>{payrollData.mealAllowance.toLocaleString()} 원</PayrollValue>
         </PayrollItem>
         <PayrollItem>
           <PayrollLabel>상여금</PayrollLabel>
@@ -66,15 +67,15 @@ const TitleContainer = styled.div`
 `
 
 const Title = styled.div`
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 17px;
+  margin-bottom: 30px;
 `
 
 const Month = styled.div`
   font-size: 32px;
   font-weight: bold;
-  margin-bottom: 70px;
+  margin-bottom: 60px;
 `
 
 const DetailContainer = styled.div`
@@ -92,8 +93,13 @@ const PayrollItem = styled.div`
   height: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 20px;
+  padding: 8px 40px;
   border-bottom: 1px solid #e0e0e0;
+
+  &:hover {
+    background-color: #f8fffe;
+    text-decoration: underline;
+  }
 `
 
 const PayrollLabel = styled.div`
@@ -111,7 +117,7 @@ const PayrollTotal = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: #f8fffe;
-  padding: 8px 20px;
+  padding: 8px 40px;
   font-weight: bold;
 `
 
@@ -122,29 +128,29 @@ const PayrollActions = styled.div`
 `
 
 const ApplyButton = styled.button`
-  font-weight: bold;
-  padding: 10px 23.5px;
+  font-weight: 500;
+  padding: 9px 23.5px;
   border: none;
-  border-radius: 4px;
-  background-color: #4fd1c5;
+  border-radius: 8px;
+  background-color: ${colors.primary_200};
   color: #ffffff;
   cursor: pointer;
   margin-right: 18px;
 
   &:hover {
-    background-color: #00bcab;
+    background-color: ${colors.primary_300};
   }
 `
 const HistoryButton = styled.button`
-  font-weight: bold;
-  padding: 10px 23.5px;
+  font-weight: 500;
+  padding: 9px 23.5px;
   border: none;
-  border-radius: 4px;
-  background-color: #00ac98;
+  border-radius: 8px;
+  background-color: ${colors.primary_400};
   color: #ffffff;
   cursor: pointer;
 
   &:hover {
-    background-color: #00bcab;
+    background-color: ${colors.primary_500};
   }
 `

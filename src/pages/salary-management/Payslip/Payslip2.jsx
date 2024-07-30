@@ -11,39 +11,9 @@ export default function Payslip2() {
     totalPay: 3800000,
   }
 
-  const employeeData = {
-    name: '강호연',
-    id: 102034,
-    hireDate: 20150115,
-    payDay: '2024년 8월 16일',
-  }
-
   return (
     <PayslipContainer>
       <Title>급여 명세서</Title>
-      <TitleContainer>
-        <Company>
-          <h1>(주) Revive</h1>
-        </Company>
-        <Detail>
-          <EmployeeItem>
-            <EmployeeLabel>임직원 이름:&nbsp;</EmployeeLabel>
-            <EmployeeValue>{employeeData.name}</EmployeeValue>
-          </EmployeeItem>
-          <EmployeeItem>
-            <EmployeeLabel>사원번호:&nbsp;</EmployeeLabel>
-            <EmployeeValue>{employeeData.id}</EmployeeValue>
-          </EmployeeItem>
-          <EmployeeItem>
-            <EmployeeLabel>입사일:&nbsp;</EmployeeLabel>
-            <EmployeeValue>{employeeData.hireDate}</EmployeeValue>
-          </EmployeeItem>
-          <EmployeeItem>
-            <EmployeeLabel>급여지급일:&nbsp;</EmployeeLabel>
-            <EmployeeValue>{employeeData.payDay}</EmployeeValue>
-          </EmployeeItem>
-        </Detail>
-      </TitleContainer>
       <DetailContainer>
         <PayrollItem>
           <PayrollLabel>총 근로일수</PayrollLabel>
@@ -78,16 +48,6 @@ export default function Payslip2() {
   )
 }
 
-const Company = styled.div``
-const Detail = styled.div``
-const EmployeeItem = styled.div`
-  width: 100%;
-  display: flex;
-  margin-bottom: 5px;
-`
-const EmployeeLabel = styled.div``
-const EmployeeValue = styled.div``
-
 const PayslipContainer = styled.div`
   width: 573px;
   height: 868px;
@@ -95,11 +55,6 @@ const PayslipContainer = styled.div`
   padding: 25px 16px;
   border-radius: 20px;
   background-color: #ffffff;
-`
-
-const TitleContainer = styled.div`
-  padding: 20px;
-  border-bottom: 1px solid #e0e0e0;
 `
 
 const Title = styled.div`
