@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-export default function Payslip2({ setCurrentPage }) {
+export default function Payslip2() {
   const payrollData = {
     baseSalary: 3500000,
     totalHours: 219,
@@ -12,12 +11,12 @@ export default function Payslip2({ setCurrentPage }) {
     totalPay: 3800000,
   }
 
-  // const employeeData = {
-  //   name: '강호연',
-  //   id: 102034,
-  //   hireDate: 20150115,
-  //   payDay: '2024년 8월 16일',
-  // }
+  const employeeData = {
+    name: '강호연',
+    id: 102034,
+    hireDate: 20150115,
+    payDay: '2024년 8월 16일',
+  }
 
   return (
     <PayslipContainer>
@@ -27,7 +26,7 @@ export default function Payslip2({ setCurrentPage }) {
           <h1>(주) Revive</h1>
         </Company>
         <Detail>
-          {/* <EmployeeItem>
+          <EmployeeItem>
             <EmployeeLabel>임직원 이름:&nbsp;</EmployeeLabel>
             <EmployeeValue>{employeeData.name}</EmployeeValue>
           </EmployeeItem>
@@ -42,7 +41,7 @@ export default function Payslip2({ setCurrentPage }) {
           <EmployeeItem>
             <EmployeeLabel>급여지급일:&nbsp;</EmployeeLabel>
             <EmployeeValue>{employeeData.payDay}</EmployeeValue>
-          </EmployeeItem> */}
+          </EmployeeItem>
         </Detail>
       </TitleContainer>
       <DetailContainer>
@@ -75,10 +74,6 @@ export default function Payslip2({ setCurrentPage }) {
         <ApplyButton>정정 신청</ApplyButton>
         <HistoryButton>정정 내역</HistoryButton>
       </PayrollActions>
-      <Pagination>
-        <Dot active={false} onClick={() => setCurrentPage(0)} />
-        <Dot active={true} onClick={() => setCurrentPage(1)} />
-      </Pagination>
     </PayslipContainer>
   )
 }
@@ -195,20 +190,4 @@ const HistoryButton = styled.button`
   &:hover {
     background-color: #00bcab;
   }
-`
-
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-`
-
-const Dot = styled.button`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin: 0 5px;
-  background-color: ${(props) => (props.active ? 'black' : '#e0e0e0')};
-  border: none;
-  cursor: pointer;
 `
