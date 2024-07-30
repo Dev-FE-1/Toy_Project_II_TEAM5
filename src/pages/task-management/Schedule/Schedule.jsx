@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import ScheduleItem from './ScheduleItem'
 
 const scheduleItems = [
   { time: '06.00am', task: 'Spin Class', duration: '45min', color: '#4fd1c5' },
@@ -14,22 +15,10 @@ const scheduleItems = [
 export default function Schedule() {
   return (
     <ScheduleContainer>
-      <h2>Today Schedule</h2>
+      <Title>Today Schedule</Title>
       <ScheduleList>
         {scheduleItems.map((item, index) => (
-          <ScheduleItem key={index}>
-            <DotLineContainer>
-              <Dot color={item.color}></Dot>
-              <Line />
-            </DotLineContainer>
-            <ItemDetails>
-              <TimeContainer>
-                <Time>{item.time}</Time>
-                <Duration>{item.duration}</Duration>
-              </TimeContainer>
-              <Task>{item.task}</Task>
-            </ItemDetails>
-          </ScheduleItem>
+          <ScheduleItem key={index} item={item} />
         ))}
       </ScheduleList>
       <ButtonContainer>
@@ -51,6 +40,10 @@ const ScheduleContainer = styled.div`
   margin: 20px;
 `
 
+const Title = styled.h2`
+  margin-bottom: 20px;
+`
+
 const ScheduleList = styled.div`
   max-height: 510px;
   overflow-y: auto;
@@ -65,71 +58,6 @@ const ScheduleList = styled.div`
     background: rgba(0, 0, 0, 0.3);
     border-radius: 6px;
   }
-`
-
-const ScheduleItem = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  /* margin: 10px 0; */
-  /* position: relative; */
-  cursor: pointer;
-`
-
-const DotLineContainer = styled.div`
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* position: relative; */
-  margin-right: 10px;
-`
-
-const Dot = styled.div`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  z-index: 1;
-`
-
-const Line = styled.div`
-  width: 1px;
-  height: 100%;
-  background-color: #d2d2d2;
-  /* position: absolute; */
-  /* top: 10px; */
-`
-
-const ItemDetails = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-`
-
-const TimeContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-`
-
-const Time = styled.div`
-  color: #848484;
-  margin-right: 10px;
-`
-
-const Duration = styled.div`
-  font-size: 15px;
-  color: #848484;
-  margin-right: 10px;
-`
-
-const Task = styled.div`
-  font-size: 18px;
-  /* font-weight: 500; */
-  padding-bottom: 20px;
 `
 
 const ButtonContainer = styled.div`
