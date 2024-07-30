@@ -1,19 +1,19 @@
+import Flex from '@components/shared/Flex'
+import Horizon from '@components/shared/Horizon'
+import Modal, { ModalContext } from '@components/shared/Modal'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import Flex from '@components/shared/Flex'
-import Modal, { ModalContext } from '@components/shared/Modal'
-import { colors } from '@styles/Colors'
 
 function TestPage() {
   return (
-    <Modal trigger={<Trigger>정정신청</Trigger>}>
+    <Modal Trigger={Trigger}>
       <ModalContents />
     </Modal>
   )
 }
 
-function Trigger({ children, onClick }) {
-  return <Button onClick={onClick}>{children}</Button>
+function Trigger({ onClick }) {
+  return <Button onClick={onClick}>모달열기</Button>
 }
 
 const Button = styled.button`
@@ -37,7 +37,7 @@ function ModalContents() {
   return (
     <Form>
       <Title>정정 신청</Title>
-      <Horizon />
+      <Horizon $width="558px" $ml="20px" />
       <Contents></Contents>
     </Form>
   )
@@ -62,18 +62,13 @@ const Title = styled.h2`
   padding-left: 41px;
 `
 
-const Horizon = styled.hr`
-  width: 558px;
-  margin-left: 20px;
-  border-image: linear-gradient(to left, white, #e0e1e2 50%, white 100%) 1;
-`
-
 function Contents() {
   const { setIsOpen } = useContext(ModalContext)
 
   const Container = styled.div`
     padding: 28px 40px;
   `
+
   const Title = styled.div`
     width: 100%;
     height: 55px;
@@ -150,18 +145,4 @@ function Contents() {
     </Container>
   )
 }
-
-export const Headding = styled.h1`
-  display: block;
-  font-size: 2em;
-  color: ${colors.primary};
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  padding-left: 40px;
-  font-weight: bold;
-  unicode-bidi: isolate;
-`
-
 export default TestPage

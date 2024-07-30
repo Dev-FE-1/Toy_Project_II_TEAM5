@@ -12,7 +12,7 @@ function Help() {
     <Container>
       <IconWithBackground Icon={QuestionMarkIcon} />
       <Message>도움이 필요하신가요?</Message>
-      <Modal trigger={<Button as="button">도움 받기</Button>}>
+      <Modal Trigger={Trigger}>
         <img src={link} />
       </Modal>
     </Container>
@@ -43,5 +43,13 @@ const Button = styled(Flex)`
   font-size: 14px;
   cursor: pointer;
 `
+
+function Trigger(props) {
+  return (
+    <Button as="button" {...props}>
+      도움 받기
+    </Button>
+  )
+}
 
 export default Help
