@@ -16,6 +16,7 @@ const ScheduleItem = ({ item }) => (
 
 const ItemContainer = styled.div`
   width: 100%;
+  height: auto;
   display: flex;
   flex-direction: row;
   cursor: pointer;
@@ -52,7 +53,7 @@ const ItemDetails = styled.div`
 
 const Task = styled.div`
   font-size: 18px;
-  padding-bottom: 20px;
+  padding-bottom: 25px;
 `
 
 export default ScheduleItem
