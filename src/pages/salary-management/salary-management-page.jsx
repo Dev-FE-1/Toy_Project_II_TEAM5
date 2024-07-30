@@ -1,12 +1,13 @@
-import Payslip from './Payslip/Payslip'
+import { Headding } from '@pages/home/home-page'
+// import Payslip from './Payslip/Payslip'
 import Payslip2 from './Payslip/Payslip2'
+
 function SalaryManagementPage() {
   return (
-    <div>
-      <h1>급여관리</h1>
-      {/* <Payslip /> */}
+    <>
+      <Headding>급여관리</Headding>
       <Payslip2 />
-    </div>
+    </>
   )
 }
 
