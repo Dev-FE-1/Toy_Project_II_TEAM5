@@ -1,7 +1,6 @@
 // import { Headding } from '@pages/home/home-page'
 // import React from 'react'
 import styled from 'styled-components'
-
 // const GlobalStyle = createGlobalStyle`
 //   * {
 //     box-sizing: border-box;
@@ -41,7 +40,9 @@ const LoginContainer = styled.div`
 const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 50%;
+  max-width: 400px;
+  margin: 0 auto;
 `
 
 const LoginTop = styled.div`
@@ -68,12 +69,13 @@ const LoginEmail = styled.div`
 `
 
 const LoginInput = styled.input`
+  font-size: 16px;
   border: 1px solid lightgray;
   border-radius: 15px;
   width: 100%;
   height: 50px;
   margin-top: 5px;
-  padding-left: 5%;
+  padding-left: 15px;
 `
 
 const LoginPassword = styled.div`
@@ -164,7 +166,7 @@ const LoginThumbnail = styled.div`
 `
 
 const TeamNameFooter = styled.footer`
-  height: 100%;
+  height: 50px;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -173,7 +175,9 @@ const TeamNameFooter = styled.footer`
 function LoginInputField({ title, type, placeholder }) {
   return (
     <>
-      <Bold>{title}</Bold>
+      <Bold>
+        <label>{title}</label>
+      </Bold>
       <div>
         <LoginInput type={type} placeholder={placeholder} />
       </div>
@@ -219,7 +223,7 @@ function SigninPage() {
         </LoginWrapper>
         <LoginThumbnail />
       </LoginContainer>
-      <TeamNameFooter>강호연 김수민 이동혁 이윤환 최원지</TeamNameFooter>
+      <TeamNameFooter> @2024, Made with FastCampus by 강호연 김수민 이동혁 이윤환 최원지</TeamNameFooter>
     </>
   )
 }
