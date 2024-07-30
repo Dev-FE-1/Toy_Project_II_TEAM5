@@ -1,11 +1,11 @@
+import { Headding } from '@pages/home/home-page'
 import Schedule from './Schedule/Schedule'
-
 function TaskManagementPage() {
   return (
-    <div>
-      <h1>업무 관리</h1>
+    <>
+      <Headding>업무 관리</Headding>
       <Schedule />
-    </div>
+    </>
   )
 }
 
