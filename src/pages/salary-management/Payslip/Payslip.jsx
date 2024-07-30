@@ -1,6 +1,7 @@
+import React from 'react'
 import styled from 'styled-components'
 
-export default function Payslip() {
+export default function Payslip({ setCurrentPage }) {
   const payrollData = {
     month: 7,
     baseSalary: 3500000,
@@ -47,6 +48,10 @@ export default function Payslip() {
         <ApplyButton>정정 신청</ApplyButton>
         <HistoryButton>정정 내역</HistoryButton>
       </PayrollActions>
+      <Pagination>
+        <Dot active={true} onClick={() => setCurrentPage(0)} />
+        <Dot active={false} onClick={() => setCurrentPage(1)} />
+      </Pagination>
     </PayslipContainer>
   )
 }
@@ -135,6 +140,7 @@ const ApplyButton = styled.button`
     background-color: #00bcab;
   }
 `
+
 const HistoryButton = styled.button`
   font-weight: bold;
   padding: 10px 23.5px;
@@ -147,4 +153,20 @@ const HistoryButton = styled.button`
   &:hover {
     background-color: #00bcab;
   }
+`
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`
+
+const Dot = styled.button`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background-color: ${(props) => (props.active ? 'black' : '#e0e0e0')};
+  border: none;
+  cursor: pointer;
 `
