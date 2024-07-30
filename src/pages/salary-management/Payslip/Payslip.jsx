@@ -12,6 +12,13 @@ export default function Payslip() {
     totalPay: 3800000,
   }
 
+  const PayrollItem = ({ label, value }) => (
+    <PayrollItemContainer>
+      <PayrollLabel>{label}</PayrollLabel>
+      <PayrollValue>{value}</PayrollValue>
+    </PayrollItemContainer>
+  )
+
   return (
     <PayslipContainer>
       <TitleContainer>
@@ -19,26 +26,14 @@ export default function Payslip() {
         <Month>{payrollData.month}월</Month>
       </TitleContainer>
       <DetailContainer>
-        <PayrollItem>
-          <PayrollLabel>기본급</PayrollLabel>
-          <PayrollValue>{payrollData.baseSalary?.toLocaleString()} 원</PayrollValue>
-        </PayrollItem>
-        <PayrollItem>
-          <PayrollLabel>연장수당</PayrollLabel>
-          <PayrollValue>{payrollData.overtimePay.toLocaleString()} 원</PayrollValue>
-        </PayrollItem>
-        <PayrollItem>
-          <PayrollLabel>근속수당</PayrollLabel>
-          <PayrollValue>{payrollData.longevityAllowance.toLocaleString()} 원</PayrollValue>
-        </PayrollItem>
-        <PayrollItem>
-          <PayrollLabel>식대</PayrollLabel>
-          <PayrollValue>{payrollData.mealAllowance.toLocaleString()} 원</PayrollValue>
-        </PayrollItem>
-        <PayrollItem>
-          <PayrollLabel>상여금</PayrollLabel>
-          <PayrollValue>{payrollData.bonus.toLocaleString()} 원</PayrollValue>
-        </PayrollItem>
+        <PayrollItem label="기본급" value={`${payrollData.baseSalary?.toLocaleString()} 원`} />
+        <PayrollItem label="연장수당" value={`${payrollData.overtimePay.toLocaleString()} 원`} />
+        <PayrollItem
+          label="근속수당"
+          value={`${payrollData.longevityAllowance.toLocaleString()} 원`}
+        />
+        <PayrollItem label="식대" value={`${payrollData.mealAllowance.toLocaleString()} 원`} />
+        <PayrollItem label="상여금" value={`${payrollData.bonus.toLocaleString()} 원`} />
         <PayrollTotal>
           <span>지급 합계</span>
           <span>{payrollData.totalPay.toLocaleString()} 원</span>
@@ -87,7 +82,7 @@ const DetailContainer = styled.div`
   margin-bottom: 77px;
 `
 
-const PayrollItem = styled.div`
+const PayrollItemContainer = styled.div`
   font-size: 16px;
   display: flex;
   height: 100%;
