@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { colors } from '@styles/Colors'
 import PayrollItem from './PayrollItem'
+import PayrollTotal from './PayrollTotal'
 
 export default function Payslip() {
   const payrollData = {
@@ -28,10 +29,7 @@ export default function Payslip() {
         />
         <PayrollItem label="식대" value={`${payrollData.mealAllowance.toLocaleString()} 원`} />
         <PayrollItem label="상여금" value={`${payrollData.bonus.toLocaleString()} 원`} />
-        <PayrollTotal>
-          <span>지급 합계</span>
-          <span>{payrollData.totalPay.toLocaleString()} 원</span>
-        </PayrollTotal>
+        <PayrollTotal totalPay={payrollData.totalPay} />
       </DetailContainer>
       <PayrollActions>
         <ApplyButton>정정 신청</ApplyButton>
@@ -74,16 +72,6 @@ const DetailContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 77px;
-`
-
-const PayrollTotal = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f8fffe;
-  padding: 8px 40px;
-  font-weight: bold;
 `
 
 const PayrollActions = styled.div`
