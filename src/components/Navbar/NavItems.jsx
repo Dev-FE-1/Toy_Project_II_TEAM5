@@ -11,7 +11,7 @@ import useCurrentPath from '@hooks/useCurrentPath'
 function NavItems() {
   return (
     <NavItemsContainer as="ul" $direction="column" $align="flex-start" $gap="5px">
-      <NavItem name="홈" path="/" Icon={HomeIcon} selected />
+      <NavItem name="홈" path="/" Icon={HomeIcon} />
       <NavItem name="급여관리" path="/salary" Icon={SalaryIcon} />
       <NavItem name="업무관리" path="/task" Icon={TaskIcon} />
       <NavItem name="테스트" path="/test" Icon={TaskIcon} />

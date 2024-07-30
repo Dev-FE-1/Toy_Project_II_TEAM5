@@ -2,10 +2,10 @@ import { colors } from '@styles/Colors'
 import styled from 'styled-components'
 import Flex from './Flex'
 
-function IconWithBackground({ inverted, Icon }) {
+function IconWithBackground({ $inverted, Icon }) {
   return (
-    <Container $inverted={inverted}>
-      <Icon color={inverted ? colors.white : colors.primary} />
+    <Container $inverted={$inverted}>
+      <Icon color={$inverted ? colors.white : colors.primary} />
     </Container>
   )
 }
