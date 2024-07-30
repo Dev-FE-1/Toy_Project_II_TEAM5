@@ -78,7 +78,7 @@ const ListRowText = styled.span`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px 15px;
+  padding: 10px;
   font-weight: bold;
   position: relative;
   ${(props) =>
@@ -100,6 +100,11 @@ const ListRowText = styled.span`
       background: #cbd5e0;
       text-align: center;
       border-radius: 8px;
+    `}
+  ${(props) =>
+    (props.status === '진행중' || props.status === '취소됨' || props.status === '완료됨') &&
+    css`
+      font-size: 15px;
     `}
   a {
     position: absolute;
