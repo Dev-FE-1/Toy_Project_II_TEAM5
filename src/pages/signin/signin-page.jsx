@@ -104,7 +104,7 @@ const ToggleCheckbox = styled.input.attrs({ type: 'checkbox' })`
   display: none;
 
   &:checked + label .toggle-button {
-    background-color: #4dd0e1;
+    background-color: var(--primary);
   }
 
   &:checked + label .toggle-button::before {
@@ -122,7 +122,7 @@ const ToggleLabel = styled.label`
 const ToggleButton = styled.span`
   width: 40px;
   height: 20px;
-  background-color: #4fd1c5;
+  background-color: #f0f0f1;
   border-radius: 20px;
   position: relative;
   transition: background-color 0.3s;
@@ -159,7 +159,7 @@ const LoginSubmitBtn = styled.button`
 const LoginThumbnail = styled.div`
   width: 50%;
   height: 900px;
-  background-color: #4fd1c5;
+  background-color: var(--primary);
   border-radius: 0 0 0 15px;
 `
 
