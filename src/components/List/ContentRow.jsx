@@ -31,6 +31,7 @@ const GridContent = styled(Flex)`
   font-weight: bold;
   position: relative;
   padding: 5px 0;
+  overflow: hidden;
 `
 
 export default ContentRow

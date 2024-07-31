@@ -18,6 +18,7 @@ const EmployeeEmail = styled.span`
   color: ${colors.gray};
   font-size: 12px;
   margin-top: 5px;
+  word-break: break-word;
 `
 
 export default EmployeeProfile
