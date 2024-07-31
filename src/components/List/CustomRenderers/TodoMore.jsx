@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import moreIcon from '@assets/icons/more.svg'
 
-function TodoMore({ more }) {
+function TodoMore() {
   return (
     <Link to="./task">
-      <More src={more} alt="More" />
+      <More src={moreIcon} alt="More" />
     </Link>
   )
 }
