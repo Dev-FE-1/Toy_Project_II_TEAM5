@@ -5,7 +5,7 @@ import Flex from '@components/shared/Flex'
 function ListComponent({ title, headers, items, keys, customRenderers }) {
   if (!headers || !items || !keys) return null
   return (
-    <ListContainer>
+    <>
       <Title>{title}</Title>
       <div className="grid-container">
         <GridContainer $count={headers.length}>
@@ -25,7 +25,7 @@ function ListComponent({ title, headers, items, keys, customRenderers }) {
           )}
         </GridContainer>
       </div>
-    </ListContainer>
+    </>
   )
 }
 
@@ -33,13 +33,6 @@ const Title = styled.h2`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 25px;
-`
-
-const ListContainer = styled.div`
-  border-radius: 15px;
-  padding: 20px 15px;
-  box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
 `
 
 const GridContainer = styled.div`
@@ -56,8 +49,8 @@ const GridHeader = styled.div`
 
 const GridContent = styled(Flex)`
   font-weight: bold;
-  padding: 10px;
   position: relative;
+  padding: 5px 0;
 `
 
 export default ListComponent

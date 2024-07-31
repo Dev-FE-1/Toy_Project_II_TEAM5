@@ -16,7 +16,7 @@ const CreateProgressbar = ({ completion }) => {
 
   return (
     <ProgressBarWrapper>
-      <ProgressPercent>{completion}%</ProgressPercent>
+      <Percent>{completion}%</Percent>
       <ProgressBar percent={percent} />
     </ProgressBarWrapper>
   )
@@ -38,7 +38,7 @@ const ProgressBarWrapper = styled.div`
   }
 `
 
-const ProgressPercent = styled.span`
+const Percent = styled.span`
   color: #4fd1c5;
   font-size: 0.9em;
   position: relative;

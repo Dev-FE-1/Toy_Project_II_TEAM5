@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import ListComponent from './ListComponent.jsx'
 import { employees } from '../Constant/employees.jsx'
 import EmployeeProfile from './CustomRenderers/EmployeeProfile.jsx'
@@ -15,14 +16,24 @@ function EmployeeList() {
   }
 
   return (
-    <ListComponent
-      title="직원 목록"
-      items={employees}
-      headers={headers}
-      keys={keys}
-      customRenderers={customRenderers}
-    />
+    <ListContainer>
+      <ListComponent
+        title="직원 목록"
+        items={employees}
+        headers={headers}
+        keys={keys}
+        customRenderers={customRenderers}
+      />
+    </ListContainer>
   )
 }
+
+const ListContainer = styled.div`
+  width: 60%;
+  border-radius: 15px;
+  padding: 20px 15px;
+  box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+`
 
 export default EmployeeList
