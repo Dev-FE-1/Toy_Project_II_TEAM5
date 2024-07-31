@@ -10,12 +10,12 @@ const rows = [
   { key: 'more', header: '' },
 ]
 
-const TodoListrow = () => {
+function TodoLists() {
   const createCustomChecklistCell = (item, row) => {
     if (row.key === 'checklist') {
       return (
         <ClassifyWrapper>
-          <ClassifyColor status={item.classification}></ClassifyColor>
+          <ClassifyColor $status={item.classification}></ClassifyColor>
           <span>{item.checklist}</span>
         </ClassifyWrapper>
       )
@@ -63,25 +63,25 @@ const ClassifyColor = styled.span`
   border-radius: 5px;
   margin-right: 10px;
   ${(props) =>
-    props.status === 'meeting' &&
+    props.$status === 'meeting' &&
     css`
       background: rgba(255, 59, 59, 0.1);
     `}
   ${(props) =>
-    props.status === 'prepare' &&
+    props.$status === 'prepare' &&
     css`
       background: rgba(255, 150, 27, 0.1);
     `}
   ${(props) =>
-    props.status === 'external' &&
+    props.$status === 'external' &&
     css`
       background: rgba(0, 133, 255, 0.1);
     `}
   ${(props) =>
-    props.status === 'report' &&
+    props.$status === 'report' &&
     css`
       background: rgba(232, 232, 232, 1);
     `}
 `
 
-export default TodoListrow
+export default TodoLists

@@ -1,7 +1,5 @@
-import { Fragment } from 'react'
-import styled, { css } from 'styled-components'
-import { colors } from '@styles/Colors'
-import CreateProgressbar from '@components/Progressbar/Progressbar'
+import styled from 'styled-components'
+import ListItem from './ListItem'
 
 const Listcontainer = ({
   lists,
@@ -12,47 +10,32 @@ const Listcontainer = ({
   createCustomChecklistCell,
 }) => {
   return (
-    <Fragment>
-      <ListRowTitle>
-        {rows.map((row) => (
-          <ListRowText key={row.key}>
-            <ListRowTitleText>{row.header}</ListRowTitleText>
+    <>
+      <ListRowHeader>
+        {rows.map((header) => (
+          <ListRowText key={header.key}>
+            <ListRowTitleText>{header.header}</ListRowTitleText>
           </ListRowText>
         ))}
-      </ListRowTitle>
+      </ListRowHeader>
       <ListRowUl key={lists.id}>
         {lists.map((item) => (
-          <ListRowContent key={item.id}>
-            {rows.map((row) => (
-              <ListRowText
-                key={`${row.id}-${row.key}`}
-                status={row.key === 'status' ? item[row.key] : null}
-              >
-                {row.key === 'name' && createCustomNameCell ? (
-                  createCustomNameCell(item, row)
-                ) : row.key === 'position1' && createCustomPositionCell ? (
-                  createCustomPositionCell(item, row)
-                ) : row.key === 'completion' ? (
-                  <CreateProgressbar completion={item[row.key]} />
-                ) : row.key === 'more' ? (
-                  <a href="/tasks">
-                    <img src={moreIcon} alt="More" className="more" />
-                  </a>
-                ) : row.key === 'checklist' ? (
-                  createCustomChecklistCell(item, row)
-                ) : (
-                  item[row.key]
-                )}
-              </ListRowText>
-            ))}
-          </ListRowContent>
+          <ListItem
+            key={item.id}
+            item={item}
+            rows={rows}
+            createCustomNameCell={createCustomNameCell}
+            createCustomPositionCell={createCustomPositionCell}
+            createCustomChecklistCell={createCustomChecklistCell}
+            moreIcon={moreIcon}
+          />
         ))}
       </ListRowUl>
-    </Fragment>
+    </>
   )
 }
 
-const ListRowTitle = styled.ul`
+const ListRowHeader = styled.ul`
   display: grid;
   grid-template-columns: 3fr 1fr 1fr 1fr;
   border-bottom: 1px solid #e2e8f0;
@@ -67,13 +50,6 @@ const ListRowTitleText = styled.span`
   font-size: 0.9em;
 `
 
-const ListRowContent = styled.li`
-  display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr;
-  align-items: center;
-  border-bottom: 1px solid #e2e8f0;
-`
-
 const ListRowText = styled.span`
   display: flex;
   justify-content: flex-start;
@@ -81,35 +57,6 @@ const ListRowText = styled.span`
   padding: 10px;
   font-weight: bold;
   position: relative;
-  ${(props) =>
-    props.status === 'Online' &&
-    css`
-      width: 80px;
-      justify-content: center;
-      color: ${colors.white};
-      background: #48bb78;
-      text-align: center;
-      border-radius: 8px;
-    `}
-  ${(props) =>
-    props.status === 'Offline' &&
-    css`
-      width: 80px;
-      justify-content: center;
-      color: ${colors.white};
-      background: #cbd5e0;
-      text-align: center;
-      border-radius: 8px;
-    `}
-  ${(props) =>
-    (props.status === '진행중' || props.status === '취소됨' || props.status === '완료됨') &&
-    css`
-      font-size: 15px;
-    `}
-  a {
-    position: absolute;
-    left: 50%;
-  }
 `
 
 export default Listcontainer

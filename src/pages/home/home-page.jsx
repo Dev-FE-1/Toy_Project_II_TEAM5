@@ -1,14 +1,14 @@
 import { colors } from '@styles/Colors'
 import styled from 'styled-components'
-import EmployeeListrow from '@components/Listrow/EmployeeListrow'
-import TodoListrow from '@components/Listrow/TodoListrow'
+import EmployeeList from '@components/List/EmployeeList'
+import ToDoList from '@components/List/TodoList'
 
 function HomePage() {
   return (
     <>
       <Headding>Home</Headding>
-      <EmployeeListrow />
-      <TodoListrow />
+      <EmployeeList />
+      <ToDoList />
     </>
   )
 }
