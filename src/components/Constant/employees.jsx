@@ -1,7 +1,7 @@
 export const employees = [
   {
     name: '강호연',
-    email: 'dustmqaksdltkfrlfdldi@revive.com',
+    email: 'KimPra2989@revive.com',
     position1: 'Programmer',
     position2: 'Developer',
     status: 'Online',

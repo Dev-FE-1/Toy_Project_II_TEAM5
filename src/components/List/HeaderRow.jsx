@@ -14,6 +14,7 @@ const GridContainer = styled.div`
   display: grid;
   grid-template-columns: ${(props) => `2fr repeat(${props.$count - 1}, 1fr)`};
   gap: 10px;
+  border-bottom: 1px solid #e2e8f0;
 `
 
 const GridHeader = styled.div`

@@ -8,23 +8,7 @@ function ListComponent({ title, headers, items, keys, customRenderers }) {
     <>
       <Title>{title}</Title>
       <div>
-        {/* <GridContainer $count={headers.length}>
-          {headers.map((header, index) => (
-            <GridHeader key={index}>{header}</GridHeader>
-          ))}
-        </GridContainer> */}
         <HeaderRow headers={headers} />
-        {/* <GridContainer $count={keys.length}>
-          {items.map((item, index) =>
-            keys.map((key) => (
-              <GridContent $align="center" $justify="flex-start" $gap="3px" key={`${index}-${key}`}>
-                {customRenderers && customRenderers[key]
-                  ? React.createElement(customRenderers[key], item)
-                  : item[key]}
-              </GridContent>
-            ))
-          )}
-        </GridContainer> */}
         <ContentRow items={items} keys={keys} customRenderers={customRenderers} />
       </div>
     </>
