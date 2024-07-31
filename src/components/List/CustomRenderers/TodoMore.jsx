@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function TodoMore({ more }) {
   return (
-    <Link to="./tasks">
+    <Link to="./task">
       <More src={more} alt="More" />
     </Link>
   )
@@ -12,6 +12,8 @@ function TodoMore({ more }) {
 const More = styled.img`
   position: absolute;
   left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `
 
 export default TodoMore
