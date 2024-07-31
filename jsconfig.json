@@ -6,6 +6,7 @@
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],
       "@constants/*": ["constants/*"],
+      "@firebase/*": ["firebase/*"],
       "@hooks/*": ["hooks/*"],
       "@mock/*": ["mock/*"],
       "@pages/*": ["pages/*"],
