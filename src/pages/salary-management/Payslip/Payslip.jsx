@@ -1,11 +1,7 @@
 import styled from 'styled-components'
-// import { colors } from '@styles/Colors'
+import { colors } from '@styles/Colors'
 import PayrollItem from './PayrollItem'
 import PayrollTotal from './PayrollTotal'
-// import Flex from '@components/shared/Flex'
-// import Horizon from '@components/shared/Horizon'
-// import Modal, { ModalContext } from '@components/shared/Modal'
-// import { useContext } from 'react'
 import PayrollActions from './PayrollAction'
 
 export default function Payslip() {
@@ -47,7 +43,7 @@ const PayslipContainer = styled.div`
   border: 1px solid #e0e0e0;
   padding: 25px 16px;
   border-radius: 20px;
-  background-color: #ffffff;
+  background-color: ${colors.white};
 `
 
 const TitleContainer = styled.div`
