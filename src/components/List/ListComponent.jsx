@@ -16,9 +16,9 @@ function ListComponent({ title, headers, items, keys, customRenderers }) {
 }
 
 const Title = styled.h2`
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
-  margin-bottom: 25px;
+  padding: 5px 10px 20px;
 `
 
 export default ListComponent

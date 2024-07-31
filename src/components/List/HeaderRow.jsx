@@ -20,6 +20,7 @@ const GridContainer = styled.div`
 const GridHeader = styled.div`
   color: #a0aec0;
   font-size: 0.9em;
+  font-weight: 700;
   padding: 10px;
 `
 
