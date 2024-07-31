@@ -4,6 +4,7 @@ import { employees } from '../Constant/employees.jsx'
 import EmployeeProfile from './CustomRenderers/EmployeeProfile.jsx'
 import EmployeePosition from './CustomRenderers/EmployeePosition.jsx'
 import EmployeeStatus from './CustomRenderers/EmployeeStatus.jsx'
+import ShadowyBox from '@components/shared/ShadowyBox.jsx'
 
 function EmployeeList() {
   const headers = ['성명', '직책', '현황', '입사일']
@@ -28,12 +29,8 @@ function EmployeeList() {
   )
 }
 
-const ListContainer = styled.div`
+const ListContainer = styled(ShadowyBox)`
   width: 60%;
-  border-radius: 15px;
-  padding: 20px 15px;
-  box-shadow: 0 3.5px 5.5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
 `
 
 export default EmployeeList
