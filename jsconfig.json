@@ -7,7 +7,9 @@
       "@components/*": ["components/*"],
       "@constants/*": ["constants/*"],
       "@hooks/*": ["hooks/*"],
+      "@mock/*": ["mock/*"],
       "@pages/*": ["pages/*"],
+      "@remote/*": ["remote/*"],
       "@styles/*": ["styles/*"]
     }
   },
