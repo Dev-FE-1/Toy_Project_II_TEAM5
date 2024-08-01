@@ -1,4 +1,3 @@
-import { colors } from '@styles/Colors'
 import styled from 'styled-components'
 import EmployeeList from '@components/List/EmployeeList'
 import ToDoList from '@components/List/TodoList'
