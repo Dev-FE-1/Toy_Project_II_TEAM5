@@ -1,6 +1,8 @@
 // import { Headding } from '@pages/home/home-page'
 // import React from 'react'
 import styled from 'styled-components'
+import Flex from '@components/shared/Flex.jsx'
+
 // const GlobalStyle = createGlobalStyle`
 //   * {
 //     box-sizing: border-box;
@@ -164,7 +166,22 @@ const LoginThumbnail = styled.div`
   background-color: var(--primary);
   border-radius: 0 0 0 15px;
 `
+const FlexLogo = styled(Flex)`
+  height: 100%;
+  color: var(--white);
+  font-size: 64px;
+  font-weight: 900;
 
+  &::before {
+    content: '';
+    display: block;
+    background-image: url('/src/assets/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 120px;
+  }
+`
 const TeamNameFooter = styled.footer`
   height: 50px;
   display: flex;
@@ -172,6 +189,7 @@ const TeamNameFooter = styled.footer`
   align-items: center;
   color: #f0f0f1;
 `
+
 function LoginInputField({ title, type, placeholder }) {
   return (
     <>
@@ -192,14 +210,14 @@ function SigninPage() {
         <LoginWrapper>
           <LoginTop>
             <MainTitle>
-              <Bold>
-                <Txt32>Welcome Back</Txt32>
-              </Bold>
+              <Txt32>
+                <Bold>Welcome Back</Bold>
+              </Txt32>
             </MainTitle>
             <SubTitle>
-              <Bold>
-                <Txt14>이메일과 비밀번호를 입력해주세요.</Txt14>
-              </Bold>
+              <Txt14>
+                <Bold>이메일과 비밀번호를 입력해주세요.</Bold>
+              </Txt14>
             </SubTitle>
           </LoginTop>
           <LoginEmail>
@@ -221,7 +239,9 @@ function SigninPage() {
           </LoginToggle>
           <LoginSubmitBtn>로그인</LoginSubmitBtn>
         </LoginWrapper>
-        <LoginThumbnail />
+        <LoginThumbnail>
+          <FlexLogo>Revive</FlexLogo>
+        </LoginThumbnail>
       </LoginContainer>
       <TeamNameFooter> @2024, Made with FastCampus by 강호연 김수민 이동혁 이윤환 최원지</TeamNameFooter>
     </>
