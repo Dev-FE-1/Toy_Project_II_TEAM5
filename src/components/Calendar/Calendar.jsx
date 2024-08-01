@@ -12,14 +12,15 @@ import {
   ScheduleItem,
 } from './Calendar.styled'
 /*
-데이터:
+필요한 데이터:
 월별 날짜(30,31...)
-시작하는 요일
+시작하는 요일 -> state
+
 */
 const Calendar = () => {
   const weekDay = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
   const daysInMonth = 31
-  const firstDayOfMonth = weekDay.indexOf('WED')
+  const firstDayOfMonth = weekDay.indexOf('TUE')
 
   const dummySchedules = {
     2: [
@@ -71,6 +72,7 @@ const Calendar = () => {
 
     return [...emptyCells, ...days]
   }
+
   return (
     <CalendarWrapper>
       <CalendarHeader>
@@ -93,4 +95,5 @@ const Calendar = () => {
     </CalendarWrapper>
   )
 }
+
 export default Calendar
