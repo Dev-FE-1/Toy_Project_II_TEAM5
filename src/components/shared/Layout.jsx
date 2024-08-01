@@ -1,0 +1,25 @@
+import SideNav from '@components/Navbar/SideNav'
+import styled from 'styled-components'
+import { Outlet } from 'react-router-dom'
+
+const Container = styled.div`
+  display: flex;
+`
+
+const Content = styled.div`
+  flex-grow: 1;
+  padding: 20px;
+`
+
+function Layout() {
+  return (
+    <Container>
+      <SideNav />
+      <Content>
+        <Outlet />
+      </Content>
+    </Container>
+  )
+}
+
+export default Layout
