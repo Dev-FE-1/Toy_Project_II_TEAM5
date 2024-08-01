@@ -6,7 +6,7 @@ export const addEmployee = () => {
   const batch = writeBatch(db)
 
   employeeList.forEach((employee) => {
-    const docRef = doc(db, 'EMPLOYEE', employee.id, 'PROFILE', 'profileInfo')
+    const docRef = doc(db, 'EMPLOYEES', employee.id, 'PROFILE', 'profile-info')
     batch.set(docRef, employee)
   })
 
