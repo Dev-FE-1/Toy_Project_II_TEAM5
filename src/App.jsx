@@ -1,4 +1,5 @@
 import Layout from '@components/shared/Layout'
+import AdminPage from '@pages/admin/admin-page'
 import HomePage from '@pages/home/home-page'
 import SalaryManagementPage from '@pages/salary-management/salary-management-page'
 import SigninPage from '@pages/signin/signin-page'
@@ -15,6 +16,7 @@ function App() {
           <Route path="/salary" element={<SalaryManagementPage />} />
           <Route path="/task" element={<TaskManagementPage />} />
           <Route path="/test" element={<TestPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Route>
         <Route path="/signin" element={<SigninPage />} />
       </Routes>
