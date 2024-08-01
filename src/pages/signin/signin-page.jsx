@@ -55,7 +55,7 @@ const LoginWrapper = styled.div`
 const MainTitle = styled.span`
   margin: 10px 0;
   color: #4fd1c5;
-  font-size: 32px;
+  font-size: 36px;
 `
 function Main({ color }) {
   return (
@@ -74,7 +74,7 @@ const SubTitle = styled.span`
 `
 
 const LoginEmail = styled.div`
-  margin: 10px 0;
+  margin: 15px 0;
   display: flex;
   flex-direction: column;
 `
@@ -90,7 +90,7 @@ const LoginInput = styled.input`
 `
 
 const LoginPassword = styled.div`
-  margin: 10px 0;
+  margin: 15px 0;
   display: flex;
   flex-direction: column;
 `
@@ -161,7 +161,7 @@ const LoginSubmitBtn = styled.button`
   border: none;
   background-color: var(--primary);
   color: white;
-  margin: 10px 0;
+  margin-top: 30px;
   cursor: pointer;
 
   &:hover {
@@ -174,10 +174,9 @@ const LoginThumbnail = styled.div`
   height: 100%;
   background-color: var(--primary);
   border-radius: 0 0 0 15px;
-  background-image: url(/src/assets/icons/wave-left.svg), 
-  url(/src/assets/icons/wave-right.svg);
+  background-image: url(/src/assets/icons/wave-left.svg), url(/src/assets/icons/wave-right.svg);
   background-repeat: no-repeat, no-repeat;
-  background-position: left, right
+  background-position: left, right;
 `
 const FlexLogo = styled(Flex)`
   height: 100%;
@@ -200,7 +199,8 @@ const TeamNameFooter = styled.footer`
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  color: #f0f0f1;
+  color: rgba(160, 174, 192, 0.3);
+  padding-right: 50px;
 `
 
 function LoginInputField({ title, type, placeholder }) {
