@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import ListComponent from './ListComponent.jsx'
-// import { todos } from '../Constant/todos.jsx'
 import TodoChecklist from './CustomRenderers/TodoChecklist.jsx'
 import TodoMore from './CustomRenderers/TodoMore.jsx'
 import Progressbar from './CustomRenderers/Progressbar.jsx'
