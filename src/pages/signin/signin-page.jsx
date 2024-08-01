@@ -171,6 +171,15 @@ const FlexLogo = styled(Flex)`
   color: var(--white);
   font-size: 64px;
   font-weight: 900;
+  background-image: url(/src/assets/icons/bg-pattern-top.svg),
+    url(/src/assets/icons/bg-pattern-bottom.svg);
+  background-position:
+    top left,
+    bottom right;
+  background-repeat: no-repeat, no-repeat;
+  background-position:
+    -25vw -50vh,
+    25vw 50vh;
 
   &::before {
     content: '';
@@ -243,7 +252,10 @@ function SigninPage() {
           <FlexLogo>Revive</FlexLogo>
         </LoginThumbnail>
       </LoginContainer>
-      <TeamNameFooter> @2024, Made with FastCampus by 강호연 김수민 이동혁 이윤환 최원지</TeamNameFooter>
+      <TeamNameFooter>
+        {' '}
+        @2024, Made with FastCampus by 강호연 김수민 이동혁 이윤환 최원지
+      </TeamNameFooter>
     </>
   )
 }
