@@ -3,6 +3,7 @@ import { colors } from '@styles/Colors'
 import PayrollItem from './PayrollItem'
 import PayrollTotal from './PayrollTotal'
 import PayrollActions from './PayrollAction'
+import ShadowyBox from '@components/shared/ShadowyBox'
 
 export default function Payslip() {
   const overtime = 16
@@ -58,14 +59,10 @@ export default function Payslip() {
   )
 }
 
-const PayslipContainer = styled.div`
+const PayslipContainer = styled(ShadowyBox)`
   width: 500px;
   height: 768px;
-  margin-top: 20px;
-  border: 1px solid #e0e0e0;
   padding: 25px 16px;
-  border-radius: 20px;
-  background-color: ${colors.white};
 `
 
 const TitleContainer = styled.div`
