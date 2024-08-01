@@ -7,13 +7,27 @@ import Lunch from './Lunch/Lunch'
 function HomePage() {
   return (
     <>
-      <Headding>Home</Headding>
-      <EmployeeList />
-      <Lunch />
-      <ToDoList />
+      <Container>
+        <TopSection>
+          <EmployeeList />
+          <Lunch />
+        </TopSection>
+        <ToDoList />
+      </Container>
     </>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
+
+const TopSection = styled.div`
+  display: flex;
+  gap: 20px;
+`
 
 export const Headding = styled.h1`
   display: block;
