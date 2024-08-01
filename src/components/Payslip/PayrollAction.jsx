@@ -22,7 +22,6 @@ function Trigger({ onClick }) {
 const Actions = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 16px;
 `
 
 const ApplyButton = styled.button`
