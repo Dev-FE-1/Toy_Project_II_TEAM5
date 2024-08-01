@@ -49,15 +49,15 @@ const MainTitle = styled.span`
   color: #4fd1c5;
   font-size: 36px;
 `
-function Main({ color }) {
-  return (
-    <>
-      <MainTitle color={color}>
-        <Bold>Welcome Back</Bold>
-      </MainTitle>
-    </>
-  )
-}
+// function Main({ color }) {
+//   return (
+//     <>
+//       <MainTitle color={color}>
+//         <Bold>Welcome Back</Bold>
+//       </MainTitle>
+//     </>
+//   )
+// }
 
 const SubTitle = styled.span`
   margin: 10px 0;
@@ -211,13 +211,18 @@ function LoginInputField({ title, type, placeholder, value, onChange }) {
 function SigninPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
 
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password)
-      console.log('로그인')
+      console.log('login successed')
     } catch (error) {
-      console.log('로그인 실패')
+      setError('유효한 아이디, 비밀번호를 입력해주세요!')
+      setTimeout(() => {
+        setError(null)
+      }, 5000)
+      console.log('login failed')
     }
   }
 
@@ -228,7 +233,9 @@ function SigninPage() {
   function handlePassword(e) {
     setPassword(e.target.value)
   }
-
+  function Alert({ error }) {
+    return <div style={{ color: 'red' }}>{error}</div>
+  }
   return (
     <>
       <LoginContainer>
@@ -259,6 +266,7 @@ function SigninPage() {
               onChange={handlePassword}
             />
           </LoginPassword>
+          {error && <Alert error={error} />}
           <LoginToggle>
             <ToggleCheckbox id="toggle" />
             <ToggleLabel htmlFor="toggle">
