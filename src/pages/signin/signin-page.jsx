@@ -174,15 +174,10 @@ const LoginThumbnail = styled.div`
   height: 900px;
   background-color: var(--primary);
   border-radius: 0 0 0 15px;
-  background-image: url(/src/assets/icons/bg-pattern-top.svg),
-    url(/src/assets/icons/bg-pattern-bottom.svg);
-  background-position:
-    top left,
-    bottom right;
+  background-image: url(/src/assets/icons/wave-left.svg), 
+  url(/src/assets/icons/wave-right.svg);
   background-repeat: no-repeat, no-repeat;
-  background-position:
-    -25vw -50vh,
-    25vw 50vh;
+  background-position: left, right
 `
 const FlexLogo = styled(Flex)`
   height: 100%;
