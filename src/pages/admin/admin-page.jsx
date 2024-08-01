@@ -1,5 +1,8 @@
 import useUser from '@hooks/useUser'
+import addCommute from '@mock/addCommute'
 import { addEmployee } from '@mock/addEmployee'
+import { addProfile } from '@mock/addProfile'
+import fetchCommutesByMonth from '@mock/fetchCommute'
 import { fetchEmployee } from '@mock/fetchEmployee'
 import styled from 'styled-components'
 import Login from './login'
@@ -9,11 +12,34 @@ function AdminPage() {
 
   return (
     <Container>
-      <Border>
-        <Label>EMPLOYEE</Label>
+      <Field label="EMPLOYEE">
         <Button onClick={addEmployee}>mock</Button>
+        <Button
+          onClick={() => {
+            addProfile(user.uid)
+          }}
+        >
+          uidtest
+        </Button>
         <Button onClick={fetchEmployee}>fetch</Button>
-      </Border>
+      </Field>
+
+      <Field label="COMMUTE">
+        <Button
+          onClick={() => {
+            addCommute(user.uid)
+          }}
+        >
+          mock
+        </Button>
+        <Button
+          onClick={() => {
+            fetchCommutesByMonth(user.uid, 2024, 1)
+          }}
+        >
+          fetch
+        </Button>
+      </Field>
       <Login />
     </Container>
   )
@@ -23,12 +49,21 @@ const Container = styled.div`
   background-image: url('https://thumbs.dreamstime.com/z/classified-square-grunge-stamp-classified-sign-classified-classified-stamp-124938799.jpg?w=360 360w, https://thumbs.dreamstime.com/z/classified-square-grunge-stamp-classified-sign-classified-classified-stamp-124938799.jpg?w=400 400w, https://thumbs.dreamstime.com/z/classified-square-grunge-stamp-classified-sign-classified-classified-stamp-124938799.jpg?w=450 450w, https://thumbs.dreamstime.com/z/classified-square-grunge-stamp-classified-sign-classified-classified-stamp-124938799.jpg?w=576 576w, https://thumbs.dreamstime.com/z/classified-square-grunge-stamp-classified-sign-classified-classified-stamp-124938799.jpg?w=768 768w, https://thumbs.dreamstime.com/z/classified-square-grunge-stamp-classified-sign-classified-classified-stamp-124938799.jpg?w=992 992w');
   height: 100%;
   border: 10px dashed;
+  padding: 20px;
 `
+
+function Field({ label, children }) {
+  return (
+    <Border>
+      <Label>{label}</Label>
+      {children}
+    </Border>
+  )
+}
 
 const Border = styled.fieldset`
   width: 600px;
-  margin-top: 20px;
-  margin-left: 20px;
+  margin: 20px 0;
   background-color: #000;
 `
 

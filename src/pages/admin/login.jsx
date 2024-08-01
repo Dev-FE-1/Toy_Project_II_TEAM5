@@ -1,5 +1,7 @@
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../firebase/firebaseConfig'
+import { auth } from '@firebase/firebaseConfig'
+import styled from 'styled-components'
+import Flex from '@components/shared/Flex'
 
 export default function Login() {
   const loginUser = async (email, password) => {
@@ -22,11 +24,18 @@ export default function Login() {
   }
   return (
     <>
-      <form onSubmit={hadleSubmit}>
+      <Flex as="form" $justify="flex-start" onSubmit={hadleSubmit}>
         <input type="email" name="email" />
         <input type="password" name="password" />
-        <button type="submit">xxxxxxxxxxxxxxxxxxx</button>
-      </form>
+        <Button type="submit"></Button>
+      </Flex>
     </>
   )
 }
+
+const Button = styled.button`
+  border: 1px inset rgb(118, 118, 118);
+  background: white;
+  width: 169.55px;
+  height: 20.89px;
+`

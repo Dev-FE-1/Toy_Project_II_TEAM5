@@ -50,3 +50,10 @@ export const employeeList = [
     profile: 'images/employee5.svg',
   },
 ]
+
+// 2024년 윤년임
+export const commutes = Array.from({ length: 366 }, (_, i) => i + 1).map((x) => ({
+  date: new Date(2024, 0, x),
+  start: new Date(2024, 0, x, 9),
+  end: new Date(2024, 0, x, 18),
+}))
