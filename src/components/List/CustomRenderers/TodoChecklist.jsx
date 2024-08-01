@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components'
 
-function TodoChecklist({ division, checklist }) {
+function TodoChecklist({ task, division }) {
   return (
     <>
       <ColoredCDivision $division={division}></ColoredCDivision>
-      <span>{checklist}</span>
+      <span>{task}</span>
     </>
   )
 }
