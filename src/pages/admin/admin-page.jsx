@@ -19,7 +19,7 @@ function AdminPage() {
             addProfile(user.uid)
           }}
         >
-          uidtest
+          profile
         </Button>
         <Button onClick={fetchEmployee}>fetch</Button>
       </Field>

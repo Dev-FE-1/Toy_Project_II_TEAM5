@@ -2,7 +2,7 @@ import { db } from '@firebase/firebaseConfig'
 import { doc, setDoc } from 'firebase/firestore'
 
 export const addProfile = async (uid) => {
-  const userDocRef = doc(db, 'EMPLOYEES', uid, 'profile', 'profile-info')
+  const userDocRef = doc(db, 'PROFILES', uid)
   try {
     await setDoc(userDocRef, newProfile)
     alert('Profile updated successfully')
