@@ -22,7 +22,7 @@ function HomePage() {
 }
 
 const Container = styled.div`
-  height: 100vh;
+  height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -31,12 +31,12 @@ const Container = styled.div`
 const TopSection = styled.div`
   display: flex;
   gap: 20px;
-  height: 50%;
+  flex-grow: 0;
 `
 
 const BottomSection = styled.div`
   display: flex;
-  height: 50%;
+  flex-grow: 1;
 `
 
 export default HomePage
