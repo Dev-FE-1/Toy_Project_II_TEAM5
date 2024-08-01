@@ -1,10 +1,12 @@
 import Calendar from "../../components/Calendar/Calendar"
+import Payslip from './Payslip/Payslip'
+
 function SalaryManagementPage() {
   return (
-  <>
-    <h1>급여관리</h1>
-    <Calendar></Calendar>
-  </>)
+    <>
+      <Calendar></Calendar>
+      <Payslip />
+    </>
+  )
 }
-
 export default SalaryManagementPage
