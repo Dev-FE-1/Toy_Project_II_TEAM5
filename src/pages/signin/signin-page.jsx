@@ -175,7 +175,7 @@ const FlexLogo = styled(Flex)`
   &::before {
     content: '';
     display: block;
-    background-image: url('/src/assets/logo.png');
+    background-image: url('/src/assets/logo2.png');
     background-size: contain;
     background-repeat: no-repeat;
     width: 120px;
