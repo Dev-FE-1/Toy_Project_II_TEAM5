@@ -1,9 +1,9 @@
-import { Headding } from '@pages/home/home-page'
 import Schedule from './Schedule/Schedule'
+import Header from '@components/Header/Header'
 function TaskManagementPage() {
   return (
     <>
-      <Headding>업무 관리</Headding>
+      <Header header="업무 관리" />
       <Schedule />
     </>
   )
