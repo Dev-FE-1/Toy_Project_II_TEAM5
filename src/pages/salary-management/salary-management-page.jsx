@@ -23,7 +23,7 @@ const StyledPayslip = styled(Payslip)`
   width: 10%;
 `
 
-function TaskManagementPage() {
+function SalaryManagementPage() {
   return (
     <PageContainer>
       <Header header="급여 내역" />
@@ -34,4 +34,4 @@ function TaskManagementPage() {
     </PageContainer>
   )
 }
-export default TaskManagementPage
+export default SalaryManagementPage
