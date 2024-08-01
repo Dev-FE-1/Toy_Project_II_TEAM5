@@ -19,13 +19,13 @@ const Bold = styled.div`
   font-weight: 700;
 `
 
-const Txt32 = styled.div`
-  font-size: 32px;
-`
+// const Txt32 = styled.div`
+//   font-size: 32px;
+// `
 
-const Txt14 = styled.div`
-  font-size: 14px;
-`
+// const Txt14 = styled.div`
+//   font-size: 14px;
+// `
 
 const Txt12 = styled.div`
   font-size: 12px;
@@ -47,16 +47,25 @@ const LoginWrapper = styled.div`
   margin: 0 auto;
 `
 
-const LoginTop = styled.div`
-  display: flex;
-  flex-direction: column;
-`
+// const LoginTop = styled.div`
+//   display: flex;
+//   flex-direction: column;
+// `
 
 const MainTitle = styled.span`
   margin: 10px 0;
   color: #4fd1c5;
   font-size: 32px;
 `
+function Main({ color }) {
+  return (
+    <>
+      <MainTitle color={color}>
+        <Bold>Welcome Back</Bold>
+      </MainTitle>
+    </>
+  )
+}
 
 const SubTitle = styled.span`
   margin: 10px 0;
@@ -165,12 +174,6 @@ const LoginThumbnail = styled.div`
   height: 900px;
   background-color: var(--primary);
   border-radius: 0 0 0 15px;
-`
-const FlexLogo = styled(Flex)`
-  height: 100%;
-  color: var(--white);
-  font-size: 64px;
-  font-weight: 900;
   background-image: url(/src/assets/icons/bg-pattern-top.svg),
     url(/src/assets/icons/bg-pattern-bottom.svg);
   background-position:
@@ -180,6 +183,12 @@ const FlexLogo = styled(Flex)`
   background-position:
     -25vw -50vh,
     25vw 50vh;
+`
+const FlexLogo = styled(Flex)`
+  height: 100%;
+  color: var(--white);
+  font-size: 64px;
+  font-weight: 900;
 
   &::before {
     content: '';
@@ -217,18 +226,14 @@ function SigninPage() {
     <>
       <LoginContainer>
         <LoginWrapper>
-          <LoginTop>
+          <Flex $align="flex-start" $direction="column">
             <MainTitle>
-              <Txt32>
-                <Bold>Welcome Back</Bold>
-              </Txt32>
+              <Bold>Welcome Back</Bold>
             </MainTitle>
             <SubTitle>
-              <Txt14>
-                <Bold>이메일과 비밀번호를 입력해주세요.</Bold>
-              </Txt14>
+              <Bold>이메일과 비밀번호를 입력해주세요.</Bold>
             </SubTitle>
-          </LoginTop>
+          </Flex>
           <LoginEmail>
             <LoginInputField title="Email" type="email" placeholder="이메일을 입력해주세요." />
           </LoginEmail>
@@ -253,7 +258,6 @@ function SigninPage() {
         </LoginThumbnail>
       </LoginContainer>
       <TeamNameFooter>
-        {' '}
         @2024, Made with FastCampus by 강호연 김수민 이동혁 이윤환 최원지
       </TeamNameFooter>
     </>
