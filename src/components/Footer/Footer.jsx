@@ -19,7 +19,7 @@ function Footer() {
 
 const FooterContainer = styled.div`
   width: 100%;
-  height: 50px;
+  height: 20px;
   color: ${colors.gray};
   display: flex;
   justify-content: space-between;
