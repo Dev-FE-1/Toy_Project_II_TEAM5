@@ -1,19 +1,11 @@
-// import { Headding } from '@pages/home/home-page'
-// import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Flex from '@components/shared/Flex.jsx'
-
-// const GlobalStyle = createGlobalStyle`
-//   * {
-//     box-sizing: border-box;
-//   }
-
-//   html, body {
-//     width: 100%;
-//     max-width: 1280px;
-//     height: 100%;
-//     margin: 0px auto;
-// }`
+import { Route, Routes } from 'react-router-dom'
+import HomePage from '@pages/home/home-page'
+//firebase
+import { auth } from '/src/firebase/firebaseConfig'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 const Bold = styled.div`
   font-weight: 700;
@@ -203,20 +195,40 @@ const TeamNameFooter = styled.footer`
   padding-right: 50px;
 `
 
-function LoginInputField({ title, type, placeholder }) {
+function LoginInputField({ title, type, placeholder, value, onChange }) {
   return (
     <>
       <Bold>
         <label>{title}</label>
       </Bold>
       <div>
-        <LoginInput type={type} placeholder={placeholder} />
+        <LoginInput type={type} placeholder={placeholder} value={value} onChange={onChange} />
       </div>
     </>
   )
 }
 
 function SigninPage() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleLogin = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+      console.log('로그인')
+    } catch (error) {
+      console.log('로그인 실패')
+    }
+  }
+
+  function handleEmail(e) {
+    setEmail(e.target.value)
+  }
+
+  function handlePassword(e) {
+    setPassword(e.target.value)
+  }
+
   return (
     <>
       <LoginContainer>
@@ -230,13 +242,21 @@ function SigninPage() {
             </SubTitle>
           </Flex>
           <LoginEmail>
-            <LoginInputField title="Email" type="email" placeholder="이메일을 입력해주세요." />
+            <LoginInputField
+              title="Email"
+              type="email"
+              placeholder="이메일을 입력해주세요."
+              value={email}
+              onChange={handleEmail}
+            />
           </LoginEmail>
           <LoginPassword>
             <LoginInputField
               title="Password"
               type="password"
               placeholder="패스워드를 입력해주세요."
+              value={password}
+              onChange={handlePassword}
             />
           </LoginPassword>
           <LoginToggle>
@@ -246,7 +266,7 @@ function SigninPage() {
               <Txt12>이메일 기억하기</Txt12>
             </ToggleLabel>
           </LoginToggle>
-          <LoginSubmitBtn>로그인</LoginSubmitBtn>
+          <LoginSubmitBtn onClick={handleLogin}>로그인</LoginSubmitBtn>
         </LoginWrapper>
         <LoginThumbnail>
           <FlexLogo>Revive</FlexLogo>
