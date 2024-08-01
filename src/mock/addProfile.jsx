@@ -1,4 +1,4 @@
-import { db } from '../firebase/firebaseConfig'
+import { db } from '@firebase/firebaseConfig'
 import { doc, setDoc } from 'firebase/firestore'
 
 export const addProfile = async (uid) => {

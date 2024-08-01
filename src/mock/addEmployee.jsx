@@ -1,5 +1,5 @@
 import { doc, writeBatch } from 'firebase/firestore'
-import { db } from '../firebase/firebaseConfig'
+import { db } from '@firebase/firebaseConfig'
 import { employeeList } from './data'
 
 export const addEmployee = () => {

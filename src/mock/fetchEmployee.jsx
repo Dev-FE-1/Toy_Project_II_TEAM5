@@ -1,5 +1,5 @@
 import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../firebase/firebaseConfig'
+import { db } from '@firebase/firebaseConfig'
 
 export const fetchEmployee = async () => {
   const userDocRef = collection(db, 'EMPLOYEE', '1', 'PROFILE')
