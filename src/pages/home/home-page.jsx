@@ -1,8 +1,16 @@
 import { colors } from '@styles/Colors'
 import styled from 'styled-components'
+import EmployeeList from '@components/List/EmployeeList'
+import ToDoList from '@components/List/TodoList'
 
 function HomePage() {
-  return <Headding>Home</Headding>
+  return (
+    <>
+      <Headding>Home</Headding>
+      <EmployeeList />
+      <ToDoList />
+    </>
+  )
 }
 
 export const Headding = styled.h1`
