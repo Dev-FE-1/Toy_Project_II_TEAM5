@@ -59,8 +59,9 @@ export default function Payslip() {
 }
 
 const PayslipContainer = styled.div`
-  width: 573px;
-  height: 868px;
+  width: 500px;
+  height: 768px;
+  margin-top: 20px;
   border: 1px solid #e0e0e0;
   padding: 25px 16px;
   border-radius: 20px;

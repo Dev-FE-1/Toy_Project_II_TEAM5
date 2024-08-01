@@ -53,7 +53,8 @@ const DayHeader = styled.div`
 `
 
 const DayCell = styled.div`
-  min-height: 100px;
+  min-height: 130px;
+  min-width: 130px;
   padding: 10px;
   display: flex;
   flex-direction: column;
