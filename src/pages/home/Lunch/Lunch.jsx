@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import koreanImage from '../../../assets/lunch/koreanImage.png'
 import westernImage from '../../../assets/lunch/westernImage.png'
+import ShadowyBox from '@components/shared/ShadowyBox'
 
 export default function Lunch() {
   return (
@@ -22,16 +23,15 @@ export default function Lunch() {
   )
 }
 
-const MenuContainer = styled.div`
-  width: 615px;
-  height: 543px;
+const MenuContainer = styled(ShadowyBox)`
+  width: 40%;
   border: 1px solid #e2e8f0;
   border-radius: 20px;
   padding: 22px;
 `
 
 const Title = styled.div`
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
 `
 
