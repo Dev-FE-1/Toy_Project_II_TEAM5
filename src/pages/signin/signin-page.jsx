@@ -33,9 +33,9 @@ const Txt12 = styled.div`
 
 const LoginContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 90vh;
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: space-between;
 `
 
@@ -44,7 +44,7 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   width: 50%;
   max-width: 400px;
-  margin: 0 auto;
+  margin: auto;
 `
 
 // const LoginTop = styled.div`
@@ -171,7 +171,7 @@ const LoginSubmitBtn = styled.button`
 
 const LoginThumbnail = styled.div`
   width: 50%;
-  height: 900px;
+  height: 100%;
   background-color: var(--primary);
   border-radius: 0 0 0 15px;
   background-image: url(/src/assets/icons/wave-left.svg), 
@@ -196,7 +196,7 @@ const FlexLogo = styled(Flex)`
   }
 `
 const TeamNameFooter = styled.footer`
-  height: 50px;
+  height: 10vh;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
