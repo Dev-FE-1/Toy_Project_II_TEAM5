@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import EmployeeList from '@components/List/EmployeeList'
 import ToDoList from '@components/List/TodoList'
-import Lunch from './Lunch/Lunch'
+import Lunch from '@components/Lunch/Lunch'
 import Footer from '@components/Footer/Footer'
 
 function HomePage() {

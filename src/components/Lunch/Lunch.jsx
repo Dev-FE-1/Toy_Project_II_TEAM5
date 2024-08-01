@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import koreanImage from '../../../assets/lunch/koreanImage.png'
-import westernImage from '../../../assets/lunch/westernImage.png'
+import koreanImage from '../../assets/lunch/koreanImage.png'
+import westernImage from '../../assets/lunch/westernImage.png'
 import ShadowyBox from '@components/shared/ShadowyBox'
 
 export default function Lunch() {

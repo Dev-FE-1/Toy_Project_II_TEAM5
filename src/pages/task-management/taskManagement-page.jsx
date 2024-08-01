@@ -1,6 +1,6 @@
 import Header from '@components/Header/Header'
-import Schedule from './Schedule/Schedule'
 import Calendar from '@components/Calendar/Calendar'
+import Schedule from '@components/Schedule/Schedule'
 import styled from 'styled-components'
 
 const PageContainer = styled.div`

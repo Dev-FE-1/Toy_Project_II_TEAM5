@@ -1,5 +1,5 @@
 import Header from '@components/Header/Header'
-import Payslip from './Payslip/Payslip'
+import Payslip from '@components/Payslip/Payslip'
 import Calendar from '@components/Calendar/Calendar'
 import styled from 'styled-components'
 
