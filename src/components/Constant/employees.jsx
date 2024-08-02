@@ -6,7 +6,7 @@ export const employees = [
     position2: 'Developer',
     status: 'Online',
     date: '24/05/20',
-    profile: 'employees/employee1.svg',
+    profile: '../../../src/assets/employees/employee1.svg',
   },
   {
     name: '김수민',
@@ -15,7 +15,7 @@ export const employees = [
     position2: 'Developer',
     status: 'Offline',
     date: '24/05/20',
-    profile: 'employees/employee2.svg',
+    profile: '../../../src/assets/employees/employee2.svg',
   },
   {
     name: '이동혁',
@@ -24,7 +24,7 @@ export const employees = [
     position2: 'Developer',
     status: 'Offline',
     date: '24/05/20',
-    profile: 'employees/employee3.svg',
+    profile: '../../../src/assets/employees/employee3.svg',
   },
   {
     name: '이윤환',
@@ -33,7 +33,7 @@ export const employees = [
     position2: 'Developer',
     status: 'Online',
     date: '24/05/20',
-    profile: 'employees/employee4.svg',
+    profile: '../../../src/assets/employees/employee4.svg',
   },
   {
     name: '최원지',
@@ -42,6 +42,6 @@ export const employees = [
     position2: 'Developer',
     status: 'Online',
     date: '24/05/20',
-    profile: 'employees/employee5.svg',
+    profile: '../../../src/assets/employees/employee5.svg',
   },
 ]
