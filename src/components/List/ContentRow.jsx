@@ -33,6 +33,7 @@ const GridContainer = styled.div`
   align-items: center;
   gap: 10px;
   border-bottom: 1px solid #f3f7fb;
+  height: 100%;
 `
 
 const GridContent = styled(Flex)`
