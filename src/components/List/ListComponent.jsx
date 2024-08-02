@@ -22,7 +22,7 @@ const Container = styled.div`
 const Title = styled.h2`
   font-size: 22px;
   font-weight: bold;
-  padding: 5px 10px 20px;
+  padding: 0 10px 20px;
 `
 
 export default ListComponent
