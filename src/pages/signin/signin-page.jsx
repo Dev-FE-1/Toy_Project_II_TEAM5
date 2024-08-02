@@ -1,19 +1,10 @@
-// import { Headding } from '@pages/home/home-page'
-// import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Flex from '@components/shared/Flex.jsx'
-
-// const GlobalStyle = createGlobalStyle`
-//   * {
-//     box-sizing: border-box;
-//   }
-
-//   html, body {
-//     width: 100%;
-//     max-width: 1280px;
-//     height: 100%;
-//     margin: 0px auto;
-// }`
+import { useNavigate } from 'react-router-dom'
+//firebase
+import { auth } from '/src/firebase/firebaseConfig'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 const Bold = styled.div`
   font-weight: 700;
@@ -33,9 +24,9 @@ const Txt12 = styled.div`
 
 const LoginContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 90vh;
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: space-between;
 `
 
@@ -44,7 +35,7 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   width: 50%;
   max-width: 400px;
-  margin: 0 auto;
+  margin: auto;
 `
 
 // const LoginTop = styled.div`
@@ -55,17 +46,17 @@ const LoginWrapper = styled.div`
 const MainTitle = styled.span`
   margin: 10px 0;
   color: #4fd1c5;
-  font-size: 32px;
+  font-size: 36px;
 `
-function Main({ color }) {
-  return (
-    <>
-      <MainTitle color={color}>
-        <Bold>Welcome Back</Bold>
-      </MainTitle>
-    </>
-  )
-}
+// function Main({ color }) {
+//   return (
+//     <>
+//       <MainTitle color={color}>
+//         <Bold>Welcome Back</Bold>
+//       </MainTitle>
+//     </>
+//   )
+// }
 
 const SubTitle = styled.span`
   margin: 10px 0;
@@ -74,7 +65,7 @@ const SubTitle = styled.span`
 `
 
 const LoginEmail = styled.div`
-  margin: 10px 0;
+  margin: 15px 0;
   display: flex;
   flex-direction: column;
 `
@@ -90,7 +81,7 @@ const LoginInput = styled.input`
 `
 
 const LoginPassword = styled.div`
-  margin: 10px 0;
+  margin: 15px 0;
   display: flex;
   flex-direction: column;
 `
@@ -161,7 +152,7 @@ const LoginSubmitBtn = styled.button`
   border: none;
   background-color: var(--primary);
   color: white;
-  margin: 10px 0;
+  margin-top: 30px;
   cursor: pointer;
 
   &:hover {
@@ -171,18 +162,12 @@ const LoginSubmitBtn = styled.button`
 
 const LoginThumbnail = styled.div`
   width: 50%;
-  height: 900px;
+  height: 100%;
   background-color: var(--primary);
   border-radius: 0 0 0 15px;
-  background-image: url(/src/assets/icons/bg-pattern-top.svg),
-    url(/src/assets/icons/bg-pattern-bottom.svg);
-  background-position:
-    top left,
-    bottom right;
+  background-image: url(/src/assets/icons/wave-left.svg), url(/src/assets/icons/wave-right.svg);
   background-repeat: no-repeat, no-repeat;
-  background-position:
-    -25vw -50vh,
-    25vw 50vh;
+  background-position: left, right;
 `
 const FlexLogo = styled(Flex)`
   height: 100%;
@@ -201,27 +186,58 @@ const FlexLogo = styled(Flex)`
   }
 `
 const TeamNameFooter = styled.footer`
-  height: 50px;
+  height: 10vh;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  color: #f0f0f1;
+  color: rgba(160, 174, 192, 0.3);
+  padding-right: 50px;
 `
 
-function LoginInputField({ title, type, placeholder }) {
+function LoginInputField({ title, type, placeholder, value, onChange }) {
   return (
     <>
       <Bold>
         <label>{title}</label>
       </Bold>
       <div>
-        <LoginInput type={type} placeholder={placeholder} />
+        <LoginInput type={type} placeholder={placeholder} value={value} onChange={onChange} />
       </div>
     </>
   )
 }
 
 function SigninPage() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
+
+  const handleLogin = async () => {
+    try {
+      const curUser = await signInWithEmailAndPassword(auth, email, password)
+      console.log('login successed')
+      localStorage.setItem('user', JSON.stringify(curUser.user))
+      navigate('/')
+    } catch (error) {
+      setError('유효한 아이디, 비밀번호를 입력해주세요!')
+      setTimeout(() => {
+        setError(null)
+      }, 5000)
+      console.log('login failed')
+    }
+  }
+
+  function handleEmail(e) {
+    setEmail(e.target.value)
+  }
+
+  function handlePassword(e) {
+    setPassword(e.target.value)
+  }
+  function Alert({ error }) {
+    return <div style={{ color: 'red' }}>{error}</div>
+  }
   return (
     <>
       <LoginContainer>
@@ -235,15 +251,24 @@ function SigninPage() {
             </SubTitle>
           </Flex>
           <LoginEmail>
-            <LoginInputField title="Email" type="email" placeholder="이메일을 입력해주세요." />
+            <LoginInputField
+              title="Email"
+              type="email"
+              placeholder="이메일을 입력해주세요."
+              value={email}
+              onChange={handleEmail}
+            />
           </LoginEmail>
           <LoginPassword>
             <LoginInputField
               title="Password"
               type="password"
               placeholder="패스워드를 입력해주세요."
+              value={password}
+              onChange={handlePassword}
             />
           </LoginPassword>
+          {error && <Alert error={error} />}
           <LoginToggle>
             <ToggleCheckbox id="toggle" />
             <ToggleLabel htmlFor="toggle">
@@ -251,7 +276,7 @@ function SigninPage() {
               <Txt12>이메일 기억하기</Txt12>
             </ToggleLabel>
           </LoginToggle>
-          <LoginSubmitBtn>로그인</LoginSubmitBtn>
+          <LoginSubmitBtn onClick={handleLogin}>로그인</LoginSubmitBtn>
         </LoginWrapper>
         <LoginThumbnail>
           <FlexLogo>Revive</FlexLogo>
