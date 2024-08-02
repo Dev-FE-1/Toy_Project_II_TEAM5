@@ -37,12 +37,12 @@ export default function Schedule() {
 }
 
 const ScheduleContainer = styled(ShadowyBox)`
-  width: 500px;
-  height: 768px;
-  padding: 45px;
   display: flex;
   flex-direction: column;
+  padding: 45px;
   align-items: flex-start;
+  width: 32%;
+  margin-bottom: 10px;
 `
 
 const Title = styled.div`

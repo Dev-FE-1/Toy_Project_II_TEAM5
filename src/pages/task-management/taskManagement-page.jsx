@@ -14,6 +14,8 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
+  margin-top: 20px;
+  gap: 20px;
 `
 const StyledCalendar = styled(Calendar)`
   width: 90%;
