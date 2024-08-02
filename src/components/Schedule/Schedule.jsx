@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import ScheduleItem from './ScheduleItem'
+import ShadowyBox from '@components/shared/ShadowyBox'
 import { colors } from '@styles/Colors'
 
 const scheduleItems = [
@@ -29,16 +30,13 @@ export default function Schedule() {
   )
 }
 
-const ScheduleContainer = styled.div`
+const ScheduleContainer = styled(ShadowyBox)`
   width: 500px;
   height: 768px;
   padding: 45px;
-  border: 1px solid #d2d2d2;
-  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 20px;
 `
 
 const Title = styled.div`

@@ -1,9 +1,12 @@
+import { colors } from '@styles/Colors'
 import styled from 'styled-components'
 
 const CalendarWrapper = styled.div`
   font-family: Arial, sans-serif;
-  max-width: 60%;
-  margin: 0 auto;
+  padding: 20px 50px;
+  padding-bottom: 0;
+  background-color: ${colors.white};
+  flex-grow: 1;
 `
 
 const CalendarHeader = styled.div`
@@ -11,11 +14,16 @@ const CalendarHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  padding-top: 0;
   position: relative;
+  & h2 {
+    font-weight: bold;
+  }
 `
 
 const MonthTitle = styled.h1`
   font-size: 24px;
+  font-weight: bold;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -42,18 +50,17 @@ const MonthYear = styled.h2`
 const CalendarGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-
   border: 1px solid #e9ecef;
 `
 
 const DayHeader = styled.div`
   padding: 10px;
-
   border: 1px solid #e9ecef;
 `
 
 const DayCell = styled.div`
-  min-height: 100px;
+  min-height: 130px;
+  min-width: 130px;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -72,12 +79,12 @@ const ScheduleList = styled.div`
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
+  gap: 4px;
   flex-grow: 1;
 `
 
 const ScheduleItem = styled.div`
-  padding: 2px 5px;
-  margin-bottom: 2px;
+  padding: 6px 8px;
   max-width: 70%;
   border-radius: 3px;
   font-size: 12px;
