@@ -1,3 +1,4 @@
+import AuthGuard from '@components/Auth/Auth-Guard'
 import Layout from '@components/shared/Layout'
 import AdminPage from '@pages/admin/admin-page'
 import HomePage from '@pages/home/home-page'
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
       <Routes>
+        {/* <Route element={<AuthGuard />}> */}
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/salary" element={<SalaryManagementPage />} />
@@ -18,6 +20,7 @@ function App() {
           <Route path="/test" element={<TestPage />} />
           <Route path="/admin" element={<AdminPage />} />
         </Route>
+        {/* </Route> */}
         <Route path="/signin" element={<SigninPage />} />
       </Routes>
     </>

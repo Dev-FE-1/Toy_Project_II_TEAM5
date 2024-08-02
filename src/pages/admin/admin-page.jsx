@@ -7,7 +7,7 @@ import { fetchEmployee } from '@mock/fetchEmployee'
 import styled from 'styled-components'
 import Login from './login'
 function AdminPage() {
-  const user = useUser()
+  const { user } = useUser()
   console.log('user', user)
 
   return (
