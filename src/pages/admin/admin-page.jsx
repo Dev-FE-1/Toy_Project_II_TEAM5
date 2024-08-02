@@ -4,11 +4,34 @@ import { addEmployee } from '@mock/addEmployee'
 import { addProfile } from '@mock/addProfile'
 import fetchCommutesByMonth from '@mock/fetchCommute'
 import { fetchEmployee } from '@mock/fetchEmployee'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Login from './login'
+
 function AdminPage() {
+  const navigate = useNavigate()
+  const [a, setA] = useState(null)
+
   const { user } = useUser()
   console.log('user', user)
+
+  useEffect(() => {
+    if (a === null) {
+      const res = prompt('누구냐')
+      if (res === 'ㅋ') {
+        setA(true)
+      } else {
+        alert('추방한다.')
+        console.log('틀림')
+        navigate('/')
+      }
+    }
+  }, [a, navigate])
+
+  if (!a) {
+    return <Container />
+  }
 
   return (
     <Container>
