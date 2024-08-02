@@ -4,16 +4,22 @@ import SalaryManagementPage from '@pages/salary-management/salary-management-pag
 import SigninPage from '@pages/signin/signin-page'
 import TaskManagementPage from '@pages/task-management/taskManagement-page'
 import TestPage from '@pages/test/test-page'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
 function App() {
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     const user = localStorage.getItem('user')
-    !user && navigate('/signin') //user가 없으면 navigate시 로그인 페이지로 이동시킴
-  }, [navigate])
+
+    if (!user) {
+      navigate('/signin')
+    } else if (location.pathname === '/signin') {
+      navigate(-1)
+    }
+  }, [navigate, location])
 
   return (
     <>
