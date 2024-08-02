@@ -4,9 +4,17 @@ import SalaryManagementPage from '@pages/salary-management/salary-management-pag
 import SigninPage from '@pages/signin/signin-page'
 import TaskManagementPage from '@pages/task-management/taskManagement-page'
 import TestPage from '@pages/test/test-page'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 function App() {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const user = localStorage.getItem('user')
+    !user && navigate('/signin') //user가 없으면 navigate시 로그인 페이지로 이동시킴
+  }, [navigate])
+
   return (
     <>
       <Routes>

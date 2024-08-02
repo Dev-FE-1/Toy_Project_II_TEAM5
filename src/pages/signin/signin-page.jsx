@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Flex from '@components/shared/Flex.jsx'
-import { Route, Routes } from 'react-router-dom'
-import HomePage from '@pages/home/home-page'
+import { useNavigate } from 'react-router-dom'
 //firebase
 import { auth } from '/src/firebase/firebaseConfig'
 import { signInWithEmailAndPassword } from 'firebase/auth'
@@ -212,11 +211,14 @@ function SigninPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password)
+      const curUser = await signInWithEmailAndPassword(auth, email, password)
       console.log('login successed')
+      localStorage.setItem('user', JSON.stringify(curUser.user))
+      navigate('/')
     } catch (error) {
       setError('유효한 아이디, 비밀번호를 입력해주세요!')
       setTimeout(() => {
