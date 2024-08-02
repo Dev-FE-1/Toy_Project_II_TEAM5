@@ -4,7 +4,7 @@ import Flex from '@components/shared/Flex'
 
 function ContentRow({ items, keys, customRenderers }) {
   return (
-    <>
+    <GridWrap>
       {items.map((item, index) => (
         <GridContainer $count={keys.length} key={index}>
           {keys.map((key) => (
@@ -16,13 +16,21 @@ function ContentRow({ items, keys, customRenderers }) {
           ))}
         </GridContainer>
       ))}
-    </>
+    </GridWrap>
   )
 }
+
+const GridWrap = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+`
 
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: ${(props) => `2fr repeat(${props.$count - 1}, 1fr)`};
+  align-items: center;
   gap: 10px;
   border-bottom: 1px solid #f3f7fb;
 `
@@ -32,6 +40,7 @@ const GridContent = styled(Flex)`
   position: relative;
   padding: 5px 0;
   overflow: hidden;
+  height: 100%;
 `
 
 export default ContentRow
