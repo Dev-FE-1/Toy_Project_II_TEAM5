@@ -4,7 +4,7 @@ import Flex from '@components/shared/Flex'
 
 function ContentRow({ items, keys, customRenderers }) {
   return (
-    <GridWrap>
+    <GridWrap $justify="space-evenly" $direction="column">
       {items.map((item, index) => (
         <GridContainer $count={keys.length} key={index}>
           {keys.map((key) => (
@@ -20,11 +20,8 @@ function ContentRow({ items, keys, customRenderers }) {
   )
 }
 
-const GridWrap = styled.div`
+const GridWrap = styled(Flex)`
   height: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
 `
 
 const GridContainer = styled.div`
