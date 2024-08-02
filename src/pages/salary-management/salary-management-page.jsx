@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Footer from '@components/Footer/Footer'
 
 const PageContainer = styled.div`
+  /* padding: 50px 20px 0 0; */
   display: flex;
   flex-direction: column;
   height: calc(100vh - 40px);
