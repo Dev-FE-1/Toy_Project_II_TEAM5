@@ -62,12 +62,9 @@ const PayslipContainer = styled(ShadowyBox)`
   display: flex;
   flex-direction: column;
   width: 32%;
-  height: 90%;
-  margin-top: 20px;
   padding: 45px;
-  border: 1px solid #e0e0e0;
   padding: 25px 16px;
-  margin-bottom: 0;
+  margin-bottom: 10px;
 `
 
 const TitleContainer = styled.div`
