@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import ScheduleItem from './ScheduleItem'
 import ShadowyBox from '@components/shared/ShadowyBox'
 import { colors } from '@styles/Colors'
+import StyledButton from '@components/shared/Button'
 
 const scheduleItems = [
   { time: '06.00am', task: 'Spin Class', duration: '45min', color: '#4fd1c5' },
@@ -24,7 +25,12 @@ export default function Schedule() {
         ))}
       </ScheduleList>
       <ButtonContainer>
-        <AddButton>일정 추가</AddButton>
+        <StyledButton
+          text="일정 추가"
+          backgroundColor={colors.primary_200}
+          hoverColor={colors.primary_300}
+          margin="30px 0 0 0"
+        />
       </ButtonContainer>
     </ScheduleContainer>
   )
@@ -65,18 +71,4 @@ const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-`
-
-const AddButton = styled.button`
-  margin-top: 30px;
-  padding: 9px 20px;
-  background-color: ${colors.primary_200};
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${colors.primary_300};
-  }
 `

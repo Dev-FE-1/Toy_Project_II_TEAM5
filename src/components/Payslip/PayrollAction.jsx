@@ -3,7 +3,7 @@ import Modal, { ModalContext } from '@components/shared/Modal'
 import Flex from '@components/shared/Flex'
 import Horizon from '@components/shared/Horizon'
 import { useContext } from 'react'
-
+import StyledButton from '@components/shared/Button'
 import { colors } from '@styles/Colors'
 
 const PayrollActions = () => (
@@ -11,47 +11,29 @@ const PayrollActions = () => (
     <Modal Trigger={Trigger}>
       <ModalContents />
     </Modal>
-    <HistoryButton>정정 내역</HistoryButton>
+    <StyledButton
+      text="정정 내역"
+      backgroundColor={colors.primary_400}
+      hoverColor={colors.primary_500}
+    />
   </Actions>
 )
 
 function Trigger({ onClick }) {
-  return <ApplyButton onClick={onClick}>정정 신청</ApplyButton>
+  return (
+    <StyledButton
+      onClick={onClick}
+      text="정정 신청"
+      backgroundColor={colors.primary_200}
+      hoverColor={colors.primary_300}
+      margin="0 18px 0 0"
+    />
+  )
 }
 
 const Actions = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 16px;
-`
-
-const ApplyButton = styled.button`
-  font-weight: 500;
-  padding: 9px 23.5px;
-  border: none;
-  border-radius: 8px;
-  background-color: ${colors.primary_200};
-  color: ${colors.white};
-  cursor: pointer;
-  margin-right: 18px;
-
-  &:hover {
-    background-color: ${colors.primary_300};
-  }
-`
-
-const HistoryButton = styled.button`
-  font-weight: 500;
-  padding: 9px 23.5px;
-  border: none;
-  border-radius: 8px;
-  background-color: ${colors.primary_400};
-  color: #ffffff;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${colors.primary_500};
-  }
 `
 
 const Button = styled.button`

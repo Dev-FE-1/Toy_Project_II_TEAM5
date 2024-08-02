@@ -1,9 +1,8 @@
+import ShadowyBox from '@components/shared/ShadowyBox'
 import styled from 'styled-components'
-import { colors } from '@styles/Colors'
+import PayrollActions from './PayrollAction'
 import PayrollItem from './PayrollItem'
 import PayrollTotal from './PayrollTotal'
-import PayrollActions from './PayrollAction'
-import ShadowyBox from '@components/shared/ShadowyBox'
 
 export default function Payslip() {
   const overtime = 16
@@ -61,8 +60,9 @@ export default function Payslip() {
 
 const PayslipContainer = styled(ShadowyBox)`
   width: 500px;
-  height: 768px;
+  height: 100%;
   padding: 25px 16px;
+  margin-bottom: 0;
 `
 
 const TitleContainer = styled.div`
@@ -84,9 +84,9 @@ const Month = styled.div`
 
 const DetailContainer = styled.div`
   width: 100%;
-  height: 492px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 77px;
+  margin-bottom: 30px;
 `
