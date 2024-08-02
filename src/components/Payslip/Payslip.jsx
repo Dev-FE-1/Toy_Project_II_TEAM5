@@ -59,10 +59,12 @@ export default function Payslip() {
 }
 
 const PayslipContainer = styled(ShadowyBox)`
-  width: 500px;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+  padding: 45px;
   padding: 25px 16px;
-  margin-bottom: 0;
+  margin-bottom: 10px;
 `
 
 const TitleContainer = styled.div`
@@ -84,9 +86,9 @@ const Month = styled.div`
 
 const DetailContainer = styled.div`
   width: 100%;
-  height: 500px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `

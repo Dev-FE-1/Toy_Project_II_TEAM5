@@ -2,6 +2,7 @@ import Header from '@components/Header/Header'
 import Calendar from '@components/Calendar/Calendar'
 import Schedule from '@components/Schedule/Schedule'
 import styled from 'styled-components'
+import Footer from '@components/Footer/Footer'
 
 const PageContainer = styled.div`
   display: flex;
@@ -14,6 +15,8 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
+  margin-top: 20px;
+  gap: 20px;
 `
 const StyledCalendar = styled(Calendar)`
   width: 90%;
@@ -31,6 +34,7 @@ function TaskManagementPage() {
         <StyledCalendar />
         <StyledSchedule />
       </ContentContainer>
+      <Footer />
     </PageContainer>
   )
 }

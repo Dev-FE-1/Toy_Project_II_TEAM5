@@ -1,7 +1,8 @@
 import { colors } from '@styles/Colors'
 import styled from 'styled-components'
+import ShadowyBox from '@components/shared/ShadowyBox'
 
-const CalendarWrapper = styled.div`
+const CalendarWrapper = styled(ShadowyBox)`
   font-family: Arial, sans-serif;
   padding: 20px 50px;
   padding-bottom: 0;
