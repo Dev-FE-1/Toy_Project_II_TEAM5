@@ -30,7 +30,6 @@ const GridWrap = styled.div`
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: ${(props) => `2fr repeat(${props.$count - 1}, 1fr)`};
-  align-items: center;
   gap: 10px;
   border-bottom: 1px solid #f3f7fb;
   height: 100%;
