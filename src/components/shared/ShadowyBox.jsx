@@ -7,6 +7,8 @@ const ShadowyBox = styled.div(
     $padding = '20px 15px',
     $marginB = '10px',
   }) => ({
+    background: '#fff',
+    overflow: 'hidden',
     borderRadius: $radius,
     boxShadow: $boxShadow,
     padding: $padding,

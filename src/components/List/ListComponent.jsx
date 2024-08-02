@@ -7,13 +7,17 @@ function ListComponent({ title, headers, items, keys, customRenderers }) {
   return (
     <>
       <Title>{title}</Title>
-      <div>
+      <Container>
         <HeaderRow headers={headers} />
         <ContentRow items={items} keys={keys} customRenderers={customRenderers} />
-      </div>
+      </Container>
     </>
   )
 }
+
+const Container = styled.div`
+  height: calc(100% - 60px);
+`
 
 const Title = styled.h2`
   font-size: 22px;

@@ -9,6 +9,7 @@ const Container = styled.div`
 const Content = styled.div`
   flex-grow: 1;
   padding: 20px;
+  padding-bottom: 0;
 `
 
 function Layout() {
