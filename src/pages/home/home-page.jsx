@@ -22,6 +22,7 @@ function HomePage() {
 }
 
 const Container = styled.div`
+  /* padding: 50px 20px 0 0; */
   height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;

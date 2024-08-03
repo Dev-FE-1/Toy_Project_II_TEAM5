@@ -7,7 +7,7 @@ import Footer from '@components/Footer/Footer'
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 40px);
   max-width: 100vw;
 `
 
@@ -15,7 +15,7 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
-  margin-top: 20px;
+  margin: 20px 0;
   gap: 20px;
 `
 const StyledCalendar = styled(Calendar)`
