@@ -8,18 +8,16 @@ import { colors } from '@styles/Colors'
 
 const PayrollActions = () => (
   <Actions>
-    <Modal Trigger={Trigger}>
-      <ModalContents />
+    <Modal Trigger={RequestTrigger}>
+      <RequestModalContents />
     </Modal>
-    <StyledButton
-      text="정정 내역"
-      backgroundColor={colors.primary_400}
-      hoverColor={colors.primary_500}
-    />
+    <Modal Trigger={CorrectionTrigger}>
+      <CorrectionModalContents />
+    </Modal>
   </Actions>
 )
 
-function Trigger({ onClick }) {
+function RequestTrigger({ onClick }) {
   return (
     <StyledButton
       onClick={onClick}
@@ -27,6 +25,17 @@ function Trigger({ onClick }) {
       backgroundColor={colors.primary_200}
       hoverColor={colors.primary_300}
       margin="0 18px 0 0"
+    />
+  )
+}
+
+function CorrectionTrigger({ onClick }) {
+  return (
+    <StyledButton
+      onClick={onClick}
+      text="정정 내역"
+      backgroundColor={colors.primary_400}
+      hoverColor={colors.primary_500}
     />
   )
 }
@@ -53,10 +62,20 @@ const Button = styled.button`
   }
 `
 
-function ModalContents() {
+function RequestModalContents() {
   return (
     <Form>
       <ModalTitle>정정 신청</ModalTitle>
+      <Horizon $width="558px" $ml="20px" />
+      <Contents />
+    </Form>
+  )
+}
+
+function CorrectionModalContents() {
+  return (
+    <Form>
+      <ModalTitle>정정 내역</ModalTitle>
       <Horizon $width="558px" $ml="20px" />
       <Contents />
     </Form>
