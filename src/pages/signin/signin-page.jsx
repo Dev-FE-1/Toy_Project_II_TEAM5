@@ -144,7 +144,7 @@ function SigninPage() {
             value={password}
             onChange={setPasswordValue}
           />
-          <Alert visible={error}>{error}</Alert>
+          <Alert $visible={error}>{error}</Alert>
           <LoginToggle>
             <ToggleCheckbox id="toggle" />
             <ToggleLabel htmlFor="toggle">
