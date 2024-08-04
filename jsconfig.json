@@ -10,6 +10,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@mock/*": ["src/mock/*"],
       "@pages/*": ["src/pages/*"],
+      "@reducers/*": ["src/reducers/*"],
       "@remote/*": ["src/remote/*"],
       "@styles/*": ["src/styles/*"]
     }
