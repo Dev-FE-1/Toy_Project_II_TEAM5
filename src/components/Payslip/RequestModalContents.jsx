@@ -109,8 +109,7 @@ const Button = styled.button`
   width: 94px;
   height: 32px;
   box-sizing: border-box;
-  margin: 20px;
-  margin-left: 40px;
+  margin: 10px 20px 20px 60px;
   padding: 6px 8px;
   background-color: #4fd1c5;
   color: white;
