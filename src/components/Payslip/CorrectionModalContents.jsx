@@ -1,4 +1,6 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'
+import { db } from '@firebase/firebaseConfig'
 import styled from 'styled-components'
 import { ModalContext } from '@components/shared/Modal'
 import Flex from '@components/shared/Flex'
@@ -7,6 +9,31 @@ import Horizon from '@components/shared/Horizon'
 
 function CorrectionModalContents() {
   const { setIsOpen } = useContext(ModalContext)
+  const [correctionHistory, setCorrectionHistory] = useState([])
+
+  useEffect(() => {
+    const fetchCorrections = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'corrections'))
+        const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+        setCorrectionHistory(data)
+      } catch (error) {
+        console.error('Error getting documents: ', error)
+      }
+    }
+
+    fetchCorrections()
+  }, [])
+
+  const handleDelete = async (id) => {
+    try {
+      const docRef = doc(db, 'corrections', id)
+      await deleteDoc(docRef)
+      setCorrectionHistory((prevHistory) => prevHistory.filter((item) => item.id !== id))
+    } catch (error) {
+      console.error('Error deleting document: ', error)
+    }
+  }
 
   function SubmitButton({ children }) {
     const handleClick = () => {
@@ -15,15 +42,6 @@ function CorrectionModalContents() {
 
     return <Button onClick={handleClick}>{children}</Button>
   }
-
-  const correctionHistory = [
-    { date: '24.07.05', content: '정정신청 5', status: '결제완료' },
-    { date: '24.07.05', content: '정정신청 5', status: '결제완료' },
-    { date: '24.07.01', content: '정정신청 4', status: '결제대기' },
-    { date: '24.06.01', content: '정정신청 3', status: '결제대기' },
-    { date: '24.05.01', content: '정정신청 2', status: '결제대기' },
-    { date: '24.04.01', content: '정정신청 1', status: '결제완료' },
-  ]
 
   return (
     <Form>
@@ -40,20 +58,20 @@ function CorrectionModalContents() {
             </tr>
           </Thead>
           <Tbody>
-            {correctionHistory.map((item, index) => (
-              <tr key={index}>
+            {correctionHistory.map((item) => (
+              <tr key={item.id}>
                 <td>{item.date}</td>
                 <td>{item.content}</td>
                 <td>{item.status}</td>
                 <td>
-                  <DeleteButton>삭제</DeleteButton>
+                  <DeleteButton onClick={() => handleDelete(item.id)}>삭제</DeleteButton>
                 </td>
               </tr>
             ))}
           </Tbody>
         </Table>
         <Flex>
-          <SubmitButton>닫기</SubmitButton>
+          <SubmitButton onClick={() => setIsOpen(false)}>닫기</SubmitButton>
         </Flex>
       </Container>
     </Form>

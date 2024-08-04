@@ -1,4 +1,6 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import { collection, addDoc } from 'firebase/firestore'
+import { db } from '@firebase/firebaseConfig'
 import styled from 'styled-components'
 import { ModalContext } from '@components/shared/Modal'
 import Flex from '@components/shared/Flex'
@@ -8,9 +10,28 @@ import { colors } from '@styles/Colors'
 function RequestModalContents() {
   const { setIsOpen } = useContext(ModalContext)
 
+  const [year, setYear] = useState(2020)
+  const [month, setMonth] = useState(1)
+  const [day, setDay] = useState(1)
+  const [content, setContent] = useState('')
+
   const years = Array.from({ length: 10 }, (_, i) => 2020 + i)
   const months = Array.from({ length: 12 }, (_, i) => 1 + i)
   const days = Array.from({ length: 31 }, (_, i) => 1 + i)
+
+  const handleSubmit = async () => {
+    try {
+      const date = `${year}.${String(month).padStart(2, '0')}.${String(day).padStart(2, '0')}`
+      await addDoc(collection(db, 'corrections'), {
+        date,
+        content,
+        status: '결제대기',
+      })
+      setIsOpen(false)
+    } catch (error) {
+      console.error('Error adding document: ', error)
+    }
+  }
 
   return (
     <Form>
@@ -20,26 +41,28 @@ function RequestModalContents() {
         <Title>날짜</Title>
         <Content>
           <Flex $gap="60px" $justify="flex-start">
-            <DateSelect data={years} />
-            <DateSelect data={months} />
-            <DateSelect data={days} />
+            <DateSelect data={years} onChange={setYear} />
+            <DateSelect data={months} onChange={setMonth} />
+            <DateSelect data={days} onChange={setDay} />
           </Flex>
         </Content>
         <Title>내용</Title>
-        <TextArea />
+        <TextArea value={content} onChange={(e) => setContent(e.target.value)} />
         <Flex>
-          <SubmitButton onClick={() => setIsOpen(false)}>완료</SubmitButton>
+          <SubmitButton onClick={handleSubmit}>완료</SubmitButton>
         </Flex>
       </Container>
     </Form>
   )
 }
 
-function DateSelect({ data }) {
+function DateSelect({ data, onChange }) {
   return (
-    <Select>
+    <Select onChange={(e) => onChange(e.target.value)}>
       {data.map((x) => (
-        <option key={x}>{x}</option>
+        <option key={x} value={x}>
+          {x}
+        </option>
       ))}
     </Select>
   )
