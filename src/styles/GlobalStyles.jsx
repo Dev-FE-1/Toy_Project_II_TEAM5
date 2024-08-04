@@ -91,7 +91,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
     vertical-align: baseline;
   }
   /* HTML5 display-role reset for older browsers */
@@ -110,8 +109,10 @@ const GlobalStyle = createGlobalStyle`
   }
   * {
     box-sizing: border-box;
+    font-family: 'NanumSquare', sans-serif;
   }
   body {
+    font-family: 'NanumSquare', sans-serif;
     line-height: 1;
     background: #f8f9fa;
   }
@@ -142,13 +143,34 @@ const GlobalStyle = createGlobalStyle`
     overflow: visible;
     background: transparent;
     color: inherit;
-    font: inherit;
     line-height: normal;
   }
   a {
     color: inherit;
     text-decoration: inherit;
   }
+
+  @font-face {
+    font-family: 'NanumSquare';
+    src: url('/fonts/NanumSquareR.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'NanumSquare';
+    src: url('/fonts/NanumSquareB.woff2') format('woff2');
+    font-weight: 500;
+    font-style: medium;
+  }
+
+  @font-face {
+    font-family: 'NanumSquare';
+    src: url('/fonts/NanumSquareEB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+  }
+  
 `
 
 export default GlobalStyle
