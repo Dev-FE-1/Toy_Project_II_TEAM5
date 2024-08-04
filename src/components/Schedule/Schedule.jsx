@@ -134,14 +134,15 @@ const Button = styled.button`
 `
 
 function ModalContents() {
+  const [selectedColor, setSelectedColor] = useState('')
   return (
     <Form>
       <Flex $justify="space-between">
         <ModalTitle>일정 추가</ModalTitle>
-        <Category />
+        <Category setSelectedColor={setSelectedColor} />
       </Flex>
       <Horizon $width="558px" $ml="20px" />
-      <Contents></Contents>
+      <Contents selectedColor={selectedColor}></Contents>
     </Form>
   )
 }
@@ -165,42 +166,70 @@ const ModalTitle = styled.h2`
   padding-left: 41px;
 `
 
-function Category() {
+function Category({ setSelectedColor }) {
   const Box = styled(Flex)`
     border: 1px solid #eceff5;
     width: 40%;
     border-radius: 5px;
+    padding: 5px 8px;
+    margin-top: 8px;
+    margin-right: 41px;
   `
+
+  const categories = [
+    { name: 'meeting', color: 'rgba(255, 59, 59, 0.5)' },
+    { name: 'report', color: 'rgb(198, 198, 198)' },
+    { name: 'prepare', color: 'rgba(255, 150, 27, 0.5)' },
+    { name: 'external', color: 'rgba(0, 133, 255, 0.5)' },
+  ]
+
   return (
     <Box $justify="space-between">
-      <ColorBlock />
+      {categories.map((category) => (
+        <ColorBlock
+          key={category.name}
+          $name={category.name}
+          $color={category.color}
+          onClick={() => setSelectedColor(category.color)}
+        />
+      ))}
     </Box>
   )
 
-  function ColorBlock() {
+  function ColorBlock({ $color, $name, onClick }) {
     const ColorBox = styled(Flex)`
       background: #f9f9fa;
       border-radius: 5px;
+      padding: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+      &:hover {
+        box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.05);
+      }
     `
 
     const ColorPin = styled.div`
-      width: 10px;
-      height: 10px;
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
-      background: pink;
-      margin-bottom: 5px;
+      background: ${(props) => props.$color};
+      margin-bottom: 8px;
+    `
+
+    const ColorText = styled.div`
+      color: ${(props) => props.$color};
     `
 
     return (
-      <ColorBox $direction="column">
-        <ColorPin></ColorPin>
-        <div>Meeting</div>
+      <ColorBox $direction="column" onClick={onClick}>
+        <ColorPin $color={$color}></ColorPin>
+        <ColorText $color={$color}>{$name}</ColorText>
       </ColorBox>
     )
   }
 }
 
-function Contents() {
+function Contents({ selectedColor }) {
   const { setIsOpen } = useContext(ModalContext)
 
   const Container = styled.div`
@@ -215,6 +244,7 @@ function Contents() {
     font-weight: bold;
     line-height: 55px;
     padding-left: 20px;
+    position: relative;
   `
 
   const Content = styled.div`
@@ -229,6 +259,11 @@ function Contents() {
     padding-left: 10px;
     border: 1px solid #eceff5;
     outline: none;
+
+    &span {
+      width: 10px;
+      height: 10px;
+    }
   `
 
   function DateSelect({ data }) {
@@ -256,6 +291,17 @@ function Contents() {
     font-size: 18px;
   `
 
+  const CategoryCircle = styled.span`
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: ${selectedColor};
+  `
+
   function SubmitButton({ children }) {
     const handleClick = () => {
       setIsOpen(false)
@@ -274,14 +320,25 @@ function Contents() {
           <DateSelect data={days} />
         </Flex>
       </Content>
-      <Title>할 일</Title>
-      <Input />
-      <Flex>
-        <Title>상태</Title>
+      <Title>
+        할 일<CategoryCircle></CategoryCircle>
+      </Title>
+      <div>
+        <Input />
+        {/* <InputCircle></InputCircle> */}
+      </div>
+      <Flex $justify="space-around">
+        <Flex $direction="column" $gap="15px">
+          <Title>상태</Title>
+          <Select></Select>
+        </Flex>
+        <Flex $direction="column" $gap="15px">
+          <Title>상태</Title>
+          <Select></Select>
+        </Flex>
       </Flex>
-
       <Flex>
-        <button>취소</button>
+        <SubmitButton>취소</SubmitButton>
         <SubmitButton>완료</SubmitButton>
       </Flex>
     </Container>
