@@ -1,15 +1,10 @@
 import React, { useState } from 'react'
-import React, { useState } from 'react'
 import styled from 'styled-components'
 import Flex from '@components/shared/Flex.jsx'
-import { useNavigate } from 'react-router-dom'
 //firebase
 import { auth } from '/src/firebase/firebaseConfig'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
-//firebase
-import { auth } from '/src/firebase/firebaseConfig'
-import { signInWithEmailAndPassword } from 'firebase/auth'
 
 const Bold = styled.div`
   // font-weight: 700;
