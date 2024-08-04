@@ -1,18 +1,22 @@
 import styled from 'styled-components'
 import TimeContainer from './TimeContainer'
 
-const ScheduleItem = ({ item }) => (
-  <ItemContainer>
-    <DotLineContainer>
-      <Dot color={item.color} />
-      <Line />
-    </DotLineContainer>
-    <ItemDetails>
-      <TimeContainer time={item.time} duration={item.duration} />
-      <Task>{item.task}</Task>
-    </ItemDetails>
-  </ItemContainer>
-)
+export default function ScheduleItem({ item }) {
+  const { time, task, color } = item
+  const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  return (
+    <ItemContainer>
+      <DotLineContainer>
+        <Dot color={color} />
+        <Line />
+      </DotLineContainer>
+      <ItemDetails>
+        <TimeContainer time={formattedTime} />
+        <Task>{task}</Task>
+      </ItemDetails>
+    </ItemContainer>
+  )
+}
 
 const ItemContainer = styled.div`
   width: 100%;
@@ -56,10 +60,8 @@ const ItemDetails = styled.div`
 
 const Task = styled.div`
   font-size: 18px;
-  padding-bottom: 25px;
+  padding-bottom: 40px;
   &:hover {
     font-weight: 600;
   }
 `
-
-export default ScheduleItem
