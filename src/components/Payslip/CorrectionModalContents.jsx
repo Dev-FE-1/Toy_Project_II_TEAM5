@@ -106,6 +106,7 @@ const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
+  margin-bottom: 15px;
   thead {
     display: table;
     width: 100%;
