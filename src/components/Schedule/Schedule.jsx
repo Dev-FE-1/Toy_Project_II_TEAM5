@@ -49,7 +49,7 @@ export default function Schedule() {
 
   return (
     <ScheduleContainer>
-      <Title>Today Schedule</Title>
+      <Title>오늘의 할 일</Title>
       <ScheduleList>
         {scheduleItems.map((item) => (
           <ScheduleItem key={item.id} item={item} />
@@ -79,7 +79,7 @@ const ScheduleContainer = styled(ShadowyBox)`
 const Title = styled.div`
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 `
 
 const ScheduleList = styled.div`
