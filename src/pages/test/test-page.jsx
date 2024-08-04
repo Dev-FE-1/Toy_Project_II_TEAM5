@@ -1,14 +1,18 @@
 import Flex from '@components/shared/Flex'
 import Horizon from '@components/shared/Horizon'
+import Loading from '@components/shared/Loading'
 import Modal, { ModalContext } from '@components/shared/Modal'
 import { useContext } from 'react'
 import styled from 'styled-components'
 
 function TestPage() {
   return (
-    <Modal Trigger={Trigger}>
-      <ModalContents />
-    </Modal>
+    <>
+      <Loading />
+      <Modal Trigger={Trigger}>
+        <ModalContents />
+      </Modal>
+    </>
   )
 }
 
