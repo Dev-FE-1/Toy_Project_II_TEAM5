@@ -7,7 +7,7 @@ import { auth } from '/src/firebase/firebaseConfig'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
 const Bold = styled.div`
-  font-weight: 700;
+  // font-weight: 700;
 `
 
 // const Txt32 = styled.div`
@@ -47,6 +47,7 @@ const MainTitle = styled.span`
   margin: 10px 0;
   color: #4fd1c5;
   font-size: 36px;
+  font-weight: 900;
 `
 // function Main({ color }) {
 //   return (
@@ -62,12 +63,21 @@ const SubTitle = styled.span`
   margin: 10px 0;
   color: #a0aec0;
   font-size: 14px;
+  font-weight: 700;
 `
 
-const LoginEmail = styled.div`
+// const LoginEmail = styled.div`
+//   margin: 15px 0;
+//   display: flex;
+//   flex-direction: column;
+// `
+
+const InputSection = styled.div`
   margin: 15px 0;
   display: flex;
   flex-direction: column;
+  font-weight: 700;
+  color: var(--black);
 `
 
 const LoginInput = styled.input`
@@ -80,11 +90,11 @@ const LoginInput = styled.input`
   padding-left: 15px;
 `
 
-const LoginPassword = styled.div`
-  margin: 15px 0;
-  display: flex;
-  flex-direction: column;
-`
+// const LoginPassword = styled.div`
+//   margin: 15px 0;
+//   display: flex;
+//   flex-direction: column;
+// `
 
 // const LoginPasswordInput = styled.input`
 //   border: 1px solid lightgray;
@@ -121,6 +131,8 @@ const ToggleLabel = styled.label`
   align-items: center;
   cursor: pointer;
   user-select: none;
+  font-size: 12px;
+  color: var(--black);
 `
 
 const ToggleButton = styled.span`
@@ -243,14 +255,10 @@ function SigninPage() {
       <LoginContainer>
         <LoginWrapper>
           <Flex $align="flex-start" $direction="column">
-            <MainTitle>
-              <Bold>Welcome Back</Bold>
-            </MainTitle>
-            <SubTitle>
-              <Bold>이메일과 비밀번호를 입력해주세요.</Bold>
-            </SubTitle>
+            <MainTitle>Welcome Back</MainTitle>
+            <SubTitle>이메일과 비밀번호를 입력해주세요.</SubTitle>
           </Flex>
-          <LoginEmail>
+          <InputSection>
             <LoginInputField
               title="Email"
               type="email"
@@ -258,8 +266,8 @@ function SigninPage() {
               value={email}
               onChange={handleEmail}
             />
-          </LoginEmail>
-          <LoginPassword>
+          </InputSection>
+          <InputSection>
             <LoginInputField
               title="Password"
               type="password"
@@ -267,13 +275,13 @@ function SigninPage() {
               value={password}
               onChange={handlePassword}
             />
-          </LoginPassword>
+          </InputSection>
           {error && <Alert error={error} />}
           <LoginToggle>
             <ToggleCheckbox id="toggle" />
             <ToggleLabel htmlFor="toggle">
               <ToggleButton className="toggle-button" />
-              <Txt12>이메일 기억하기</Txt12>
+              이메일 기억하기
             </ToggleLabel>
           </LoginToggle>
           <LoginSubmitBtn onClick={handleLogin}>로그인</LoginSubmitBtn>
