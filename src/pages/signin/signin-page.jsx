@@ -121,9 +121,6 @@ function SigninPage() {
   function setPasswordValue(e) {
     setPassword(e.target.value)
   }
-  function Alert({ error }) {
-    return <div style={{ color: 'red' }}>{error}</div>
-  }
 
   return (
     <>
@@ -147,7 +144,7 @@ function SigninPage() {
             value={password}
             onChange={setPasswordValue}
           />
-          {error && <Alert error={error} />}
+          <Alert visible={error}>{error}</Alert>
           <LoginToggle>
             <ToggleCheckbox id="toggle" />
             <ToggleLabel htmlFor="toggle">
@@ -295,4 +292,11 @@ const TeamNameFooter = styled.footer`
   color: rgba(160, 174, 192, 0.3);
   padding-right: 50px;
 `
+
+const Alert = styled.div`
+  height: 20px;
+  color: red;
+  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+`
+
 export default SigninPage
