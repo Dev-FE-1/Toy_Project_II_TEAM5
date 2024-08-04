@@ -13,7 +13,7 @@ function App() {
   const location = useLocation()
 
   useEffect(() => {
-    const user = localStorage.getItem('user')
+    const user = sessionStorage.getItem('user')
 
     if (!user) {
       navigate('/signin')

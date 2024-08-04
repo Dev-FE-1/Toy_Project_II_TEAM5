@@ -229,7 +229,7 @@ function SigninPage() {
     try {
       const curUser = await signInWithEmailAndPassword(auth, email, password)
       console.log('login successed')
-      localStorage.setItem('user', JSON.stringify(curUser.user))
+      sessionStorage.setItem('user', JSON.stringify(curUser.user))
       navigate('/')
     } catch (error) {
       setError('유효한 아이디, 비밀번호를 입력해주세요!')

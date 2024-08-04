@@ -13,7 +13,7 @@ function UserStatus() {
     auth
       .signOut()
       .then(() => {
-        localStorage.removeItem('user')
+        sessionStorage.removeItem('user')
         navigate('/signin')
       })
       .catch((error) => {
