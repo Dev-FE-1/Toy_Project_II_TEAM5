@@ -18,9 +18,9 @@ const Bold = styled.div`
 //   font-size: 14px;
 // `
 
-const Txt12 = styled.div`
-  font-size: 12px;
-`
+// const Txt12 = styled.div`
+//   font-size: 12px;
+// `
 
 const LoginContainer = styled.div`
   width: 100%;
@@ -240,11 +240,11 @@ function SigninPage() {
     }
   }
 
-  function handleEmail(e) {
+  function setEmailValue(e) {
     setEmail(e.target.value)
   }
 
-  function handlePassword(e) {
+  function setPasswordValue(e) {
     setPassword(e.target.value)
   }
   function Alert({ error }) {
@@ -264,7 +264,7 @@ function SigninPage() {
               type="email"
               placeholder="이메일을 입력해주세요."
               value={email}
-              onChange={handleEmail}
+              onChange={setEmailValue}
             />
           </InputSection>
           <InputSection>
@@ -273,7 +273,7 @@ function SigninPage() {
               type="password"
               placeholder="패스워드를 입력해주세요."
               value={password}
-              onChange={handlePassword}
+              onChange={setPasswordValue}
             />
           </InputSection>
           {error && <Alert error={error} />}
