@@ -17,10 +17,12 @@ function App() {
 
     if (!user) {
       navigate('/signin')
-    } else if (location.pathname === '/signin') {
-      navigate(-1)
+    } else {
+      if (location.pathname === '/signin') {
+        navigate(-1)
+      }
     }
-  }, [navigate, location])
+  }, [navigate, location.pathname])
 
   return (
     <>
