@@ -1,13 +1,14 @@
 import Layout from '@components/shared/Layout'
 import AdminPage from '@pages/admin/admin-page'
 import HomePage from '@pages/home/home-page'
+import NotFoundPage from '@pages/not-found/not-found-page'
 import SalaryManagementPage from '@pages/salary-management/salary-management-page'
 import SigninPage from '@pages/signin/signin-page'
 import TaskManagementPage from '@pages/task-management/taskManagement-page'
 import TestPage from '@pages/test/test-page'
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import useAuthState from '@components/Login/useAuthState'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 function App() {
   const navigate = useNavigate()
@@ -39,6 +40,7 @@ function App() {
           <Route path="/admin" element={<AdminPage />} />
         </Route>
         <Route path="/signin" element={<SigninPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   )
