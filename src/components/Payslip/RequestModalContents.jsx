@@ -53,7 +53,9 @@ function RequestModalContents() {
         <Title>내용</Title>
         <TextArea value={content} onChange={(e) => setContent(e.target.value)} />
         <Flex>
-          <SubmitButton onClick={handleSubmit}>완료</SubmitButton>
+          <SubmitButton onClick={handleSubmit} disabled={content.trim() === ''}>
+            완료
+          </SubmitButton>
           <CancelButton onClick={handleCancel}>취소</CancelButton>
         </Flex>
       </Container>
@@ -130,7 +132,7 @@ const TextArea = styled.textarea`
   outline: none;
   margin-top: 25px;
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 18px;
 `
 
 const Button = styled.button`
@@ -155,6 +157,11 @@ const SubmitButton = styled(Button)`
   background-color: #4fd1c5;
   &:hover {
     background-color: #00bcab;
+  }
+
+  &:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
   }
 `
 
