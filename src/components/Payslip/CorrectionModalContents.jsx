@@ -10,6 +10,7 @@ import Horizon from '@components/shared/Horizon'
 function CorrectionModalContents() {
   const { setIsOpen } = useContext(ModalContext)
   const [correctionHistory, setCorrectionHistory] = useState([])
+  const [expandedContent, setExpandedContent] = useState({})
 
   useEffect(() => {
     const fetchCorrections = async () => {
@@ -33,6 +34,13 @@ function CorrectionModalContents() {
     } catch (error) {
       console.error('Error deleting document: ', error)
     }
+  }
+
+  const toggleExpand = (id) => {
+    setExpandedContent((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }))
   }
 
   function SubmitButton({ children }) {
@@ -61,7 +69,13 @@ function CorrectionModalContents() {
             {correctionHistory.map((item) => (
               <tr key={item.id}>
                 <td>{item.date}</td>
-                <td>{item.content}</td>
+                <ContentCell
+                  onClick={() => toggleExpand(item.id)}
+                  expanded={expandedContent[item.id]}
+                  title={expandedContent[item.id] ? '' : item.content}
+                >
+                  {item.content}
+                </ContentCell>
                 <td>{item.status}</td>
                 <td>
                   <DeleteButton
@@ -118,6 +132,17 @@ const Button = styled.button`
 
   &:hover {
     background-color: #00bcab;
+  }
+`
+
+const ContentCell = styled.td`
+  white-space: ${({ expanded }) => (expanded ? 'normal' : 'nowrap')};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: ${({ expanded }) => (expanded ? 'none' : '150px')};
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 `
 
