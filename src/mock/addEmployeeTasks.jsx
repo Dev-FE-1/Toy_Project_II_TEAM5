@@ -19,7 +19,7 @@ const addEmployeeTasks = async (uid, taskData) => {
     console.log('Adding task to Firestore:', newTask)
     await setDoc(docRef, newTask)
     console.log('Task added successfully')
-    return formattedDate // 문서 ID로 사용
+    return formattedDate
   } catch (error) {
     console.error('Error adding task:', error)
     throw error

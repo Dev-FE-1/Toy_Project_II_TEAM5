@@ -16,8 +16,10 @@ const getDivisionColor = (division) => {
       return 'rgba(255, 150, 27, 0.5)'
     case 'External':
       return 'rgba(0, 133, 255, 0.5)'
+    case 'Report':
+      return 'rgb(198, 198, 198)'
     default:
-      return 'rgb(232, 232, 232)'
+      return '#fff'
   }
 }
 
