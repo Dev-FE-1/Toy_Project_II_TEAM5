@@ -7,14 +7,14 @@ import TaskManagementPage from '@pages/task-management/taskManagement-page'
 import TestPage from '@pages/test/test-page'
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import useAuthState from '@components/Login/useAuthState'
 
 function App() {
   const navigate = useNavigate()
   const location = useLocation()
+  const user = useAuthState()
 
   useEffect(() => {
-    const user = sessionStorage.getItem('user')
-
     if (!user) {
       navigate('/signin')
     } else {
@@ -22,7 +22,7 @@ function App() {
         navigate(-1)
       }
     }
-  }, [navigate, location.pathname])
+  }, [navigate, location.pathname, user])
 
   return (
     <>
