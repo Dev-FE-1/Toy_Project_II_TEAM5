@@ -101,8 +101,7 @@ function SigninPage() {
 
   const handleLogin = async () => {
     try {
-      const user = await signInWithEmailAndPassword(auth, email, password)
-      console.log(user)
+      await signInWithEmailAndPassword(auth, email, password)
       navigate('/')
     } catch (error) {
       setError('유효한 아이디, 비밀번호를 입력해주세요!')
