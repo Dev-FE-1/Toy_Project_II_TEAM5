@@ -13,12 +13,16 @@ function App() {
   const navigate = useNavigate()
   const location = useLocation()
   const user = useAuthState()
+  const pageLists = ['/', '/salary', '/task', '/test', '/signin']
 
   useEffect(() => {
+    const curPage = pageLists.find((pageList) => pageList === location.pathname)
+
+    //임의로 페이지를 옮겼을 때, user 정보가 없으면 signin/ 있으면 마지막페이지로 이동
     if (!user) {
       navigate('/signin')
     } else {
-      if (location.pathname === '/signin') {
+      if (location.pathname === '/signin' || !curPage) {
         navigate(-1)
       }
     }
