@@ -64,7 +64,12 @@ function CorrectionModalContents() {
                 <td>{item.content}</td>
                 <td>{item.status}</td>
                 <td>
-                  <DeleteButton onClick={() => handleDelete(item.id)}>삭제</DeleteButton>
+                  <DeleteButton
+                    onClick={() => handleDelete(item.id)}
+                    disabled={item.status === '결제완료'}
+                  >
+                    삭제
+                  </DeleteButton>
                 </td>
               </tr>
             ))}
@@ -169,6 +174,11 @@ const DeleteButton = styled.button`
   cursor: pointer;
   &:hover {
     background-color: #ff4c4c;
+  }
+
+  &:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
   }
 `
 
