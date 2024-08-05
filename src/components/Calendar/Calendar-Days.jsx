@@ -43,7 +43,7 @@ function CalendarDays() {
   const isLastMonth = (day) => day.getMonth() !== month
 
   return calendarDays.map((day) => (
-    <Container key={day} isLastMonth={isLastMonth(day)}>
+    <Container key={day} $isLastMonth={isLastMonth(day)}>
       <span className="day">{day.getDate()}</span>
       <ScheduleList>
         {dummySchedules[day.getDate()]?.map((schedule, index) => (
@@ -69,8 +69,8 @@ const Container = styled.div`
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 5px;
-    ${({ isLastMonth }) =>
-      isLastMonth &&
+    ${({ $isLastMonth }) =>
+      $isLastMonth &&
       css`
         color: ${colors.gray};
         font-weight: 400;

@@ -12,7 +12,6 @@ function MonthSelector() {
 
   return (
     <Select
-      defaultValue={month}
       value={month}
       onChange={(e) => {
         handleMonthSelect(e)
