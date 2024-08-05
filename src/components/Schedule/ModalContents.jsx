@@ -33,6 +33,8 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
     day: new Date().getDate(),
+    hour: new Date().getHours().toString().padStart(2, '0'),
+    minute: (Math.round(new Date().getMinutes() / 10) * 10).toString().padStart(2, '0'),
     task: '',
     status: '진행중',
     division: '',
@@ -48,10 +50,19 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
     if (!taskData.task) {
       alert('할 일을 입력해주세요.')
       return
+    } else if (!taskData.division) {
+      alert('구분을 선택해주세요.')
+      return
     }
     const newTask = {
       task: taskData.task,
-      time: new Date(taskData.year, taskData.month - 1, taskData.day),
+      time: new Date(
+        taskData.year,
+        taskData.month - 1,
+        taskData.day,
+        parseInt(taskData.hour),
+        parseInt(taskData.minute)
+      ),
       status: taskData.status,
       division: taskData.division,
       // division: taskData.division || getCategoryNameByColor(selectedColor),
@@ -207,33 +218,36 @@ function Contents({ selectedColor, taskData, handleInputChange, handleSubmit }) 
       <Title>시간</Title>
       <Content>
         <Flex $gap="60px" $justify="flex-start">
-          <DateSelect name="hour" value={taskData.hour} onChange={handleInputChange} data={hours} />
+          <DateSelect
+            name="hour"
+            value={taskData.hour}
+            onChange={handleInputChange}
+            data={hours.map((h) => h.toString().padStart(2, '0'))}
+          />
           :
           <DateSelect
             name="minute"
             value={taskData.minute}
             onChange={handleInputChange}
-            data={minutes}
+            data={minutes.map((m) => m.toString().padStart(2, '0'))}
           />
         </Flex>
       </Content>
       <Title>
         할 일<CategoryCircle $selectedColor={selectedColor}></CategoryCircle>
       </Title>
-      <div>
-        <Input name="task" value={taskData.task} onChange={handleInputChange} />
-      </div>
-      <Flex $justify="space-around">
-        <Flex $direction="column" $gap="15px">
-          <Title>상태</Title>
+      <Input name="task" value={taskData.task} onChange={handleInputChange} />
+      <Flex $justify="space-between">
+        <Half $gap="15px">
+          <FlexTitle>상태</FlexTitle>
           <Select name="status" value={taskData.status} onChange={handleInputChange}>
             <option value="진행중">진행중</option>
             <option value="완료함">완료함</option>
             <option value="취소됨">취소됨</option>
           </Select>
-        </Flex>
-        <Flex $direction="column" $gap="15px">
-          <Title>구분</Title>
+        </Half>
+        <Half $gap="15px">
+          <FlexTitle>구분</FlexTitle>
           <Select name="division" value={taskData.division} onChange={handleInputChange}>
             <option value="">선택</option>
             {categories.map((cat) => (
@@ -242,7 +256,7 @@ function Contents({ selectedColor, taskData, handleInputChange, handleSubmit }) 
               </option>
             ))}
           </Select>
-        </Flex>
+        </Half>
       </Flex>
       <Flex>
         <SubmitButton onClick={() => setIsOpen(false)}>취소</SubmitButton>
@@ -267,13 +281,29 @@ const Title = styled.div`
   position: relative;
 `
 
+const Half = styled(Flex)`
+  width: 45%;
+`
+
+const FlexTitle = styled.div`
+  width: 50%;
+  height: 50px;
+  box-sizing: border-box;
+  background-color: #effaf8;
+  color: black;
+  font-weight: bold;
+  line-height: 50px;
+  padding-left: 20px;
+  position: relative;
+`
+
 const Content = styled.div`
-  margin: 15px 0 25px;
+  margin: 10px 0 20px;
 `
 
 const Select = styled.select`
   width: 160px;
-  height: 40px;
+  height: 50px;
   box-sizing: border-box;
   padding: 5px 12px;
   border: 1px solid #eceff5;
@@ -291,7 +321,7 @@ const Input = styled.input`
   resize: none;
   border: 1px solid #eceff5;
   outline: none;
-  margin: 15px 0 25px;
+  margin: 10px 0 20px;
   padding: 0 5px;
   font-size: 18px;
 `

@@ -75,6 +75,7 @@ export default function Schedule() {
 const ScheduleContainer = styled(ShadowyBox)`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 45px;
   align-items: flex-start;
   width: 32%;
@@ -88,9 +89,9 @@ const Title = styled.div`
 `
 
 const ScheduleList = styled.div`
-  max-height: 570px;
   overflow-y: auto;
   width: 100%;
+  max-height: 750px;
   padding-right: 10px;
   &::-webkit-scrollbar {
     width: 5px;
