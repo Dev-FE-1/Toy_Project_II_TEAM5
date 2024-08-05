@@ -1,6 +1,7 @@
 import { CalendarContext } from '@components/Container/calendar-context'
 import useCalendar from '@hooks/useCalendar'
 import { colors } from '@styles/Colors'
+import isHoliday from '@utils/isHoliday'
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 
@@ -41,10 +42,14 @@ function CalendarDays() {
   }
 
   const isLastMonth = (day) => day.getMonth() !== month
+  // const holidayName = (day) => HOLIDAYS.find((holiday) => holiday.date
 
   return calendarDays.map((day) => (
-    <Container key={day} $isLastMonth={isLastMonth(day)}>
-      <span className="day">{day.getDate()}</span>
+    <Container key={day} $isLastMonth={isLastMonth(day)} $isHoliday={isHoliday(day)}>
+      <span className="day">
+        {day.getDate()}
+        <span className="holiday">{isHoliday(day)?.name}</span>
+      </span>
       <ScheduleList>
         {dummySchedules[day.getDate()]?.map((schedule, index) => (
           <ScheduleItem key={index} type={schedule.type}>
@@ -69,12 +74,22 @@ const Container = styled.div`
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 5px;
-    ${({ $isLastMonth }) =>
-      $isLastMonth &&
-      css`
-        color: ${colors.gray};
-        font-weight: 400;
-      `}
+    ${({ $isHoliday, $isLastMonth }) =>
+      $isHoliday
+        ? css`
+            color: red;
+          `
+        : $isLastMonth &&
+          css`
+            color: ${colors.gray};
+            font-weight: 400;
+          `}
+  }
+
+  .holiday {
+    margin-left: 6px;
+    font-size: 20px;
+    font-weight: 500;
   }
 `
 
