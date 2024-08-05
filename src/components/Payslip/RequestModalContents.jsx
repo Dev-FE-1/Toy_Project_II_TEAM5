@@ -33,6 +33,10 @@ function RequestModalContents() {
     }
   }
 
+  const handleCancel = () => {
+    setIsOpen(false)
+  }
+
   return (
     <Form>
       <ModalTitle>정정 신청</ModalTitle>
@@ -50,6 +54,7 @@ function RequestModalContents() {
         <TextArea value={content} onChange={(e) => setContent(e.target.value)} />
         <Flex>
           <SubmitButton onClick={handleSubmit}>완료</SubmitButton>
+          <CancelButton onClick={handleCancel}>취소</CancelButton>
         </Flex>
       </Container>
     </Form>
@@ -132,7 +137,8 @@ const Button = styled.button`
   width: 94px;
   height: 32px;
   box-sizing: border-box;
-  margin: 10px 20px 20px 60px;
+  /* margin: 10px 20px 20px 60px; */
+  margin-right: 20px;
   padding: 6px 8px;
   background-color: #4fd1c5;
   color: white;
@@ -140,6 +146,13 @@ const Button = styled.button`
   border-radius: 8px;
   cursor: pointer;
 
+  &:hover {
+    background-color: #00bcab;
+  }
+`
+
+const CancelButton = styled(Button)`
+  background-color: #4fd1c5;
   &:hover {
     background-color: #00bcab;
   }
