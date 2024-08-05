@@ -26,6 +26,7 @@ const getDivisionColor = (division) => {
 export default function Schedule() {
   const [scheduleItems, setScheduleItems] = useState([])
   const [loading, setLoading] = useState(true)
+  const [activeIndex, setActiveIndex] = useState(null)
 
   useEffect(() => {
     const loadTasks = async () => {
@@ -60,8 +61,13 @@ export default function Schedule() {
     <ScheduleContainer>
       <Title>오늘의 할 일</Title>
       <ScheduleList>
-        {scheduleItems.map((item) => (
-          <ScheduleItem key={item.id} item={item} />
+        {scheduleItems.map((item, index) => (
+          <ScheduleItem
+            key={item.id}
+            item={item}
+            isActive={activeIndex === index}
+            onClick={() => setActiveIndex(index)}
+          />
         ))}
       </ScheduleList>
       <ButtonContainer>
