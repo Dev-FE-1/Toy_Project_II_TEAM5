@@ -36,6 +36,7 @@ export default function Schedule() {
           ...task,
           color: getDivisionColor(task.division),
         }))
+        formattedTasks.sort((a, b) => a.time.getTime() - b.time.getTime())
         setScheduleItems(formattedTasks)
         setLoading(false)
       } catch (error) {
