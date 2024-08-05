@@ -151,17 +151,17 @@ const Button = styled.button`
   }
 `
 
-const CancelButton = styled(Button)`
+const SubmitButton = styled(Button)`
   background-color: #4fd1c5;
   &:hover {
     background-color: #00bcab;
   }
 `
 
-const SubmitButton = styled(Button)`
-  background-color: #4fd1c5;
+const CancelButton = styled(Button)`
+  background-color: ${colors.primary_300};
   &:hover {
-    background-color: #00bcab;
+    background-color: ${colors.primary_400};
   }
 `
 
