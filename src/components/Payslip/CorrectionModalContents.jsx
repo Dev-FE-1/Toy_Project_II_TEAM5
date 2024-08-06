@@ -1,12 +1,34 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+import { deleteDoc, doc } from 'firebase/firestore'
 import styled from 'styled-components'
 import { ModalContext } from '@components/shared/Modal'
 import Flex from '@components/shared/Flex'
 import { colors } from '@styles/Colors'
 import Horizon from '@components/shared/Horizon'
+import useFetchCorrections from '@hooks/useFetchCorrection'
+import { db } from '@firebase/firebaseConfig'
 
 function CorrectionModalContents() {
   const { setIsOpen } = useContext(ModalContext)
+  const { correctionHistory, setCorrectionHistory, error } = useFetchCorrections()
+  const [expandedContent, setExpandedContent] = useState({})
+
+  const handleDelete = async (id) => {
+    try {
+      const docRef = doc(db, 'corrections', id)
+      await deleteDoc(docRef)
+      setCorrectionHistory((prevHistory) => prevHistory.filter((item) => item.id !== id))
+    } catch (error) {
+      console.error('Error deleting document: ', error)
+    }
+  }
+
+  const toggleExpand = (id) => {
+    setExpandedContent((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }))
+  }
 
   function SubmitButton({ children }) {
     const handleClick = () => {
@@ -15,15 +37,6 @@ function CorrectionModalContents() {
 
     return <Button onClick={handleClick}>{children}</Button>
   }
-
-  const correctionHistory = [
-    { date: '24.07.05', content: '정정신청 5', status: '결제완료' },
-    { date: '24.07.05', content: '정정신청 5', status: '결제완료' },
-    { date: '24.07.01', content: '정정신청 4', status: '결제대기' },
-    { date: '24.06.01', content: '정정신청 3', status: '결제대기' },
-    { date: '24.05.01', content: '정정신청 2', status: '결제대기' },
-    { date: '24.04.01', content: '정정신청 1', status: '결제완료' },
-  ]
 
   return (
     <Form>
@@ -40,20 +53,32 @@ function CorrectionModalContents() {
             </tr>
           </Thead>
           <Tbody>
-            {correctionHistory.map((item, index) => (
-              <tr key={index}>
+            {correctionHistory.map((item) => (
+              <tr key={item.id}>
                 <td>{item.date}</td>
-                <td>{item.content}</td>
+                <ContentCell
+                  onClick={() => toggleExpand(item.id)}
+                  expanded={expandedContent[item.id]}
+                  title={expandedContent[item.id] ? '' : item.content}
+                >
+                  {item.content}
+                </ContentCell>
                 <td>{item.status}</td>
                 <td>
-                  <DeleteButton>삭제</DeleteButton>
+                  <DeleteButton
+                    onClick={() => handleDelete(item.id)}
+                    disabled={item.status === '결제완료'}
+                  >
+                    삭제
+                  </DeleteButton>
                 </td>
               </tr>
             ))}
           </Tbody>
         </Table>
+        {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
         <Flex>
-          <SubmitButton>닫기</SubmitButton>
+          <SubmitButton onClick={() => setIsOpen(false)}>닫기</SubmitButton>
         </Flex>
       </Container>
     </Form>
@@ -95,6 +120,17 @@ const Button = styled.button`
 
   &:hover {
     background-color: #00bcab;
+  }
+`
+
+const ContentCell = styled.td`
+  white-space: ${({ expanded }) => (expanded ? 'normal' : 'nowrap')};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: ${({ expanded }) => (expanded ? 'none' : '150px')};
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 `
 
@@ -151,6 +187,11 @@ const DeleteButton = styled.button`
   cursor: pointer;
   &:hover {
     background-color: #ff4c4c;
+  }
+
+  &:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
   }
 `
 
