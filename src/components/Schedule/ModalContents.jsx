@@ -277,9 +277,8 @@ const Input = styled.input`
 
 const CategoryCircle = styled.span`
   position: absolute;
-  top: 50%;
+  bottom: -40px;
   right: 20px;
-  transform: translateY(-50%);
   width: 20px;
   height: 20px;
   border-radius: 50%;
