@@ -12,15 +12,31 @@ function CorrectionModalContents() {
   const { setIsOpen } = useContext(ModalContext)
   const { correctionHistory, setCorrectionHistory, error } = useFetchCorrections()
   const [expandedContent, setExpandedContent] = useState({})
+  const [isDeleteConfirmModalOpen, setIsDeleteConfirmModalOpen] = useState(false)
+  const [selectedItemId, setSelectedItemId] = useState(null)
 
-  const handleDelete = async (id) => {
-    try {
-      const docRef = doc(db, 'corrections', id)
-      await deleteDoc(docRef)
-      setCorrectionHistory((prevHistory) => prevHistory.filter((item) => item.id !== id))
-    } catch (error) {
-      console.error('Error deleting document: ', error)
+  const handleDeleteClick = (id) => {
+    setSelectedItemId(id)
+    setIsDeleteConfirmModalOpen(true)
+  }
+
+  const handleConfirmDelete = async () => {
+    if (selectedItemId) {
+      try {
+        const docRef = doc(db, 'corrections', selectedItemId)
+        await deleteDoc(docRef)
+        setCorrectionHistory((prevHistory) =>
+          prevHistory.filter((item) => item.id !== selectedItemId)
+        )
+        setIsDeleteConfirmModalOpen(false)
+      } catch (error) {
+        console.error('Error deleting document: ', error)
+      }
     }
+  }
+
+  const handleCancelDelete = () => {
+    setIsDeleteConfirmModalOpen(false)
   }
 
   const toggleExpand = (id) => {
@@ -66,7 +82,7 @@ function CorrectionModalContents() {
                 <td>{item.status}</td>
                 <td>
                   <DeleteButton
-                    onClick={() => handleDelete(item.id)}
+                    onClick={() => handleDeleteClick(item.id)}
                     disabled={item.status === '결제완료'}
                   >
                     삭제
@@ -81,6 +97,17 @@ function CorrectionModalContents() {
           <SubmitButton onClick={() => setIsOpen(false)}>닫기</SubmitButton>
         </Flex>
       </Container>
+      {isDeleteConfirmModalOpen && (
+        <ConfirmModal>
+          <ConfirmModalContent>
+            <ConfirmModalText>삭제하시겠습니까?</ConfirmModalText>
+            <Flex>
+              <ConfirmButton onClick={handleConfirmDelete}>삭제</ConfirmButton>
+              <CancelButton onClick={handleCancelDelete}>취소</CancelButton>
+            </Flex>
+          </ConfirmModalContent>
+        </ConfirmModal>
+      )}
     </Form>
   )
 }
@@ -193,6 +220,48 @@ const DeleteButton = styled.button`
     background-color: #a9a9a9;
     cursor: not-allowed;
   }
+`
+
+const ConfirmModal = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+`
+
+const ConfirmModalContent = styled.div`
+  background-color: ${colors.white};
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+`
+
+const ConfirmModalText = styled.p`
+  font-size: 16px;
+  font-weight: 500;
+  margin: 20px 0;
+`
+
+const ConfirmButton = styled(Button)`
+  background-color: #ff6b6b;
+  &:hover {
+    background-color: #ff4c4c;
+  }
+  margin-right: 0;
+`
+
+const CancelButton = styled(Button)`
+  background-color: ${colors.primary_300};
+  &:hover {
+    background-color: ${colors.primary_400};
+  }
+  margin-right: 30px;
 `
 
 export default CorrectionModalContents
