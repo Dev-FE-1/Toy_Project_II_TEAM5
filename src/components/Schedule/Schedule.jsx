@@ -7,6 +7,8 @@ import StyledButton from '@components/shared/Button'
 import { fetchEmployeeTasks } from '../../mock/fetchEmployeeTasks'
 import Modal from '@components/shared/Modal'
 import ModalContents from './ModalContents'
+import EditModal from './EditModalContents'
+import deleteEmployeeTasks from '@mock/deleteEmployeeTasks'
 
 const getDivisionColor = (division) => {
   switch (division) {
@@ -27,6 +29,8 @@ export default function Schedule() {
   const [scheduleItems, setScheduleItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeIndex, setActiveIndex] = useState(null)
+  const [editingTask, setEditingTask] = useState(null)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
   useEffect(() => {
     const loadTasks = async () => {
@@ -50,7 +54,55 @@ export default function Schedule() {
   }, [])
 
   const handleTaskAdded = (newTask) => {
-    setScheduleItems((prev) => [...prev, newTask])
+    setScheduleItems((prev) => {
+      const updatedItems = [...prev, { ...newTask, color: getDivisionColor(newTask.division) }]
+      return updatedItems.sort((a, b) => a.time.getTime() - b.time.getTime())
+    })
+  }
+
+  const handleEditClick = (task) => {
+    setEditingTask(task)
+    setIsEditModalOpen(true)
+    console.log('Edit button clicked, task:', task)
+  }
+
+  const handleTaskUpdated = (taskId, updatedTask) => {
+    setScheduleItems((prev) =>
+      prev.map((item) =>
+        item.id === taskId
+          ? { ...item, ...updatedTask, color: getDivisionColor(updatedTask.division) }
+          : item
+      )
+    )
+    setEditingTask(null)
+    setIsEditModalOpen(false)
+  }
+
+  const handleCloseEditModal = () => {
+    setEditingTask(null)
+    setIsEditModalOpen(false)
+  }
+
+  const handleDeleteClick = async (taskId) => {
+    if (window.confirm('정말로 이 일정을 삭제하시겠습니까?')) {
+      try {
+        await deleteEmployeeTasks('Zrghj2Jf3CVwQ7jSOmjCXYBBlek1', taskId)
+        setScheduleItems((prev) => prev.filter((item) => item.id !== taskId))
+      } catch (error) {
+        console.error('Error deleting task:', error)
+        alert('일정 삭제 중 오류가 발생했습니다.')
+      }
+    }
+  }
+
+  const EditTrigger = ({ onClick }) => {
+    useEffect(() => {
+      if (isEditModalOpen) {
+        onClick()
+      }
+    }, [isEditModalOpen, onClick])
+
+    return null
   }
 
   if (loading) {
@@ -67,12 +119,26 @@ export default function Schedule() {
             item={item}
             isActive={activeIndex === index}
             onClick={() => setActiveIndex(index)}
+            onEditClick={() => handleEditClick(item)}
+            onDeleteClick={() => handleDeleteClick(item.id)}
           />
         ))}
       </ScheduleList>
       <ButtonContainer>
         <Modal Trigger={Trigger}>
           <ModalContents employeeId="Zrghj2Jf3CVwQ7jSOmjCXYBBlek1" onTaskAdded={handleTaskAdded} />
+        </Modal>
+      </ButtonContainer>
+      <ButtonContainer>
+        <Modal Trigger={(props) => <EditTrigger {...props} task={editingTask} />}>
+          {editingTask && (
+            <EditModal
+              employeeId="Zrghj2Jf3CVwQ7jSOmjCXYBBlek1"
+              task={editingTask}
+              onTaskUpdated={handleTaskUpdated}
+              onClose={handleCloseEditModal}
+            />
+          )}
         </Modal>
       </ButtonContainer>
     </ScheduleContainer>

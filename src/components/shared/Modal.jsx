@@ -13,6 +13,7 @@ function Modal({ children, Trigger, onOpen }) {
   useEffect(() => {
     if (isOpen && onOpen) {
       onOpen()
+      console.log('Modal onOpen callback executed')
     }
   }, [isOpen, onOpen])
 

@@ -2,14 +2,13 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import TimeContainer from './TimeContainer'
 
-export default function ScheduleItem({ item, isActive, onClick }) {
+export default function ScheduleItem({ item, isActive, onClick, onEditClick, onDeleteClick }) {
   const { time, task, color } = item
   const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
   const [isBtnVisible, setIsBtnVisible] = useState(false)
 
   function handleClick() {
     setIsBtnVisible(!isBtnVisible)
-    console.log('click')
   }
 
   return (
@@ -19,7 +18,12 @@ export default function ScheduleItem({ item, isActive, onClick }) {
         <Line />
       </DotLineContainer>
       <ItemDetails>
-        <TimeContainer time={formattedTime} isBtnVisible={isActive} />
+        <TimeContainer
+          time={formattedTime}
+          isBtnVisible={isActive}
+          onEditClick={onEditClick}
+          onDeleteClick={onDeleteClick}
+        />
         <Task onClick={handleClick}>{task}</Task>
       </ItemDetails>
     </ItemContainer>

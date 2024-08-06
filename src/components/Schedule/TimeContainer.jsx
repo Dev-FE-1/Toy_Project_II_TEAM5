@@ -4,12 +4,22 @@ import { FaPencilAlt } from 'react-icons/fa'
 import { FaTrash } from 'react-icons/fa'
 import Flex from '@components/shared/Flex'
 
-const TimeContainer = ({ time, isBtnVisible }) => (
+const TimeContainer = ({ time, isBtnVisible, onEditClick, onDeleteClick }) => (
   <TimeDetails>
     <Time>{time}</Time>
     <Btns $isBtnVisible={isBtnVisible}>
-      <EditBtn />
-      <DeleteBtn />
+      <EditBtn
+        onClick={(e) => {
+          e.stopPropagation()
+          onEditClick()
+        }}
+      />
+      <DeleteBtn
+        onClick={(e) => {
+          e.stopPropagation()
+          onDeleteClick()
+        }}
+      />
     </Btns>
   </TimeDetails>
 )
