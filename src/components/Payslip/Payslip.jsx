@@ -4,18 +4,17 @@ import PayrollActions from './PayrollAction'
 import PayrollItem from './PayrollItem'
 import PayrollTotal from './PayrollTotal'
 
-export default function Payslip() {
-  const overtime = 16
+export default function Payslip({ overTime }) {
   const overtimeRate = 15822
   const overtimeMultiplier = 1.5
-  const overtimePay = overtime * overtimeRate * overtimeMultiplier
-  const overtimeFormula = `연장 근무 시간(${overtime}시간) * 통상 시급(${overtimeRate.toLocaleString()}원) * ${overtimeMultiplier}`
+  const overtimePay = overTime * overtimeRate * overtimeMultiplier
+  const overtimeFormula = `연장 근무 시간(${overTime}시간) * 통상 시급(${overtimeRate.toLocaleString()}원) * ${overtimeMultiplier}`
 
   const payrollData = {
     month: 7,
     baseSalary: 3500000,
     mealAllowance: 300000,
-    overtime,
+    overtime: overTime,
     overtimePay,
     longevityAllowance: 200000,
     bonus: 200000,
