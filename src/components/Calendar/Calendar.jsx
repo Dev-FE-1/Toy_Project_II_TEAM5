@@ -11,64 +11,38 @@ import {
   ScheduleList,
   ScheduleItem,
 } from './Calendar.styled'
-/*
-필요한 데이터:
-월별 날짜(30,31...)
-시작하는 요일 -> state
 
-*/
-const Calendar = () => {
+const Calendar = ({ dayNum, firstDay, workTimeTable, selectedMonth, onMonthChange }) => {
   const weekDay = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-  const daysInMonth = 31
-  const firstDayOfMonth = weekDay.indexOf('TUE')
-
-  const dummySchedules = {
-    2: [
-      { type: '출근', time: '09:00', description: '' },
-      { type: '퇴근', time: '18:00', description: '' },
-    ],
-    3: [
-      { type: '출근', time: '09:00', description: '' },
-      { type: '퇴근', time: '18:00', description: '' },
-    ],
-    4: [
-      { type: '출근', time: '09:00', description: '' },
-      { type: '퇴근', time: '18:00', description: '' },
-    ],
-    5: [
-      { type: '출근', time: '09:00', description: '' },
-      { type: '퇴근', time: '18:00', description: '' },
-    ],
-    9: [
-      { type: '출근', time: '09:00', description: '' },
-      { type: '퇴근', time: '18:00', description: '' },
-    ],
-    10: [
-      { type: '출근', time: '09:00', description: '' },
-      { type: '퇴근', time: '18:00', description: '' },
-    ],
-    11: [{ type: 'Development', description: '' }],
-    12: [{ type: 'Edit file', description: '' }],
-    13: [{ type: 'Note taking', description: '' }],
-  }
+  const daysInMonth = dayNum
+  const firstDayOfMonth = weekDay.indexOf(firstDay) // Get index of the first day
 
   const renderCalendarDays = () => {
+    // Create empty cells for the days before the first day
     const emptyCells = Array.from({ length: firstDayOfMonth }).map((_, index) => (
       <DayCell key={`empty-${index}`} />
     ))
 
-    const days = Array.from({ length: daysInMonth }).map((_, day) => (
-      <DayCell key={day + 1}>
-        <DayNumber>{day + 1}</DayNumber>
-        <ScheduleList>
-          {dummySchedules[day + 1]?.map((schedule, index) => (
-            <ScheduleItem key={index} type={schedule.type}>
-              {schedule.type} {schedule.time}
-            </ScheduleItem>
-          ))}
-        </ScheduleList>
-      </DayCell>
-    ))
+    // Create cells for each day of the month
+    const days = Array.from({ length: daysInMonth }).map((_, day) => {
+      const currentDate = day + 1
+      // Ensure the day index is correct for workTimeTable
+      const daySchedule = workTimeTable[currentDate] || {}
+
+      return (
+        <DayCell key={currentDate}>
+          <DayNumber>{currentDate}</DayNumber>
+          <ScheduleList>
+            {daySchedule.workIn && (
+              <ScheduleItem type="출근">출근 {daySchedule.workIn}</ScheduleItem>
+            )}
+            {daySchedule.workOut && (
+              <ScheduleItem type="퇴근">퇴근 {daySchedule.workOut}</ScheduleItem>
+            )}
+          </ScheduleList>
+        </DayCell>
+      )
+    })
 
     return [...emptyCells, ...days]
   }
@@ -77,8 +51,8 @@ const Calendar = () => {
     <CalendarWrapper>
       <CalendarHeader>
         <MonthYear>July, 2024</MonthYear>
-        <MonthTitle>7월</MonthTitle>
-        <MonthSelector>
+        <MonthTitle>{selectedMonth}월</MonthTitle>
+        <MonthSelector value={selectedMonth} onChange={onMonthChange}>
           {Array.from({ length: 12 }).map((_, index) => (
             <option key={index + 1} value={index + 1}>
               {index + 1}월
