@@ -28,7 +28,7 @@ const getDivisionColor = (division) => {
 }
 
 export default function ModalContents({ employeeId, onTaskAdded }) {
-  // const [selectedColor, setSelectedColor] = useState('')
+  const [selectedColor, setSelectedColor] = useState('')
   const [taskData, setTaskData] = useState({
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
@@ -44,6 +44,10 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setTaskData((prev) => ({ ...prev, [name]: value }))
+    if (name === 'division') {
+      const SelectCategory = categories.find((cat) => cat.name === value)
+      setSelectedColor(SelectCategory ? SelectCategory.color : '')
+    }
   }
 
   const handleSubmit = async () => {
@@ -92,7 +96,7 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
       </Flex>
       <Horizon $width="558px" $ml="20px" />
       <Contents
-        // selectedColor={selectedColor}
+        selectedColor={selectedColor}
         taskData={taskData}
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit} // Ensure handleSubmit is passed here
@@ -119,61 +123,6 @@ const ModalTitle = styled.h2`
   font-weight: bold;
   padding-left: 41px;
 `
-
-// function Category({ setSelectedColor }) {
-//   return (
-//     <Box $justify="space-between">
-//       {categories.map((category) => (
-//         <ColorBlock
-//           key={category.name}
-//           $name={category.name}
-//           $color={category.color}
-//           onClick={() => setSelectedColor(category.color)}
-//         />
-//       ))}
-//     </Box>
-//   )
-// }
-// const Box = styled(Flex)`
-//   border: 1px solid #eceff5;
-//   width: 40%;
-//   border-radius: 5px;
-//   padding: 5px 8px;
-//   margin-top: 8px;
-//   margin-right: 41px;
-// `
-
-// function ColorBlock({ $color, $name, onClick }) {
-//   return (
-//     <ColorBox $direction="column" onClick={onClick}>
-//       <ColorPin $color={$color}></ColorPin>
-//       <ColorText $color={$color}>{$name}</ColorText>
-//     </ColorBox>
-//   )
-// }
-
-// const ColorBox = styled(Flex)`
-//   background: #f9f9fa;
-//   border-radius: 5px;
-//   padding: 5px;
-//   cursor: pointer;
-//   transition: 0.2s;
-//   &:hover {
-//     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.05);
-//   }
-// `
-
-// const ColorPin = styled.div`
-//   width: 15px;
-//   height: 15px;
-//   border-radius: 50%;
-//   background: ${(props) => props.$color};
-//   margin-bottom: 8px;
-// `
-
-// const ColorText = styled.div`
-//   color: ${(props) => props.$color};
-// `
 
 function Contents({ selectedColor, taskData, handleInputChange, handleSubmit }) {
   const { setIsOpen } = useContext(ModalContext)
@@ -259,8 +208,8 @@ function Contents({ selectedColor, taskData, handleInputChange, handleSubmit }) 
         </Half>
       </Flex>
       <Flex>
-        <SubmitButton onClick={() => setIsOpen(false)}>취소</SubmitButton>
         <SubmitButton onClick={handleSubmit}>완료</SubmitButton>
+        <SubmitButton onClick={() => setIsOpen(false)}>취소</SubmitButton>
       </Flex>
     </Container>
   )

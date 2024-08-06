@@ -182,8 +182,8 @@ function Contents({ taskData, handleInputChange, handleSubmit, onClose }) {
         </Half>
       </Flex>
       <Flex>
-        <Button onClick={onClose}>취소</Button>
         <Button onClick={handleSubmit}>수정 완료</Button>
+        <Button onClick={onClose}>취소</Button>
       </Flex>
     </Container>
   )
