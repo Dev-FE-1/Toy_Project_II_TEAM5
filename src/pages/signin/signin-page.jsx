@@ -294,7 +294,7 @@ const TeamNameFooter = styled.footer`
 const Alert = styled.div`
   height: 20px;
   color: red;
-  visibility: ${(props) => (props.visible ? 'visible' : 'hidden')};
+  visibility: ${(props) => (props.$visible ? 'visible' : 'hidden')};
 `
 
 export default SigninPage
