@@ -2,10 +2,10 @@ import styled, { css } from 'styled-components'
 import { colors } from '@styles/Colors'
 import Flex from '@components/shared/Flex'
 
-const EmployeeStatus = ({ status }) => {
+const EmployeeStatus = ({ isOnline }) => {
   return (
-    <ColoredStatus $justify="center" $status={status}>
-      {status}
+    <ColoredStatus $justify="center" $isOnline={isOnline}>
+      {isOnline ? 'Online' : 'Offline'}
     </ColoredStatus>
   )
 }
@@ -19,15 +19,13 @@ const ColoredStatus = styled(Flex)`
   position: relative;
 
   ${(props) =>
-    props.$status === 'Online' &&
-    css`
-      background: #48bb78;
-    `}
-  ${(props) =>
-    props.$status === 'Offline' &&
-    css`
-      background: #cbd5e0;
-    `}
+    props.$isOnline
+      ? css`
+          background: #48bb78;
+        `
+      : css`
+          background: #cbd5e0;
+        `}
 `
 
 export default EmployeeStatus
