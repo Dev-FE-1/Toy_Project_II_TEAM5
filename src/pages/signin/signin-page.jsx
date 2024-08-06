@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Flex from '@components/shared/Flex.jsx'
 import InputField from '@hooks/InputField.jsx'
@@ -97,11 +97,20 @@ function SigninPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [isChecked, setIsChecked] = useState(false)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('storedEmail')
+    if (storedEmail) {
+      setEmail(storedEmail)
+      setIsChecked(true)
+    }
+  }, []) // signin이 최초 로드될 때, localStorage에 사용자 정보가있으면 가져온다.
 
   const handleLogin = async () => {
     try {
-      // await signInWithEmailAndPassword(auth, email, password)
+      await signInWithEmailAndPassword(auth, email, password)
       navigate('/')
     } catch (error) {
       setError('유효한 아이디, 비밀번호를 입력해주세요!')
@@ -118,6 +127,16 @@ function SigninPage() {
 
   function setPasswordValue(e) {
     setPassword(e.target.value)
+  }
+
+  function handleIsToggleChecked(e) {
+    if (e.target.checked === true) {
+      setIsChecked(true)
+      localStorage.setItem('storedEmail', email)
+    } else {
+      setIsChecked(false)
+      localStorage.removeItem('storedEmail')
+    }
   }
 
   return (
@@ -144,7 +163,7 @@ function SigninPage() {
           />
           <Alert $visible={error}>{error}</Alert>
           <LoginToggle>
-            <ToggleCheckbox id="toggle" />
+            <ToggleCheckbox id="toggle" checked={isChecked} onChange={handleIsToggleChecked} />
             <ToggleLabel htmlFor="toggle">
               <ToggleButton className="toggle-button" />
               이메일 기억하기
