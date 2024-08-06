@@ -6,6 +6,8 @@ import TodoMore from './CustomRenderers/TodoMore.jsx'
 import Progressbar from './CustomRenderers/Progressbar.jsx'
 import ShadowyBox from '@components/shared/ShadowyBox.jsx'
 import { fetchEmployeeTasks } from '../../mock/fetchEmployeeTasks'
+import Loading from '@components/shared/Loading'
+import Flex from '@components/shared/Flex.jsx'
 
 function ToDoList() {
   const [todos, setTodos] = useState([])
@@ -40,7 +42,11 @@ function ToDoList() {
   }
 
   if (loading) {
-    return <div>Loading...</div>
+    return (
+      <Center>
+        <Loading />
+      </Center>
+    )
   }
 
   return (
@@ -55,6 +61,10 @@ function ToDoList() {
     </ListContainer>
   )
 }
+
+const Center = styled(Flex)`
+  width: 100%;
+`
 
 const ListContainer = styled(ShadowyBox)`
   width: 100%;

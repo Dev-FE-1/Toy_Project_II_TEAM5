@@ -9,6 +9,8 @@ import Modal from '@components/shared/Modal'
 import ModalContents from './ModalContents'
 import EditModal from './EditModalContents'
 import deleteEmployeeTasks from '@mock/deleteEmployeeTasks'
+import Loading from '@components/shared/Loading'
+import Flex from '@components/shared/Flex'
 
 const getDivisionColor = (division) => {
   switch (division) {
@@ -42,6 +44,7 @@ export default function Schedule() {
           color: getDivisionColor(task.division),
         }))
         formattedTasks.sort((a, b) => a.time.getTime() - b.time.getTime())
+        console.log('Sorted tasks:', formattedTasks)
         setScheduleItems(formattedTasks)
         setLoading(false)
       } catch (error) {
@@ -101,7 +104,11 @@ export default function Schedule() {
   }
 
   if (loading) {
-    return <div>Loading...</div>
+    return (
+      <Center>
+        <Loading />
+      </Center>
+    )
   }
 
   return (
@@ -137,6 +144,10 @@ export default function Schedule() {
     </ScheduleContainer>
   )
 }
+
+const Center = styled(Flex)`
+  width: 32%;
+`
 
 const ScheduleContainer = styled(ShadowyBox)`
   display: flex;

@@ -4,8 +4,8 @@ import { colors } from '@styles/Colors'
 const StyledButton = ({ text, $backgroundColor, $hoverColor, onClick, margin }) => {
   return (
     <Button
-      $backgroundcolor={backgroundColor}
-      $hovercolor={hoverColor}
+      $backgroundcolor={$backgroundColor}
+      $hovercolor={$hoverColor}
       onClick={onClick}
       $margin={margin}
     >

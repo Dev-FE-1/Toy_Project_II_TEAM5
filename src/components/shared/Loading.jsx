@@ -23,7 +23,7 @@ const rotate = keyframes`
 const Container = styled(Flex)`
   flex-direction: column;
   gap: 40px;
-  width: 200px;
+  width: 100px;
   & img {
     width: 100%;
     display: block;
