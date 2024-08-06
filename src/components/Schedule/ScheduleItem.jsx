@@ -36,9 +36,6 @@ const ItemContainer = styled.div`
   display: flex;
   flex-direction: row;
   cursor: pointer;
-  /* &:hover {
-    font-weight: 600;
-  } */
 `
 
 const DotLineContainer = styled.div`
@@ -72,8 +69,11 @@ const ItemDetails = styled.div`
 
 const Task = styled.div`
   font-size: 18px;
-  padding-bottom: 40px;
+  padding: 28px 5px 33px;
+  margin: 5px 0;
+  line-height: 21px;
+  transition: 0.3s;
   &:hover {
-    font-weight: 600;
+    background: rgba(158, 227, 219, 0.1);
   }
 `

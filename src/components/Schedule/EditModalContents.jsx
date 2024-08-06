@@ -48,11 +48,15 @@ const EditModal = ({ employeeId, task, onTaskUpdated, onClose }) => {
       await updateEmployeeTask(employeeId, task.id, updatedTask)
       onTaskUpdated(task.id, updatedTask)
       setIsOpen(false)
-      onClose()
+      handleClose()
     } catch (error) {
       console.error('Error updating task:', error)
       alert('작업 수정 중 오류가 발생했습니다.')
     }
+  }
+  const handleClose = () => {
+    setIsOpen(false)
+    onClose()
   }
 
   return (
@@ -63,6 +67,7 @@ const EditModal = ({ employeeId, task, onTaskUpdated, onClose }) => {
         taskData={taskData}
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
+        onClose={handleClose}
       />
       {/* <ButtonContainer>
         <Button onClick={handleSubmit}>수정 완료</Button>
@@ -100,8 +105,13 @@ const ModalTitle = styled.h2`
   padding-left: 41px;
 `
 
-function Contents({ taskData, handleInputChange, handleSubmit }) {
-  const { setIsOpen } = useContext(ModalContext)
+function Contents({ taskData, handleInputChange, handleSubmit, onClose }) {
+  // const { setIsOpen } = useContext(ModalContext)
+  const years = Array.from({ length: 10 }, (_, i) => 2024 + i)
+  const months = Array.from({ length: 12 }, (_, i) => 1 + i)
+  const days = Array.from({ length: 31 }, (_, i) => 1 + i)
+  const hours = Array.from({ length: 24 }, (_, i) => i)
+  const minutes = Array.from({ length: 60 }, (_, i) => i)
 
   function DateSelect({ name, value, onChange, data }) {
     return (
@@ -114,12 +124,6 @@ function Contents({ taskData, handleInputChange, handleSubmit }) {
       </Select>
     )
   }
-
-  const years = Array.from({ length: 10 }, (_, i) => 2024 + i)
-  const months = Array.from({ length: 12 }, (_, i) => 1 + i)
-  const days = Array.from({ length: 31 }, (_, i) => 1 + i)
-  const hours = Array.from({ length: 24 }, (_, i) => i)
-  const minutes = Array.from({ length: 60 }, (_, i) => i)
 
   return (
     <Container>
@@ -178,7 +182,7 @@ function Contents({ taskData, handleInputChange, handleSubmit }) {
         </Half>
       </Flex>
       <Flex>
-        <Button onClick={() => setIsOpen(false)}>취소</Button>
+        <Button onClick={onClose}>취소</Button>
         <Button onClick={handleSubmit}>수정 완료</Button>
       </Flex>
     </Container>
@@ -245,12 +249,6 @@ const Input = styled.input`
   padding: 0 5px;
   font-size: 18px;
 `
-
-// const ButtonContainer = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   padding: 20px;
-// `
 
 const Button = styled.button`
   width: 94px;
