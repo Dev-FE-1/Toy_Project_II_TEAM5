@@ -14,6 +14,7 @@ function RequestModalContents() {
   const [month, setMonth] = useState(1)
   const [day, setDay] = useState(1)
   const [content, setContent] = useState('')
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
 
   const years = Array.from({ length: 10 }, (_, i) => 2020 + i)
   const months = Array.from({ length: 12 }, (_, i) => 1 + i)
@@ -33,6 +34,18 @@ function RequestModalContents() {
     }
   }
 
+  const handleCancel = () => {
+    setIsOpen(false)
+  }
+
+  const handleConfirm = () => {
+    setIsConfirmModalOpen(true)
+  }
+
+  const handleConfirmClose = () => {
+    setIsConfirmModalOpen(false)
+  }
+
   return (
     <Form>
       <ModalTitle>정정 신청</ModalTitle>
@@ -49,9 +62,24 @@ function RequestModalContents() {
         <Title>내용</Title>
         <TextArea value={content} onChange={(e) => setContent(e.target.value)} />
         <Flex>
-          <SubmitButton onClick={handleSubmit}>완료</SubmitButton>
+          <SubmitButton onClick={handleConfirm} disabled={content.trim() === ''}>
+            완료
+          </SubmitButton>
+          <CancelButton onClick={handleCancel}>취소</CancelButton>
         </Flex>
       </Container>
+
+      {isConfirmModalOpen && (
+        <ConfirmModal>
+          <ConfirmModalContent>
+            <ConfirmModalText>신청하시겠습니까?</ConfirmModalText>
+            <Flex>
+              <ConfirmButton onClick={handleSubmit}>신청</ConfirmButton>
+              <CancelButton onClick={handleConfirmClose}>취소</CancelButton>
+            </Flex>
+          </ConfirmModalContent>
+        </ConfirmModal>
+      )}
     </Form>
   )
 }
@@ -125,14 +153,15 @@ const TextArea = styled.textarea`
   outline: none;
   margin-top: 25px;
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 18px;
 `
 
 const Button = styled.button`
   width: 94px;
   height: 32px;
   box-sizing: border-box;
-  margin: 10px 20px 20px 60px;
+  /* margin: 10px 20px 20px 60px; */
+  margin-right: 20px;
   padding: 6px 8px;
   background-color: #4fd1c5;
   color: white;
@@ -147,6 +176,50 @@ const Button = styled.button`
 
 const SubmitButton = styled(Button)`
   background-color: #4fd1c5;
+  &:hover {
+    background-color: #00bcab;
+  }
+
+  &:disabled {
+    background-color: #a9a9a9;
+    cursor: not-allowed;
+  }
+`
+
+const CancelButton = styled(Button)`
+  background-color: ${colors.primary_300};
+  &:hover {
+    background-color: ${colors.primary_400};
+  }
+`
+const ConfirmModal = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+`
+
+const ConfirmModalContent = styled.div`
+  background-color: ${colors.white};
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+`
+
+const ConfirmModalText = styled.p`
+  font-size: 16px;
+  margin-bottom: 20px;
+`
+
+const ConfirmButton = styled(Button)`
+  background-color: #4fd1c5;
+  margin-left: 20px;
   &:hover {
     background-color: #00bcab;
   }
