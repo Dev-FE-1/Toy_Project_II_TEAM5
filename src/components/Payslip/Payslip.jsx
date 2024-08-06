@@ -7,7 +7,7 @@ import PayrollTotal from './PayrollTotal'
 export default function Payslip({ overTime }) {
   const overtimeRate = 15822
   const overtimeMultiplier = 1.5
-  const overtimePay = overTime * overtimeRate * overtimeMultiplier
+  const overtimePay = Math.ceil(overTime * overtimeRate * overtimeMultiplier)
   const overtimeFormula = `연장 근무 시간(${overTime}시간) * 통상 시급(${overtimeRate.toLocaleString()}원) * ${overtimeMultiplier}`
 
   const payrollData = {
