@@ -3,6 +3,7 @@ import ScheduleItem from './ScheduleItem'
 import ShadowyBox from '@components/shared/ShadowyBox'
 import { colors } from '@styles/Colors'
 import StyledButton from '@components/shared/Button'
+import { scrollbarStyle } from '@styles/variables'
 
 const scheduleItems = [
   { time: '06.00am', task: 'Spin Class', duration: '45min', color: '#4fd1c5' },
@@ -43,6 +44,7 @@ const ScheduleContainer = styled(ShadowyBox)`
   align-items: flex-start;
   width: 32%;
   margin-bottom: 10px;
+  ${scrollbarStyle}
 `
 
 const Title = styled.div`
@@ -56,15 +58,7 @@ const ScheduleList = styled.div`
   overflow-y: auto;
   width: 100%;
   padding-right: 10px;
-  &::-webkit-scrollbar {
-    width: 5px;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.4);
-  }
-  &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-  }
+  ${scrollbarStyle}
 `
 
 const ButtonContainer = styled.div`
