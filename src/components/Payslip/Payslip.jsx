@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import PayrollActions from './PayrollAction'
 import PayrollItem from './PayrollItem'
 import PayrollTotal from './PayrollTotal'
+import { useContext } from 'react'
+import { CalendarContext } from '@components/Container/calendar-context'
 
 export default function Payslip() {
   const overtime = 16
@@ -30,11 +32,15 @@ export default function Payslip() {
     },
   }
 
+  const { year, month } = useContext(CalendarContext)
+
   return (
     <PayslipContainer>
       <TitleContainer>
         <Title>급여 지급내역</Title>
-        <Month>{payrollData.month}월</Month>
+        <Month>
+          {year} 년 {month + 1}월
+        </Month>
       </TitleContainer>
       <DetailContainer>
         {[
@@ -62,6 +68,7 @@ const PayslipContainer = styled(ShadowyBox)`
   display: flex;
   flex-direction: column;
   width: 32%;
+  max-height: 805px;
   padding: 45px;
   padding: 25px 16px;
   margin-bottom: 10px;
