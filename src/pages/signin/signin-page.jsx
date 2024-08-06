@@ -106,7 +106,13 @@ function SigninPage() {
       setEmail(storedEmail)
       setIsChecked(true)
     }
-  }, []) // signin이 최초 로드될 때, localStorage에 사용자 정보가있으면 가져온다.
+  }, []) // signin이 최초 로드될 때, 1. localStorage에 사용자 정보가있으면 가져온다. 2. toggle checked -> true
+
+  useEffect(() => {
+    if (isChecked) {
+      localStorage.setItem('storedEmail', email)
+    }
+  }, [email, isChecked]) // email이 바뀔 때마다 toggle checked가 true이면 localstorage에 사용자 정보(email)을 업데이트한다.
 
   const handleLogin = async () => {
     try {
@@ -119,7 +125,7 @@ function SigninPage() {
       }, 5000)
       console.log('login failed')
     }
-  }
+  } //로그인 성공 시 메인페이지로, 실패 시 error 메시지 5초간 출력
 
   function setEmailValue(e) {
     setEmail(e.target.value)
@@ -137,7 +143,7 @@ function SigninPage() {
       setIsChecked(false)
       localStorage.removeItem('storedEmail')
     }
-  }
+  } // toggle 상태(checked)가 바뀔 때 실행되는 이벤트, default가 false이므로 첫 실행 시 true가 된다
 
   return (
     <>
