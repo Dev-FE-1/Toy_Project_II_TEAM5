@@ -1,18 +1,19 @@
 import { useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import TimeContainer from './TimeContainer'
 
 export default function ScheduleItem({ item, isActive, onClick, onEditClick, onDeleteClick }) {
-  const { time, task, color } = item
+  const { time, task, color, status } = item
   const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
   const [isBtnVisible, setIsBtnVisible] = useState(false)
+  const isCancelled = status === '취소됨'
 
   function handleClick() {
     setIsBtnVisible(!isBtnVisible)
   }
 
   return (
-    <ItemContainer onClick={onClick}>
+    <ItemContainer onClick={onClick} $isCancelled={isCancelled}>
       <DotLineContainer>
         <Dot color={color} />
         <Line />
@@ -24,7 +25,9 @@ export default function ScheduleItem({ item, isActive, onClick, onEditClick, onD
           onEditClick={onEditClick}
           onDeleteClick={onDeleteClick}
         />
-        <Task onClick={handleClick}>{task}</Task>
+        <Task onClick={handleClick} $isCancelled={isCancelled}>
+          {task}
+        </Task>
       </ItemDetails>
     </ItemContainer>
   )
@@ -73,6 +76,12 @@ const Task = styled.div`
   margin: 5px 0;
   line-height: 21px;
   transition: 0.3s;
+  ${(props) =>
+    props.$isCancelled &&
+    css`
+      color: #888;
+      text-decoration: line-through;
+    `}
   &:hover {
     background: rgba(158, 227, 219, 0.1);
   }
