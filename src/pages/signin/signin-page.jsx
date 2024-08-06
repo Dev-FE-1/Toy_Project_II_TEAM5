@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Flex from '@components/shared/Flex.jsx'
-import InputField from '@components/Login/InputField.jsx'
+import InputField from '@hooks/InputField.jsx'
 
 //firebase
 import { auth } from '/src/firebase/firebaseConfig'
