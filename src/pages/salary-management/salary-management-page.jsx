@@ -83,7 +83,7 @@ function SalaryManagementPage() {
           selectedMonth={month} // Pass the selectedMonth to Calendar
           onMonthChange={handleMonthChange}
         />
-        <StyledPayslip overTime={processedData.overTime} />
+        <StyledPayslip overTime={processedData.overTime} month={month} />
       </ContentContainer>
       <Footer />
     </PageContainer>
