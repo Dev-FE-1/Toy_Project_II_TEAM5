@@ -1,30 +1,17 @@
-import { useContext, useState, useEffect } from 'react'
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore'
-import { db } from '@firebase/firebaseConfig'
+import { useContext, useState } from 'react'
+import { deleteDoc, doc } from 'firebase/firestore'
 import styled from 'styled-components'
 import { ModalContext } from '@components/shared/Modal'
 import Flex from '@components/shared/Flex'
 import { colors } from '@styles/Colors'
 import Horizon from '@components/shared/Horizon'
+import useFetchCorrections from '@hooks/useFetchCorrection'
+import { db } from '@firebase/firebaseConfig'
 
 function CorrectionModalContents() {
   const { setIsOpen } = useContext(ModalContext)
-  const [correctionHistory, setCorrectionHistory] = useState([])
+  const { correctionHistory, setCorrectionHistory, error } = useFetchCorrections()
   const [expandedContent, setExpandedContent] = useState({})
-
-  useEffect(() => {
-    const fetchCorrections = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'corrections'))
-        const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-        setCorrectionHistory(data)
-      } catch (error) {
-        console.error('Error getting documents: ', error)
-      }
-    }
-
-    fetchCorrections()
-  }, [])
 
   const handleDelete = async (id) => {
     try {
@@ -89,6 +76,7 @@ function CorrectionModalContents() {
             ))}
           </Tbody>
         </Table>
+        {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
         <Flex>
           <SubmitButton onClick={() => setIsOpen(false)}>닫기</SubmitButton>
         </Flex>
