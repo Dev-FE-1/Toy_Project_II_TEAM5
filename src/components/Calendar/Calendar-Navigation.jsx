@@ -39,6 +39,12 @@ const Month = styled(Flex)`
   font-size: 24px;
   margin-bottom: 12px;
   transform: translateY(10px);
+
+  & h2 {
+    text-align: center;
+    width: 60px;
+  }
+
   & button {
     font-size: 20px;
   }

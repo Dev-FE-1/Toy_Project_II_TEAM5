@@ -18,10 +18,11 @@ const Calendar = () => {
 }
 
 const Container = styled(ShadowyBox)`
-  padding: 20px 50px;
+  padding: 20px 40px;
   padding-bottom: 0;
   background-color: ${colors.white};
   flex-grow: 1;
+  width: 70%;
 `
 
 const CalendarContents = styled.div`
