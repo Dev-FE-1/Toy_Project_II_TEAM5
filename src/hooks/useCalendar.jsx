@@ -6,21 +6,21 @@ const useCalendar = (year, month) => {
 
   const [calendarDays, setCalendarDays] = useState([])
 
-  useEffect(() => {
-    const firstDayOfMonth = new Date(year, month, 1)
+  const firstDayIndex = new Date(year, month, 1).getDay()
 
+  useEffect(() => {
     // 이번달의 1일이 일요일이 아닌 경우에 지난달 마지막 주 추가
     let previousMonthDays = []
-    if (firstDayOfMonth.getDay() !== 0) {
+    if (firstDayIndex !== 0) {
       previousMonthDays = getLastWeekOfPreviousMonth(year, month)
     }
 
     const currentMonthDays = getDaysInMonth(year, month)
 
     setCalendarDays([...previousMonthDays, ...currentMonthDays])
-  }, [year, month])
+  }, [year, month, firstDayIndex])
 
-  return { calendarHeader, calendarDays }
+  return { calendarHeader, calendarDays, firstDayIndex }
 }
 
 //helper

@@ -1,18 +1,21 @@
+import { CalendarContext } from '@components/Container/calendar-context'
 import ShadowyBox from '@components/shared/ShadowyBox'
+import useAttendance from '@hooks/useAttandance'
+import calcOverTime from '@utils/calcOverTime'
+import { useContext } from 'react'
 import styled from 'styled-components'
 import PayrollActions from './PayrollAction'
 import PayrollItem from './PayrollItem'
 import PayrollTotal from './PayrollTotal'
-import { useContext } from 'react'
-import { CalendarContext } from '@components/Container/calendar-context'
 
-export default function Payslip({ overTime }) {
+export default function Payslip() {
+  const { year, month } = useContext(CalendarContext)
+  const { data, status } = useAttendance({ month })
+  const overTime = calcOverTime(data?.workTimeTable)
   const overtimeRate = 15822
   const overtimeMultiplier = 1.5
   const overtimePay = Math.ceil(overTime * overtimeRate * overtimeMultiplier)
   const overtimeFormula = `연장 근무 시간(${overTime}시간) * 통상 시급(${overtimeRate.toLocaleString()}원) * ${overtimeMultiplier}`
-
-  const { year, month } = useContext(CalendarContext)
 
   const payrollData = {
     month: month,
@@ -32,6 +35,8 @@ export default function Payslip({ overTime }) {
       )
     },
   }
+
+  if (status === 'pending') return <PayslipContainer />
 
   return (
     <PayslipContainer>

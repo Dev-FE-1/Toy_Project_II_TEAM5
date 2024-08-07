@@ -1,42 +1,48 @@
 import { CalendarContext } from '@components/Container/calendar-context'
+import Loading from '@components/shared/Loading'
 import useAttendance from '@hooks/useAttandance'
 import useCalendar from '@hooks/useCalendar'
 import { colors } from '@styles/Colors'
 import isHoliday from '@utils/isHoliday'
+import { format } from 'date-fns/format'
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 
 function CalendarDays() {
   const { month, year } = useContext(CalendarContext)
+  const { calendarDays, firstDayIndex } = useCalendar(year, month)
 
-  const { calendarDays } = useCalendar(year, month)
-  const firstDay = calendarDays.findIndex((x) => x.getMonth() === month)
+  const { data, status } = useAttendance({ month })
 
-  const { processedData } = useAttendance({ month })
+  const hasAttendance = !!data && Object.keys(data).length !== 0
+  const workOfDay = (day) => data.workTimeTable[day]
 
-  // const workOfDay = (day) => workList?.workTimeTable[day]
+  const isPrevMonth = (day) => day.getMonth() !== month
 
-  // console.log('w', workOfDay(0))
-  console.log('d', processedData)
-  // console.log('a', firstDay)
+  const toTime = (timeStamp) => format(new Date(timeStamp), 'HH:mm')
 
-  const isLastMonth = (day) => day.getMonth() !== month
-  // const holidayName = (day) => HOLIDAYS.find((holiday) => holiday.date)
+  if (status === 'pending') return <Loading />
 
   return calendarDays.map((day, idx) => (
-    <Container key={day} $isLastMonth={isLastMonth(day)} $isHoliday={isHoliday(day)}>
+    <Container key={day} $isPrevMonth={isPrevMonth(day)} $isHoliday={isHoliday(day)}>
       <span className="day">
         {day.getDate()}
         <span className="holiday">{isHoliday(day)?.name}</span>
       </span>
-      {/* <ScheduleList>
-        {workOfDay(idx - firstDay)?.workIn && (
-          <ScheduleItem type="출근">출근 {workOfDay(idx - firstDay)?.workIn}</ScheduleItem>
-        )}
-        {workOfDay(idx - firstDay)?.workOut && (
-          <ScheduleItem type="퇴근">퇴근 {workOfDay(idx - firstDay)?.workOut}</ScheduleItem>
-        )}
-      </ScheduleList> */}
+      {hasAttendance && !isHoliday(day) && (
+        <ScheduleList>
+          {workOfDay(idx - firstDayIndex)?.workIn && (
+            <ScheduleItem type="출근">
+              출근 {toTime(workOfDay(idx - firstDayIndex)?.workIn)}
+            </ScheduleItem>
+          )}
+          {workOfDay(idx - firstDayIndex)?.workOut && (
+            <ScheduleItem type="퇴근">
+              퇴근 {toTime(workOfDay(idx - firstDayIndex)?.workOut)}
+            </ScheduleItem>
+          )}
+        </ScheduleList>
+      )}
     </Container>
   ))
 }
@@ -54,12 +60,12 @@ const Container = styled.div`
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 5px;
-    ${({ $isHoliday, $isLastMonth }) =>
+    ${({ $isHoliday, $isPrevMonth }) =>
       $isHoliday
         ? css`
             color: red;
           `
-        : $isLastMonth &&
+        : $isPrevMonth &&
           css`
             color: ${colors.gray};
             font-weight: 400;

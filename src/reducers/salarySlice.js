@@ -21,7 +21,7 @@ const workListSlice = createSlice({
       })
       .addCase(fetchWorkList.rejected, (state, action) => {
         state.status = 'rejected'
-        state.error = action.payload
+        state.error = action.error.message
       })
   },
 })
@@ -31,7 +31,7 @@ export const fetchWorkList = createAsyncThunk('workList/fetchWorkList', async (m
     const docRef = doc(db, `EMPLOYEES/Zrghj2Jf3CVwQ7jSOmjCXYBBlek1/ATTENDENCE/${month}`)
     const docSnap = await getDoc(docRef)
 
-    if (docSnap.empty) {
+    if (!docSnap.exists()) {
       return thunkAPI.rejectWithValue('No documents found')
     } else {
       return docSnap.data()

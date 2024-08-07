@@ -12,9 +12,7 @@ function SalaryManagementPage() {
         <ContentContainer>
           <ContentContainer>
             <Calendar />
-            <Payslip
-            // overTime={processedData.over}
-            />
+            <Payslip />
           </ContentContainer>
         </ContentContainer>
       </CalendarContextProvider>
