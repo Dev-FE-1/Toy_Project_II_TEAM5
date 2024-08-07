@@ -3,8 +3,11 @@ import styled, { css } from 'styled-components'
 import TimeContainer from './TimeContainer'
 
 export default function ScheduleItem({ item, isActive, onClick, onEditClick, onDeleteClick }) {
-  const { time, task, color, status } = item
-  const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  const { time, title, color, status } = item
+  const formattedTime = new Date(time).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  })
   const [isBtnVisible, setIsBtnVisible] = useState(false)
   const isCancelled = status === '취소됨'
 
@@ -26,7 +29,7 @@ export default function ScheduleItem({ item, isActive, onClick, onEditClick, onD
           onDeleteClick={onDeleteClick}
         />
         <Task onClick={handleClick} $isCancelled={isCancelled}>
-          {task}
+          {title}
         </Task>
       </ItemDetails>
     </ItemContainer>

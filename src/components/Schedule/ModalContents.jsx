@@ -14,18 +14,8 @@
 // ]
 
 // const getDivisionColor = (division) => {
-//   switch (division) {
-//     case 'Meeting':
-//       return 'rgba(255, 59, 59, 0.5)'
-//     case 'Prepare':
-//       return 'rgba(255, 150, 27, 0.5)'
-//     case 'External':
-//       return 'rgba(0, 133, 255, 0.5)'
-//     case 'Report':
-//       return 'rgb(198, 198, 198)'
-//     default:
-//       return '#fff'
-//   }
+//   const category = categories.find((cat) => cat.name === division)
+//   return category ? category.color : '#fff'
 // }
 
 // const getCompletionValue = (status) => {
@@ -44,8 +34,8 @@
 //   const [selectedColor, setSelectedColor] = useState('')
 //   const [taskData, setTaskData] = useState({
 //     year: new Date().getFullYear(),
-//     month: new Date().getMonth() + 1,
-//     day: new Date().getDate(),
+//     month: (new Date().getMonth() + 1).toString().padStart(2, '0'),
+//     day: new Date().getDate().toString().padStart(2, '0'),
 //     hour: new Date().getHours().toString().padStart(2, '0'),
 //     minute: (Math.round(new Date().getMinutes() / 10) * 10).toString().padStart(2, '0'),
 //     task: '',
@@ -58,8 +48,8 @@
 //     const { name, value } = e.target
 //     setTaskData((prev) => ({ ...prev, [name]: value }))
 //     if (name === 'division') {
-//       const SelectCategory = categories.find((cat) => cat.name === value)
-//       setSelectedColor(SelectCategory ? SelectCategory.color : '')
+//       const selectedCategory = categories.find((cat) => cat.name === value)
+//       setSelectedColor(selectedCategory ? selectedCategory.color : '')
 //     }
 //   }
 
@@ -75,15 +65,14 @@
 //       title: taskData.task,
 //       time: new Date(
 //         taskData.year,
-//         taskData.month - 1,
-//         taskData.day,
-//         parseInt(taskData.hour),
-//         parseInt(taskData.minute)
-//       ),
+//         parseInt(taskData.month, 10) - 1,
+//         parseInt(taskData.day, 10),
+//         parseInt(taskData.hour, 10),
+//         parseInt(taskData.minute, 10)
+//       ).toISOString(), // ISO 문자열로 변환
 //       status: taskData.status,
 //       division: taskData.division,
 //       completion: getCompletionValue(taskData.status),
-//       // division: taskData.division || getCategoryNameByColor(selectedColor),
 //     }
 //     console.log('New Task Data:', newTask)
 //     try {
@@ -104,16 +93,10 @@
 //     }
 //   }
 
-//   // const getCategoryNameByColor = (color) => {
-//   //   const category = categories.find((cat) => cat.color === color)
-//   //   return category ? category.name : ''
-//   // }
-
 //   return (
 //     <Form>
 //       <Flex $justify="space-between">
 //         <ModalTitle>일정 추가</ModalTitle>
-//         {/* <Category setSelectedColor={setSelectedColor} /> */}
 //       </Flex>
 //       <Horizon $width="558px" $ml="20px" />
 //       <Contents
@@ -161,10 +144,10 @@
 //   }
 
 //   const years = Array.from({ length: 10 }, (_, i) => 2024 + i)
-//   const months = Array.from({ length: 12 }, (_, i) => 1 + i)
-//   const days = Array.from({ length: 31 }, (_, i) => 1 + i)
-//   const hours = Array.from({ length: 24 }, (_, i) => i)
-//   const minutes = Array.from({ length: 60 }, (_, i) => i)
+//   const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0'))
+//   const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, '0'))
+//   const hours = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0'))
+//   const minutes = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0'))
 
 //   function SubmitButton({ children, onClick }) {
 //     return <Button onClick={onClick}>{children}</Button>
@@ -188,18 +171,13 @@
 //       <Title>시간</Title>
 //       <Content>
 //         <Flex $gap="60px" $justify="flex-start">
-//           <DateSelect
-//             name="hour"
-//             value={taskData.hour}
-//             onChange={handleInputChange}
-//             data={hours.map((h) => h.toString().padStart(2, '0'))}
-//           />
+//           <DateSelect name="hour" value={taskData.hour} onChange={handleInputChange} data={hours} />
 //           :
 //           <DateSelect
 //             name="minute"
 //             value={taskData.minute}
 //             onChange={handleInputChange}
-//             data={minutes.map((m) => m.toString().padStart(2, '0'))}
+//             data={minutes}
 //           />
 //         </Flex>
 //       </Content>
@@ -212,7 +190,7 @@
 //           <FlexTitle>상태</FlexTitle>
 //           <Select name="status" value={taskData.status} onChange={handleInputChange}>
 //             <option value="진행중">진행중</option>
-//             <option value="완료함">완료함</option>
+//             <option value="완료됨">완료됨</option>
 //             <option value="취소됨">취소됨</option>
 //           </Select>
 //         </Half>
@@ -322,7 +300,6 @@
 //     background-color: #00bcab;
 //   }
 // `
-
 import { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { ModalContext } from '../shared/Modal'
@@ -428,7 +405,7 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
         selectedColor={selectedColor}
         taskData={taskData}
         handleInputChange={handleInputChange}
-        handleSubmit={handleSubmit} // Ensure handleSubmit is passed here
+        handleSubmit={handleSubmit}
       />
     </Form>
   )
@@ -581,11 +558,6 @@ const Select = styled.select`
   padding: 5px 12px;
   border: 1px solid #eceff5;
   outline: none;
-
-  &span {
-    width: 10px;
-    height: 10px;
-  }
 `
 
 const Input = styled.input`

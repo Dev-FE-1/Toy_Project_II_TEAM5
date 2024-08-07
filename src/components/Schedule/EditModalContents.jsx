@@ -20,7 +20,7 @@ const EditModal = ({ employeeId, task, onTaskUpdated, onClose }) => {
     day: task.time.getDate(),
     hour: task.time.getHours().toString().padStart(2, '0'),
     minute: task.time.getMinutes().toString().padStart(2, '0'),
-    task: task.task,
+    task: task.title,
     status: task.status,
     division: task.division,
   })
@@ -32,7 +32,7 @@ const EditModal = ({ employeeId, task, onTaskUpdated, onClose }) => {
 
   const handleSubmit = async () => {
     const updatedTask = {
-      task: taskData.task,
+      task: taskData.title,
       time: new Date(
         taskData.year,
         taskData.month - 1,
