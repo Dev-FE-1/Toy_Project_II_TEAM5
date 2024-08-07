@@ -38,7 +38,7 @@ function Weather() {
   return (
     <Container $gap="20px">
       <Message>{formattedDate}</Message>
-      <img
+      <WeatherImg
         src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
         alt={weatherData.weather[0].description}
       />
@@ -57,10 +57,29 @@ const Container = styled(Flex)`
   color: ${colors.white};
   font-weight: bold;
   border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 60%;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 2px dashed #76b8ee;
+    z-index: 0;
+  }
 `
+
+const WeatherImg = styled.img`
+  z-index: 1;
+`
+
 const Message = styled.span`
   display: inline-block;
   font-weight: bold;
+  text-shadow: -1.85px 2.78px 0.93px rgba(0, 0, 0, 0.1);
+  z-index: 1;
   & sup {
     vertical-align: super;
     font-size: smaller;
