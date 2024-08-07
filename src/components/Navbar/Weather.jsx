@@ -63,6 +63,7 @@ const Container = styled(Flex)`
     content: '';
     position: absolute;
     left: 60%;
+    bottom: -38%;
     width: 260px;
     height: 260px;
     border-radius: 50%;
