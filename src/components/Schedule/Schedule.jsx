@@ -1,17 +1,21 @@
-import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import ScheduleItem from './ScheduleItem'
 import ShadowyBox from '@components/shared/ShadowyBox'
 import { colors } from '@styles/Colors'
 import StyledButton from '@components/shared/Button'
-import { fetchEmployeeTasks } from '../../mock/fetchEmployeeTasks'
+import { scrollbarStyle } from '@styles/shared'
+// import { fetchEmployeeTasks } from '../../mock/fetchEmployeeTasks'
+import { useState, useEffect } from 'react'
 import Modal from '@components/shared/Modal'
 import ModalContents from './ModalContents'
 import EditModal from './EditModalContents'
-import deleteEmployeeTasks from '@mock/deleteEmployeeTasks'
+// import deleteEmployeeTasks from '@mock/deleteEmployeeTasks'
 import Loading from '@components/shared/Loading'
 import Flex from '@components/shared/Flex'
-import { scrollbarStyle } from '@styles/variables'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchTasks, addTask, updateTask, deleteTask } from '@reducers/taskSlice.js'
+import { useMemo } from 'react'
+import { Timestamp } from 'firebase/firestore'
 
 const getDivisionColor = (division) => {
   switch (division) {
@@ -29,54 +33,41 @@ const getDivisionColor = (division) => {
 }
 
 export default function Schedule() {
-  const [scheduleItems, setScheduleItems] = useState([])
-  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
+  const { data: tasks, status } = useSelector((state) => state.tasks)
+  // const [scheduleItems, setScheduleItems] = useState([])
+  // const [loading, setLoading] = useState(true)
   const [activeIndex, setActiveIndex] = useState(null)
   const [editingTask, setEditingTask] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
   useEffect(() => {
-    const loadTasks = async () => {
-      try {
-        const employeeId = 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1'
-        const tasks = await fetchEmployeeTasks(employeeId)
-        const formattedTasks = tasks.map((task) => ({
-          ...task,
-          color: getDivisionColor(task.division),
-        }))
-        formattedTasks.sort((a, b) => a.time.getTime() - b.time.getTime())
-        console.log('Sorted tasks:', formattedTasks)
-        setScheduleItems(formattedTasks)
-        setLoading(false)
-      } catch (error) {
-        console.log(error)
-        setLoading(false)
-      }
-    }
+    const employeeId = 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1'
+    dispatch(fetchTasks(employeeId))
+  }, [dispatch])
 
-    loadTasks()
-  }, [])
+  const formattedTasks = useMemo(() => {
+    return tasks
+      .map((task) => ({
+        ...task,
+        color: getDivisionColor(task.division),
+        time: task.time instanceof Timestamp ? task.time.toDate() : new Date(task.time),
+      }))
+      .sort((a, b) => a.time.getTime() - b.time.getTime())
+  }, [tasks])
 
   const handleTaskAdded = (newTask) => {
-    setScheduleItems((prev) => {
-      const updatedItems = [...prev, { ...newTask, color: getDivisionColor(newTask.division) }]
-      return updatedItems.sort((a, b) => a.time.getTime() - b.time.getTime())
-    })
+    dispatch(addTask({ uid: 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1', taskData: newTask }))
   }
 
   const handleEditClick = (task) => {
     setEditingTask(task)
     setIsEditModalOpen(true)
-    console.log('Edit button clicked, task:', task)
   }
 
   const handleTaskUpdated = (taskId, updatedTask) => {
-    setScheduleItems((prev) =>
-      prev.map((item) =>
-        item.id === taskId
-          ? { ...item, ...updatedTask, color: getDivisionColor(updatedTask.division) }
-          : item
-      )
+    dispatch(
+      updateTask({ employeeId: 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1', taskId, taskData: updatedTask })
     )
     setEditingTask(null)
     setIsEditModalOpen(false)
@@ -84,13 +75,7 @@ export default function Schedule() {
 
   const handleDeleteClick = async (taskId) => {
     if (window.confirm('정말로 이 일정을 삭제하시겠습니까?')) {
-      try {
-        await deleteEmployeeTasks('Zrghj2Jf3CVwQ7jSOmjCXYBBlek1', taskId)
-        setScheduleItems((prev) => prev.filter((item) => item.id !== taskId))
-      } catch (error) {
-        console.error('Error deleting task:', error)
-        alert('일정 삭제 중 오류가 발생했습니다.')
-      }
+      dispatch(deleteTask({ employeeId: 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1', taskId }))
     }
   }
 
@@ -104,7 +89,7 @@ export default function Schedule() {
     return null
   }
 
-  if (loading) {
+  if (status === 'loading') {
     return (
       <Center>
         <Loading />
@@ -116,7 +101,7 @@ export default function Schedule() {
     <ScheduleContainer>
       <Title>오늘의 할 일</Title>
       <ScheduleList>
-        {scheduleItems.map((item, index) => (
+        {formattedTasks.map((item, index) => (
           <ScheduleItem
             key={item.id}
             item={item}

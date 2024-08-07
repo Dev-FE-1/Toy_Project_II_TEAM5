@@ -1,10 +1,11 @@
+import Loading from '@components/shared/Loading'
+import ShadowyBox from '@components/shared/ShadowyBox.jsx'
 import useTodoList from '@hooks/useTodoList.jsx'
 import styled from 'styled-components'
 import Progressbar from './CustomRenderers/Progressbar.jsx'
 import TodoChecklist from './CustomRenderers/TodoChecklist.jsx'
 import TodoMore from './CustomRenderers/TodoMore.jsx'
-import ShadowyBox from '@components/shared/ShadowyBox.jsx'
-import Loading from '@components/shared/Loading'
+import ListComponent from './ListComponent.jsx'
 import Flex from '@components/shared/Flex.jsx'
 
 function ToDoList() {
