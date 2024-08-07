@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Flex from '@components/shared/Flex.jsx'
-import { useNavigate } from 'react-router-dom'
+import InputField from '@components/Login/InputField.jsx'
+
 //firebase
 import { auth } from '/src/firebase/firebaseConfig'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
 
-const Bold = styled.div`
-  font-weight: 700;
-`
+// const Bold = styled.div`
+//   // font-weight: 700;
+// `
 
 // const Txt32 = styled.div`
 //   font-size: 32px;
@@ -18,9 +20,148 @@ const Bold = styled.div`
 //   font-size: 14px;
 // `
 
-const Txt12 = styled.div`
-  font-size: 12px;
-`
+// const Txt12 = styled.div`
+//   font-size: 12px;
+// `
+
+// const LoginTop = styled.div`
+//   display: flex;
+//   flex-direction: column;
+// `
+
+// function Main({ color }) {
+//   return (
+//     <>
+//       <MainTitle color={color}>
+//         <Bold>Welcome Back</Bold>
+//       </MainTitle>
+//     </>
+//   )
+// }
+
+// const LoginEmail = styled.div`
+//   margin: 15px 0;
+//   display: flex;
+//   flex-direction: column;
+// `
+
+// const InputSection = styled.div`
+//   margin: 15px 0;
+//   display: flex;
+//   flex-direction: column;
+//   font-weight: 700;
+//   color: var(--black);
+// `
+
+// const LoginInput = styled.input`
+//   font-size: 16px;
+//   border: 1px solid lightgray;
+//   border-radius: 15px;
+//   width: 100%;
+//   height: 50px;
+//   margin-top: 5px;
+//   padding-left: 15px;
+// `
+
+// const LoginPassword = styled.div`
+//   margin: 15px 0;
+//   display: flex;
+//   flex-direction: column;
+// `
+
+// const LoginPasswordInput = styled.input`
+//   border: 1px solid lightgray;
+//   border-radius: 15px;
+//   width: 100%;
+//   height: 50px;
+//   margin-top: 5px;
+//   padding-left: 5%;
+// `
+
+// const ColoredLoginToggle = styled(LoginToggle)`
+//   color: #fff;
+// `
+
+// function LoginInputField({ title, type, placeholder, value, onChange }) {
+//   return (
+//     <>
+//       <label>{title}</label>
+//       <div>
+//         <LoginInput type={type} placeholder={placeholder} value={value} onChange={onChange} />
+//       </div>
+//     </>
+//   )
+// }
+
+function SigninPage() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const navigate = useNavigate()
+
+  const handleLogin = async () => {
+    try {
+      // await signInWithEmailAndPassword(auth, email, password)
+      navigate('/')
+    } catch (error) {
+      setError('유효한 아이디, 비밀번호를 입력해주세요!')
+      setTimeout(() => {
+        setError(null)
+      }, 5000)
+      console.log('login failed')
+    }
+  }
+
+  function setEmailValue(e) {
+    setEmail(e.target.value)
+  }
+
+  function setPasswordValue(e) {
+    setPassword(e.target.value)
+  }
+
+  return (
+    <>
+      <LoginContainer>
+        <LoginWrapper>
+          <Flex $align="flex-start" $direction="column">
+            <MainTitle>Welcome Back</MainTitle>
+            <SubTitle>이메일과 비밀번호를 입력해주세요.</SubTitle>
+          </Flex>
+          <InputField
+            title="Email"
+            type="email"
+            placeholder="이메일을 입력해주세요."
+            value={email}
+            onChange={setEmailValue}
+          />
+          <InputField
+            title="Password"
+            type="password"
+            placeholder="패스워드를 입력해주세요."
+            value={password}
+            onChange={setPasswordValue}
+          />
+          <Alert $visible={error}>{error}</Alert>
+          <LoginToggle>
+            <ToggleCheckbox id="toggle" />
+            <ToggleLabel htmlFor="toggle">
+              <ToggleButton className="toggle-button" />
+              이메일 기억하기
+            </ToggleLabel>
+          </LoginToggle>
+          <LoginSubmitBtn onClick={handleLogin}>로그인</LoginSubmitBtn>
+        </LoginWrapper>
+        <LoginThumbnail>
+          <FlexLogo>Revive</FlexLogo>
+        </LoginThumbnail>
+      </LoginContainer>
+      <TeamNameFooter>
+        @2024, Made with FastCampus by 강호연 김수민 이동혁 이윤환 최원지
+      </TeamNameFooter>
+    </>
+  )
+}
 
 const LoginContainer = styled.div`
   width: 100%;
@@ -38,71 +179,25 @@ const LoginWrapper = styled.div`
   margin: auto;
 `
 
-// const LoginTop = styled.div`
-//   display: flex;
-//   flex-direction: column;
-// `
-
 const MainTitle = styled.span`
   margin: 10px 0;
   color: #4fd1c5;
   font-size: 36px;
+  font-weight: 900;
 `
-// function Main({ color }) {
-//   return (
-//     <>
-//       <MainTitle color={color}>
-//         <Bold>Welcome Back</Bold>
-//       </MainTitle>
-//     </>
-//   )
-// }
-
-const SubTitle = styled.span`
-  margin: 10px 0;
-  color: #a0aec0;
-  font-size: 14px;
-`
-
-const LoginEmail = styled.div`
-  margin: 15px 0;
-  display: flex;
-  flex-direction: column;
-`
-
-const LoginInput = styled.input`
-  font-size: 16px;
-  border: 1px solid lightgray;
-  border-radius: 15px;
-  width: 100%;
-  height: 50px;
-  margin-top: 5px;
-  padding-left: 15px;
-`
-
-const LoginPassword = styled.div`
-  margin: 15px 0;
-  display: flex;
-  flex-direction: column;
-`
-
-// const LoginPasswordInput = styled.input`
-//   border: 1px solid lightgray;
-//   border-radius: 15px;
-//   width: 100%;
-//   height: 50px;
-//   margin-top: 5px;
-//   padding-left: 5%;
-// `
 
 const LoginToggle = styled.div`
   display: flex;
   align-items: center;
   margin: 10px 0;
 `
-// const ColoredLoginToggle = styled(LoginToggle)`
-//   color: #fff;
-// `
+
+const SubTitle = styled.span`
+  margin: 10px 0;
+  color: #a0aec0;
+  font-size: 14px;
+  font-weight: 700;
+`
 
 const ToggleCheckbox = styled.input.attrs({ type: 'checkbox' })`
   display: none;
@@ -121,6 +216,8 @@ const ToggleLabel = styled.label`
   align-items: center;
   cursor: pointer;
   user-select: none;
+  font-size: 12px;
+  color: var(--black);
 `
 
 const ToggleButton = styled.span`
@@ -194,99 +291,10 @@ const TeamNameFooter = styled.footer`
   padding-right: 50px;
 `
 
-function LoginInputField({ title, type, placeholder, value, onChange }) {
-  return (
-    <>
-      <Bold>
-        <label>{title}</label>
-      </Bold>
-      <div>
-        <LoginInput type={type} placeholder={placeholder} value={value} onChange={onChange} />
-      </div>
-    </>
-  )
-}
-
-function SigninPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const navigate = useNavigate()
-
-  const handleLogin = async () => {
-    try {
-      const curUser = await signInWithEmailAndPassword(auth, email, password)
-      console.log('login successed')
-      localStorage.setItem('user', JSON.stringify(curUser.user))
-      navigate('/')
-    } catch (error) {
-      setError('유효한 아이디, 비밀번호를 입력해주세요!')
-      setTimeout(() => {
-        setError(null)
-      }, 5000)
-      console.log('login failed')
-    }
-  }
-
-  function handleEmail(e) {
-    setEmail(e.target.value)
-  }
-
-  function handlePassword(e) {
-    setPassword(e.target.value)
-  }
-  function Alert({ error }) {
-    return <div style={{ color: 'red' }}>{error}</div>
-  }
-  return (
-    <>
-      <LoginContainer>
-        <LoginWrapper>
-          <Flex $align="flex-start" $direction="column">
-            <MainTitle>
-              <Bold>Welcome Back</Bold>
-            </MainTitle>
-            <SubTitle>
-              <Bold>이메일과 비밀번호를 입력해주세요.</Bold>
-            </SubTitle>
-          </Flex>
-          <LoginEmail>
-            <LoginInputField
-              title="Email"
-              type="email"
-              placeholder="이메일을 입력해주세요."
-              value={email}
-              onChange={handleEmail}
-            />
-          </LoginEmail>
-          <LoginPassword>
-            <LoginInputField
-              title="Password"
-              type="password"
-              placeholder="패스워드를 입력해주세요."
-              value={password}
-              onChange={handlePassword}
-            />
-          </LoginPassword>
-          {error && <Alert error={error} />}
-          <LoginToggle>
-            <ToggleCheckbox id="toggle" />
-            <ToggleLabel htmlFor="toggle">
-              <ToggleButton className="toggle-button" />
-              <Txt12>이메일 기억하기</Txt12>
-            </ToggleLabel>
-          </LoginToggle>
-          <LoginSubmitBtn onClick={handleLogin}>로그인</LoginSubmitBtn>
-        </LoginWrapper>
-        <LoginThumbnail>
-          <FlexLogo>Revive</FlexLogo>
-        </LoginThumbnail>
-      </LoginContainer>
-      <TeamNameFooter>
-        @2024, Made with FastCampus by 강호연 김수민 이동혁 이윤환 최원지
-      </TeamNameFooter>
-    </>
-  )
-}
+const Alert = styled.div`
+  height: 20px;
+  color: red;
+  visibility: ${(props) => (props.$visible ? 'visible' : 'hidden')};
+`
 
 export default SigninPage

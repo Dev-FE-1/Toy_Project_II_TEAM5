@@ -11,6 +11,7 @@ import EditModal from './EditModalContents'
 import deleteEmployeeTasks from '@mock/deleteEmployeeTasks'
 import Loading from '@components/shared/Loading'
 import Flex from '@components/shared/Flex'
+import { scrollbarStyle } from '@styles/variables'
 
 const getDivisionColor = (division) => {
   switch (division) {
@@ -157,6 +158,7 @@ const ScheduleContainer = styled(ShadowyBox)`
   align-items: flex-start;
   width: 32%;
   margin-bottom: 10px;
+  ${scrollbarStyle}
 `
 
 const Title = styled.div`
@@ -170,15 +172,7 @@ const ScheduleList = styled.div`
   width: 100%;
   max-height: 750px;
   padding-right: 10px;
-  &::-webkit-scrollbar {
-    width: 5px;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.4);
-  }
-  &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 6px;
-  }
+  ${scrollbarStyle}
 `
 
 const ButtonContainer = styled.div`

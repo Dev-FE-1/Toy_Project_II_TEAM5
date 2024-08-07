@@ -6,23 +6,16 @@ import SalaryManagementPage from '@pages/salary-management/salary-management-pag
 import SigninPage from '@pages/signin/signin-page'
 import TaskManagementPage from '@pages/task-management/taskManagement-page'
 import TestPage from '@pages/test/test-page'
-import { useEffect } from 'react'
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import useAuthState from '@components/Login/useAuthState'
+import { Route, Routes } from 'react-router-dom'
+import Loading from '@components/shared/Loading'
 
 function App() {
-  const navigate = useNavigate()
-  const location = useLocation()
+  const { user, loading } = useAuthState()
 
-  useEffect(() => {
-    const user = localStorage.getItem('user')
-
-    if (!user) {
-      navigate('/signin')
-    } else if (location.pathname === '/signin') {
-      navigate(-1)
-    }
-  }, [navigate, location])
-
+  if (loading) {
+    return <Loading />
+  }
   return (
     <>
       <Routes>
@@ -33,7 +26,7 @@ function App() {
           <Route path="/test" element={<TestPage />} />
           <Route path="/admin" element={<AdminPage />} />
         </Route>
-        <Route path="/signin" element={<SigninPage />} />
+        {!user && <Route path="/signin" element={<SigninPage />} />}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
