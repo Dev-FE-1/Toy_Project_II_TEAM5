@@ -103,20 +103,18 @@ function SigninPage() {
   useEffect(() => {
     const storedEmail = localStorage.getItem('storedEmail')
     if (storedEmail) {
-      setEmail(storedEmail)
-      setIsChecked(true)
+      // localStorage에 사용자 정보가 있으면
+      setEmail(storedEmail) // 1. 가져온다. -> Email input창의 value가 됨
+      setIsChecked(true) // 2. toggle checked -> true인 상태로 페이지 불러옴
     }
-  }, []) // signin이 최초 로드될 때, 1. localStorage에 사용자 정보가있으면 가져온다. 2. toggle checked -> true
-
-  useEffect(() => {
-    if (isChecked) {
-      localStorage.setItem('storedEmail', email)
-    }
-  }, [email, isChecked]) // email이 바뀔 때마다 toggle checked가 true이면 localstorage에 사용자 정보(email)을 업데이트한다.
+  }, []) // signin이 최초 로드될 때 1번만 실행
 
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password)
+      if (isChecked) {
+        localStorage.setItem('storedEmail', email)
+      } //로그인 성공 시점에 toggle이 true이면 이메일 저장
       navigate('/')
     } catch (error) {
       setError('유효한 아이디, 비밀번호를 입력해주세요!')
@@ -138,7 +136,6 @@ function SigninPage() {
   function handleIsToggleChecked(e) {
     if (e.target.checked === true) {
       setIsChecked(true)
-      localStorage.setItem('storedEmail', email)
     } else {
       setIsChecked(false)
       localStorage.removeItem('storedEmail')
@@ -175,9 +172,7 @@ function SigninPage() {
               이메일 기억하기
             </ToggleLabel>
           </LoginToggle>
-          <LoginSubmitBtn onClick={handleLogin} $active={email}>
-            로그인
-          </LoginSubmitBtn>
+          <LoginSubmitBtn onClick={handleLogin}>로그인</LoginSubmitBtn>
         </LoginWrapper>
         <LoginThumbnail>
           <FlexLogo>Revive</FlexLogo>
