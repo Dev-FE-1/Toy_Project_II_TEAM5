@@ -278,7 +278,7 @@ const LoginSubmitBtn = styled.button`
   color: white;
   margin-top: 30px;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: transform 0.1s;
 
   &:hover {
     background-color: gray;
