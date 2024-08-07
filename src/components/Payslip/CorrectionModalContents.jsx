@@ -54,6 +54,12 @@ function CorrectionModalContents() {
     return <Button onClick={handleClick}>{children}</Button>
   }
 
+  const sortedCorrectionHistory = correctionHistory.sort((a, b) => {
+    if (a.status === '결제완료' && b.status !== '결제완료') return 1
+    if (a.status !== '결제완료' && b.status === '결제완료') return -1
+    return new Date(b.date) - new Date(a.date)
+  })
+
   return (
     <Form>
       <ModalTitle>정정 내역</ModalTitle>
@@ -69,7 +75,7 @@ function CorrectionModalContents() {
             </tr>
           </Thead>
           <Tbody>
-            {correctionHistory.map((item) => (
+            {sortedCorrectionHistory.map((item) => (
               <tr key={item.id}>
                 <td>{item.date}</td>
                 <ContentCell
