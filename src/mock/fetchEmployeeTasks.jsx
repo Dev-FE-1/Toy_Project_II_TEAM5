@@ -9,7 +9,7 @@ export async function fetchEmployeeTasks(employeeId) {
   const tasks = taskSnapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
-    time: doc.data().time.toDate().toISOString(),
+    time: doc.data().time.toDate(),
   }))
 
   return tasks

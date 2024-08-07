@@ -35,8 +35,6 @@ const getDivisionColor = (division) => {
 export default function Schedule() {
   const dispatch = useDispatch()
   const { data: tasks, status } = useSelector((state) => state.tasks)
-  // const [scheduleItems, setScheduleItems] = useState([])
-  // const [loading, setLoading] = useState(true)
   const [activeIndex, setActiveIndex] = useState(null)
   const [editingTask, setEditingTask] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -89,12 +87,16 @@ export default function Schedule() {
     return null
   }
 
-  if (status === 'loading') {
+  if (status === 'pending' || status === 'idle') {
     return (
       <Center>
         <Loading />
       </Center>
     )
+  }
+
+  if (status === 'rejected') {
+    return <div>데이터를 불러오는 데 실패했습니다.</div>
   }
 
   return (
