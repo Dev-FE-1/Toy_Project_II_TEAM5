@@ -3,7 +3,7 @@ import ScheduleItem from './ScheduleItem'
 import ShadowyBox from '@components/shared/ShadowyBox'
 import { colors } from '@styles/Colors'
 import StyledButton from '@components/shared/Button'
-import { scrollbarStyle } from '@styles/variables'
+import { scrollbarStyle } from '@styles/shared'
 
 const scheduleItems = [
   { time: '06.00am', task: 'Spin Class', duration: '45min', color: '#4fd1c5' },
