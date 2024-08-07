@@ -7,7 +7,7 @@ export const employeeList = [
     position2: 'Developer',
     isOnline: true,
     date: '24/05/20',
-    profile: 'images/employee1.svg',
+    profile: '/src/assets/employees/employee1.svg',
   },
   {
     id: '2',
@@ -17,7 +17,7 @@ export const employeeList = [
     position2: 'Developer',
     isOnline: false,
     date: '24/05/20',
-    profile: 'images/employee2.svg',
+    profile: '/src/assets/employees/employee2.svg',
   },
   {
     id: '3',
@@ -27,7 +27,7 @@ export const employeeList = [
     position2: 'Developer',
     isOnline: false,
     date: '24/05/20',
-    profile: 'images/employee3.svg',
+    profile: '/src/assets/employees/employee3.svg',
   },
   {
     id: '4',
@@ -37,7 +37,7 @@ export const employeeList = [
     position2: 'Developer',
     isOnline: true,
     date: '24/05/20',
-    profile: 'images/employee4.svg',
+    profile: '/src/assets/employees/employee4.svg',
   },
   {
     id: '5',
@@ -47,7 +47,7 @@ export const employeeList = [
     position2: 'Developer',
     isOnline: true,
     date: '24/05/20',
-    profile: 'images/employee5.svg',
+    profile: '/src/assets/employees/employee5.svg',
   },
 ]
 
