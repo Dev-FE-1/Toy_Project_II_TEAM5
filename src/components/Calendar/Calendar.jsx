@@ -1,73 +1,35 @@
-import {
-  CalendarWrapper,
-  CalendarHeader,
-  MonthTitle,
-  MonthSelector,
-  MonthYear,
-  CalendarGrid,
-  DayHeader,
-  DayCell,
-  DayNumber,
-  ScheduleList,
-  ScheduleItem,
-} from './Calendar.styled'
+import ShadowyBox from '@components/shared/ShadowyBox'
+import { colors } from '@styles/Colors'
+import styled from 'styled-components'
+import CalendarDays from './Calendar-Days'
+import CalendarNavigation from './Calendar-Navigation'
+import CalendarHeader from './Calendar-header'
 
-const Calendar = ({ dayNum, firstDay, workTimeTable, selectedMonth, onMonthChange }) => {
-  const weekDay = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-  const daysInMonth = dayNum
-  const firstDayOfMonth = weekDay.indexOf(firstDay) // Get index of the first day
-
-  const renderCalendarDays = () => {
-    // Create empty cells for the days before the first day
-    const emptyCells = Array.from({ length: firstDayOfMonth }).map((_, index) => (
-      <DayCell key={`empty-${index}`} />
-    ))
-
-    // Create cells for each day of the month
-    const days = Array.from({ length: daysInMonth }).map((_, day) => {
-      const currentDate = day + 1
-      // Ensure the day index is correct for workTimeTable
-      const daySchedule = workTimeTable[currentDate] || {}
-
-      return (
-        <DayCell key={currentDate}>
-          <DayNumber>{currentDate}</DayNumber>
-          <ScheduleList>
-            {daySchedule.workIn && (
-              <ScheduleItem type="출근">출근 {daySchedule.workIn}</ScheduleItem>
-            )}
-            {daySchedule.workOut && (
-              <ScheduleItem type="퇴근">퇴근 {daySchedule.workOut}</ScheduleItem>
-            )}
-          </ScheduleList>
-        </DayCell>
-      )
-    })
-
-    return [...emptyCells, ...days]
-  }
-
+const Calendar = () => {
   return (
-    <CalendarWrapper>
-      <CalendarHeader>
-        <MonthYear>July, 2024</MonthYear>
-        <MonthTitle>{selectedMonth}월</MonthTitle>
-        <MonthSelector value={selectedMonth} onChange={onMonthChange}>
-          {Array.from({ length: 12 }).map((_, index) => (
-            <option key={index + 1} value={index + 1}>
-              {index + 1}월
-            </option>
-          ))}
-        </MonthSelector>
-      </CalendarHeader>
-      <CalendarGrid>
-        {weekDay.map((day) => (
-          <DayHeader key={day}>{day}</DayHeader>
-        ))}
-        {renderCalendarDays()}
-      </CalendarGrid>
-    </CalendarWrapper>
+    <Container>
+      <CalendarNavigation />
+      <CalendarContents>
+        <CalendarHeader />
+        <CalendarDays />
+      </CalendarContents>
+    </Container>
   )
 }
+
+const Container = styled(ShadowyBox)`
+  padding: 20px 40px;
+  padding-bottom: 0;
+  background-color: ${colors.white};
+  flex-grow: 1;
+  width: 70%;
+  overflow: initial;
+`
+
+const CalendarContents = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 1px solid #e9ecef;
+`
 
 export default Calendar

@@ -171,6 +171,12 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
   }
   
+  body {
+    &::-webkit-scrollbar {
+    display: none;
+  }
+  }
+
 `
 
 export default GlobalStyle
