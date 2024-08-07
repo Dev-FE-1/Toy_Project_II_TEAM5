@@ -10,6 +10,9 @@ export default function Payslip({ month, overTime }) {
   const overtimePay = Math.ceil(overTime * overtimeRate * overtimeMultiplier)
   const overtimeFormula = `연장 근무 시간(${overTime}시간) * 통상 시급(${overtimeRate.toLocaleString()}원) * ${overtimeMultiplier}`
 
+  const bonusOptions = [200000, 500000, 700000]
+  const randomBonus = bonusOptions[Math.floor(Math.random() * bonusOptions.length)]
+
   const payrollData = {
     month: month,
     baseSalary: 3500000,
@@ -17,7 +20,7 @@ export default function Payslip({ month, overTime }) {
     overtime: overTime,
     overtimePay,
     longevityAllowance: 200000,
-    bonus: 200000,
+    bonus: randomBonus,
     get totalPay() {
       return (
         this.baseSalary +
