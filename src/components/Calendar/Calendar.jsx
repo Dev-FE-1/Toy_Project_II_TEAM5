@@ -15,18 +15,16 @@ import {
 const Calendar = ({ dayNum, firstDay, workTimeTable, selectedMonth, onMonthChange }) => {
   const weekDay = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
   const daysInMonth = dayNum
-  const firstDayOfMonth = weekDay.indexOf(firstDay) // Get index of the first day
+  const firstDayOfMonth = weekDay.indexOf(firstDay)
 
   const renderCalendarDays = () => {
-    // Create empty cells for the days before the first day
     const emptyCells = Array.from({ length: firstDayOfMonth }).map((_, index) => (
       <DayCell key={`empty-${index}`} />
     ))
 
-    // Create cells for each day of the month
     const days = Array.from({ length: daysInMonth }).map((_, day) => {
       const currentDate = day + 1
-      // Ensure the day index is correct for workTimeTable
+
       const daySchedule = workTimeTable[currentDate] || {}
 
       return (
