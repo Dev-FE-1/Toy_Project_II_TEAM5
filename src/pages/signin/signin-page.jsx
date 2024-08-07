@@ -175,7 +175,9 @@ function SigninPage() {
               이메일 기억하기
             </ToggleLabel>
           </LoginToggle>
-          <LoginSubmitBtn onClick={handleLogin}>로그인</LoginSubmitBtn>
+          <LoginSubmitBtn onClick={handleLogin} $active={email}>
+            로그인
+          </LoginSubmitBtn>
         </LoginWrapper>
         <LoginThumbnail>
           <FlexLogo>Revive</FlexLogo>
@@ -276,9 +278,14 @@ const LoginSubmitBtn = styled.button`
   color: white;
   margin-top: 30px;
   cursor: pointer;
+  transition: transform 0.3s;
 
   &:hover {
     background-color: gray;
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 `
 
