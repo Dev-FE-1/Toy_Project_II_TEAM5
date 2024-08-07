@@ -36,7 +36,7 @@ function Weather() {
   const formattedDate = date.toLocaleDateString('en-US', options)
 
   return (
-    <Container $gap="20px">
+    <Container $gap="15px">
       <Message>{formattedDate}</Message>
       <WeatherImg
         src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
@@ -52,7 +52,7 @@ function Weather() {
 
 const Container = styled(Flex)`
   width: 100%;
-  /* padding: 16px 0; */
+  padding: 5px 0;
   background: linear-gradient(to top right, #47bfdf, #4a91ff);
   color: ${colors.white};
   font-weight: bold;
@@ -77,6 +77,7 @@ const WeatherImg = styled.img`
 
 const Message = styled.span`
   display: inline-block;
+  font-size: 17px;
   font-weight: bold;
   text-shadow: -1.85px 2.78px 0.93px rgba(0, 0, 0, 0.1);
   z-index: 1;
