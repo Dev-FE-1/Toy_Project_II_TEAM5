@@ -7,7 +7,7 @@ import SigninPage from '@pages/signin/signin-page'
 import TaskManagementPage from '@pages/task-management/taskManagement-page'
 import TestPage from '@pages/test/test-page'
 import useAuthState from '@hooks/useAuthState'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import Loading from '@components/shared/Loading'
 
 function App() {
@@ -16,18 +16,21 @@ function App() {
   if (loading) {
     return <Loading />
   }
+
   return (
     <>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/salary" element={<SalaryManagementPage />} />
-          <Route path="/task" element={<TaskManagementPage />} />
-          <Route path="/test" element={<TestPage />} />
-          <Route path="/admin" element={<AdminPage />} />
-        </Route>
-        {!user && <Route path="/signin" element={<SigninPage />} />}
-        <Route path="*" element={<NotFoundPage />} />
+        {user && (
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/salary" element={<SalaryManagementPage />} />
+            <Route path="/task" element={<TaskManagementPage />} />
+            <Route path="/test" element={<TestPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+          </Route>
+        )}
+        <Route path="/signin" element={user ? <Navigate to="/" /> : <SigninPage />} />
+        <Route path="*" element={user ? <NotFoundPage /> : <Navigate to="/signin" />} />
       </Routes>
     </>
   )
