@@ -4,6 +4,7 @@ import Header from '@components/Header/Header'
 import Payslip from '@components/Payslip/Payslip'
 import styled from 'styled-components'
 import ScheduleList from './ScheduleList'
+import Footer from '@components/Footer/Footer'
 
 function SalaryManagementPage() {
   return (
@@ -11,12 +12,11 @@ function SalaryManagementPage() {
       <Header header="급여 내역" />
       <CalendarContextProvider>
         <ContentContainer>
-          <ContentContainer>
-            <Calendar ScheduleList={ScheduleList} />
-            <Payslip />
-          </ContentContainer>
+          <Calendar ScheduleList={ScheduleList} />
+          <Payslip />
         </ContentContainer>
       </CalendarContextProvider>
+      <Footer />
     </PageContainer>
   )
 }
@@ -28,7 +28,6 @@ const PageContainer = styled.div`
 `
 
 const ContentContainer = styled.div`
-  width: 100%;
   display: flex;
   margin: 20px 0;
   gap: 20px;

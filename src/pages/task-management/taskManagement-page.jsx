@@ -30,8 +30,6 @@ const PageContainer = styled.div`
 
 const ContentContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  flex: 1;
   margin: 20px 0;
   gap: 20px;
 `

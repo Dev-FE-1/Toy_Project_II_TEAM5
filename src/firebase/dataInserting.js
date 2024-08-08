@@ -9,168 +9,160 @@ function getTimestampFromDate(year, month, day, hour, minute = 0) {
 
 // 예시 데이터
 const month = {
-  dayNum: 30,
-  firstDay: 'SAT', // 2024년 6월 1일은 토요일
-  overTime: 0,
   workTimeTable: [
-    // 주말에는 빈 배열
+    // 7월 1일
     {
-      workIn: null,
-      workOut: null,
-      Objection: [],
-    },
-    {
-      workIn: null,
-      workOut: null,
-      Objection: [],
-    },
-    // 평일 데이터
-    {
-      workIn: getTimestampFromDate(2024, 6, 3, 9, 0), // 2024년 6월 3일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 3, 18, 0), // 2024년 6월 3일 오후 6시
+      workIn: getTimestampFromDate(2024, 7, 1, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 1, 18, 0),
       Objection: ['이의있음'],
     },
+    // 7월 2일
     {
-      workIn: getTimestampFromDate(2024, 6, 4, 9, 0), // 2024년 6월 4일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 4, 19, 0), // 2024년 6월 4일 오후 7시
+      workIn: getTimestampFromDate(2024, 7, 2, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 2, 19, 0),
       Objection: ['이의있음'],
     },
+    // 7월 3일
     {
-      workIn: getTimestampFromDate(2024, 6, 5, 9, 0), // 2024년 6월 5일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 5, 18, 30), // 2024년 6월 5일 오후 6시 30분
+      workIn: getTimestampFromDate(2024, 7, 3, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 3, 18, 30),
       Objection: ['이의있음'],
     },
+    // 7월 4일
     {
-      workIn: getTimestampFromDate(2024, 6, 6, 9, 0), // 2024년 6월 6일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 6, 20, 0), // 2024년 6월 6일 오후 8시
+      workIn: getTimestampFromDate(2024, 7, 4, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 4, 20, 0),
       Objection: ['이의있음'],
     },
+    // 7월 5일
     {
-      workIn: getTimestampFromDate(2024, 6, 7, 9, 0), // 2024년 6월 7일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 7, 18, 0), // 2024년 6월 7일 오후 6시
+      workIn: getTimestampFromDate(2024, 7, 5, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 5, 18, 0),
       Objection: ['이의있음'],
     },
-    // 주말에는 빈 배열
+    // 7월 6일 (토요일)
+    { workIn: null, workOut: null, Objection: [] },
+    // 7월 7일 (일요일)
+    { workIn: null, workOut: null, Objection: [] },
+    // 7월 8일
     {
-      workIn: null,
-      workOut: null,
-      Objection: [],
-    },
-    {
-      workIn: null,
-      workOut: null,
-      Objection: [],
-    },
-    // 평일 데이터
-    {
-      workIn: getTimestampFromDate(2024, 6, 10, 9, 0), // 2024년 6월 10일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 10, 19, 0), // 2024년 6월 10일 오후 7시
+      workIn: getTimestampFromDate(2024, 7, 8, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 8, 19, 0),
       Objection: ['이의있음'],
     },
+    // 7월 9일
     {
-      workIn: getTimestampFromDate(2024, 6, 11, 9, 0), // 2024년 6월 11일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 11, 18, 30), // 2024년 6월 11일 오후 6시 30분
+      workIn: getTimestampFromDate(2024, 7, 9, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 9, 18, 30),
       Objection: ['이의있음'],
     },
+    // 7월 10일
     {
-      workIn: getTimestampFromDate(2024, 6, 12, 9, 0), // 2024년 6월 12일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 12, 20, 0), // 2024년 6월 12일 오후 8시
+      workIn: getTimestampFromDate(2024, 7, 10, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 10, 20, 0),
       Objection: ['이의있음'],
     },
+    // 7월 11일
     {
-      workIn: getTimestampFromDate(2024, 6, 13, 9, 0), // 2024년 6월 13일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 13, 18, 0), // 2024년 6월 13일 오후 6시
+      workIn: getTimestampFromDate(2024, 7, 11, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 11, 18, 0),
       Objection: ['이의있음'],
     },
+    // 7월 12일
     {
-      workIn: getTimestampFromDate(2024, 6, 14, 9, 0), // 2024년 6월 14일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 14, 19, 0), // 2024년 6월 14일 오후 7시
+      workIn: getTimestampFromDate(2024, 7, 12, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 12, 19, 0),
       Objection: ['이의있음'],
     },
-    // 주말에는 빈 배열
+    // 7월 13일 (토요일)
+    { workIn: null, workOut: null, Objection: [] },
+    // 7월 14일 (일요일)
+    { workIn: null, workOut: null, Objection: [] },
+    // 7월 15일
     {
-      workIn: null,
-      workOut: null,
-      Objection: [],
-    },
-    {
-      workIn: null,
-      workOut: null,
-      Objection: [],
-    },
-    // 평일 데이터
-    {
-      workIn: getTimestampFromDate(2024, 6, 17, 9, 0), // 2024년 6월 17일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 17, 18, 30), // 2024년 6월 17일 오후 6시 30분
+      workIn: getTimestampFromDate(2024, 7, 15, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 15, 18, 30),
       Objection: ['이의있음'],
     },
+    // 7월 16일
     {
-      workIn: getTimestampFromDate(2024, 6, 18, 9, 0), // 2024년 6월 18일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 18, 20, 0), // 2024년 6월 18일 오후 8시
+      workIn: getTimestampFromDate(2024, 7, 16, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 16, 20, 0),
       Objection: ['이의있음'],
     },
+    // 7월 17일
     {
-      workIn: getTimestampFromDate(2024, 6, 19, 9, 0), // 2024년 6월 19일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 19, 18, 0), // 2024년 6월 19일 오후 6시
+      workIn: getTimestampFromDate(2024, 7, 17, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 17, 18, 0),
       Objection: ['이의있음'],
     },
+    // 7월 18일
     {
-      workIn: getTimestampFromDate(2024, 6, 20, 9, 0), // 2024년 6월 20일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 20, 19, 0), // 2024년 6월 20일 오후 7시
+      workIn: getTimestampFromDate(2024, 7, 18, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 18, 19, 0),
       Objection: ['이의있음'],
     },
+    // 7월 19일
     {
-      workIn: getTimestampFromDate(2024, 6, 21, 9, 0), // 2024년 6월 21일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 21, 18, 30), // 2024년 6월 21일 오후 6시 30분
+      workIn: getTimestampFromDate(2024, 7, 19, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 19, 18, 30),
       Objection: ['이의있음'],
     },
-    // 주말에는 빈 배열
+    // 7월 20일 (토요일)
+    { workIn: null, workOut: null, Objection: [] },
+    // 7월 21일 (일요일)
+    { workIn: null, workOut: null, Objection: [] },
+    // 7월 22일
     {
-      workIn: null,
-      workOut: null,
-      Objection: [],
-    },
-    {
-      workIn: null,
-      workOut: null,
-      Objection: [],
-    },
-    // 평일 데이터
-    {
-      workIn: getTimestampFromDate(2024, 6, 24, 9, 0), // 2024년 6월 24일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 24, 18, 0), // 2024년 6월 24일 오후 6시
+      workIn: getTimestampFromDate(2024, 7, 22, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 22, 20, 0),
       Objection: ['이의있음'],
     },
+    // 7월 23일
     {
-      workIn: getTimestampFromDate(2024, 6, 25, 9, 0), // 2024년 6월 25일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 25, 19, 0), // 2024년 6월 25일 오후 7시
+      workIn: getTimestampFromDate(2024, 7, 23, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 23, 18, 0),
       Objection: ['이의있음'],
     },
+    // 7월 24일
     {
-      workIn: getTimestampFromDate(2024, 6, 26, 9, 0), // 2024년 6월 26일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 26, 18, 30), // 2024년 6월 26일 오후 6시 30분
+      workIn: getTimestampFromDate(2024, 7, 24, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 24, 19, 0),
       Objection: ['이의있음'],
     },
+    // 7월 25일
     {
-      workIn: getTimestampFromDate(2024, 6, 27, 9, 0), // 2024년 6월 27일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 27, 20, 0), // 2024년 6월 27일 오후 8시
+      workIn: getTimestampFromDate(2024, 7, 25, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 25, 18, 0),
       Objection: ['이의있음'],
     },
+    // 7월 26일
     {
-      workIn: getTimestampFromDate(2024, 6, 28, 9, 0), // 2024년 6월 28일 오전 9시
-      workOut: getTimestampFromDate(2024, 6, 28, 18, 0), // 2024년 6월 28일 오후 6시
+      workIn: getTimestampFromDate(2024, 7, 26, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 26, 19, 0),
       Objection: ['이의있음'],
     },
-    // 주말에는 빈 배열
+    // 7월 27일 (토요일)
+    { workIn: null, workOut: null, Objection: [] },
+    // 7월 28일 (일요일)
+    { workIn: null, workOut: null, Objection: [] },
+    // 7월 29일
     {
-      workIn: null,
-      workOut: null,
-      Objection: [],
+      workIn: getTimestampFromDate(2024, 7, 29, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 29, 18, 30),
+      Objection: ['이의있음'],
     },
+    // 7월 30일
     {
-      workIn: null,
-      workOut: null,
-      Objection: [],
+      workIn: getTimestampFromDate(2024, 7, 30, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 30, 20, 0),
+      Objection: ['이의있음'],
+    },
+    // 7월 31일
+    {
+      workIn: getTimestampFromDate(2024, 7, 31, 9, 0),
+      workOut: getTimestampFromDate(2024, 7, 31, 18, 0),
+      Objection: ['이의있음'],
     },
   ],
 }
@@ -185,7 +177,7 @@ data.workTimeTable.forEach((entry) => {
 // Firestore에 데이터 추가 함수
 async function uploadAttendanceData() {
   const empId = 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1' // 사원번호
-  const monthDocId = '6' // 문서 ID
+  const monthDocId = '7' // 문서 ID
 
   try {
     // Firestore에 데이터 삽입
