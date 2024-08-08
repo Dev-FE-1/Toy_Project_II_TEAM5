@@ -22,15 +22,18 @@ const Calendar = ({ ScheduleList }) => {
 }
 
 const Container = styled(ShadowyBox)`
-  flex-grow: 1;
+  /* flex-grow: 1; */
   width: 70%;
   overflow: initial;
+  position: relative;
+  height: auto;
 `
 
 const CalendarContents = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   border: 1px solid ${({ colorMode }) => (colorMode === 'light' ? '#e9ecef' : colors.gray[600])};
+  height: 90%;
 `
 
 export default Calendar
