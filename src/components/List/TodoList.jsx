@@ -1,4 +1,4 @@
-import Loading from '@components/shared/Loading.jsx'
+import Loading from '@components/shared/Loading'
 import ShadowyBox from '@components/shared/ShadowyBox.jsx'
 import useTodoList from '@hooks/useTodoList.jsx'
 import styled from 'styled-components'
@@ -6,6 +6,7 @@ import Progressbar from './CustomRenderers/Progressbar.jsx'
 import TodoChecklist from './CustomRenderers/TodoChecklist.jsx'
 import TodoMore from './CustomRenderers/TodoMore.jsx'
 import ListComponent from './ListComponent.jsx'
+import Flex from '@components/shared/Flex.jsx'
 
 function ToDoList() {
   const { todos, loading, header } = useTodoList()
@@ -18,7 +19,11 @@ function ToDoList() {
   }
 
   if (loading) {
-    return <Loading />
+    return (
+      <Center>
+        <Loading />
+      </Center>
+    )
   }
 
   return (
@@ -33,6 +38,10 @@ function ToDoList() {
     </ListContainer>
   )
 }
+
+const Center = styled(Flex)`
+  width: 100%;
+`
 
 const ListContainer = styled(ShadowyBox)`
   width: 100%;

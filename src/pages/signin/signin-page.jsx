@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Flex from '@components/shared/Flex.jsx'
-import InputField from '@components/Login/InputField.jsx'
+import InputField from '@hooks/InputField.jsx'
 
 //firebase
 import { auth } from '/src/firebase/firebaseConfig'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
+
+// const Bold = styled.div`
+//   // font-weight: 700;
+// `
 
 // const Bold = styled.div`
 //   // font-weight: 700;
@@ -97,11 +101,24 @@ function SigninPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [isChecked, setIsChecked] = useState(false)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('storedEmail')
+    if (storedEmail) {
+      // localStorage에 사용자 정보가 있으면
+      setEmail(storedEmail) // 1. 가져온다. -> Email input창의 value가 됨
+      setIsChecked(true) // 2. toggle checked -> true인 상태로 페이지 불러옴
+    }
+  }, []) // signin이 최초 로드될 때 1번만 실행
 
   const handleLogin = async () => {
     try {
-      // await signInWithEmailAndPassword(auth, email, password)
+      await signInWithEmailAndPassword(auth, email, password)
+      if (isChecked) {
+        localStorage.setItem('storedEmail', email)
+      } //로그인 성공 시점에 toggle이 true이면 이메일 저장
       navigate('/')
     } catch (error) {
       setError('유효한 아이디, 비밀번호를 입력해주세요!')
@@ -110,7 +127,7 @@ function SigninPage() {
       }, 5000)
       console.log('login failed')
     }
-  }
+  } //로그인 성공 시 메인페이지로, 실패 시 error 메시지 5초간 출력
 
   function setEmailValue(e) {
     setEmail(e.target.value)
@@ -119,6 +136,15 @@ function SigninPage() {
   function setPasswordValue(e) {
     setPassword(e.target.value)
   }
+
+  function handleIsToggleChecked(e) {
+    if (e.target.checked === true) {
+      setIsChecked(true)
+    } else {
+      setIsChecked(false)
+      localStorage.removeItem('storedEmail')
+    }
+  } // toggle 상태(checked)가 바뀔 때 실행되는 이벤트, default가 false이므로 첫 실행 시 true가 된다
 
   return (
     <>
@@ -144,13 +170,15 @@ function SigninPage() {
           />
           <Alert $visible={error}>{error}</Alert>
           <LoginToggle>
-            <ToggleCheckbox id="toggle" />
+            <ToggleCheckbox id="toggle" checked={isChecked} onChange={handleIsToggleChecked} />
             <ToggleLabel htmlFor="toggle">
               <ToggleButton className="toggle-button" />
               이메일 기억하기
             </ToggleLabel>
           </LoginToggle>
-          <LoginSubmitBtn onClick={handleLogin}>로그인</LoginSubmitBtn>
+          <LoginSubmitBtn onClick={handleLogin} disabled={!email && !password}>
+            로그인
+          </LoginSubmitBtn>
         </LoginWrapper>
         <LoginThumbnail>
           <FlexLogo>Revive</FlexLogo>
@@ -251,9 +279,21 @@ const LoginSubmitBtn = styled.button`
   color: white;
   margin-top: 30px;
   cursor: pointer;
+  transition: transform 0.1s;
 
   &:hover {
     background-color: gray;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+    background-color: #d3d3d3;
+    transform: none;
   }
 `
 
