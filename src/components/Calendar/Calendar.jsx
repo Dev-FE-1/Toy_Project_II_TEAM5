@@ -1,4 +1,3 @@
-import React from 'react'
 import ShadowyBox from '@components/shared/ShadowyBox'
 import { colors } from '@styles/Colors'
 import styled from 'styled-components'
