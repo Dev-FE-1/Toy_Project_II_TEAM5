@@ -4,7 +4,9 @@ import { colorVariables } from './Colors'
 const GlobalStyle = createGlobalStyle`
 
   ${colorVariables}
-  
+  :root {
+    --modal-z-index: 100;
+  }
   /* reset css */
   html,
   body,

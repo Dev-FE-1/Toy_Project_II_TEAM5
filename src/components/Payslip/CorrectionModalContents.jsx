@@ -1,10 +1,14 @@
 import { useContext, useState } from 'react'
 import { deleteDoc, doc } from 'firebase/firestore'
+import { useContext, useState } from 'react'
+import { deleteDoc, doc } from 'firebase/firestore'
 import styled from 'styled-components'
 import { ModalContext } from '@components/shared/Modal'
 import Flex from '@components/shared/Flex'
 import { colors } from '@styles/Colors'
 import Horizon from '@components/shared/Horizon'
+import useFetchCorrections from '@hooks/useFetchCorrection'
+import { db } from '@firebase/firebaseConfig'
 import useFetchCorrections from '@hooks/useFetchCorrection'
 import { db } from '@firebase/firebaseConfig'
 
@@ -85,6 +89,13 @@ function CorrectionModalContents() {
                 >
                   {item.content}
                 </ContentCell>
+                <ContentCell
+                  onClick={() => toggleExpand(item.id)}
+                  expanded={expandedContent[item.id]}
+                  title={expandedContent[item.id] ? '' : item.content}
+                >
+                  {item.content}
+                </ContentCell>
                 <td>{item.status}</td>
                 <td>
                   <DeleteButton
@@ -99,7 +110,9 @@ function CorrectionModalContents() {
           </Tbody>
         </Table>
         {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
+        {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
         <Flex>
+          <SubmitButton onClick={() => setIsOpen(false)}>닫기</SubmitButton>
           <SubmitButton onClick={() => setIsOpen(false)}>닫기</SubmitButton>
         </Flex>
       </Container>
@@ -153,6 +166,17 @@ const Button = styled.button`
 
   &:hover {
     background-color: #00bcab;
+  }
+`
+
+const ContentCell = styled.td`
+  white-space: ${({ expanded }) => (expanded ? 'normal' : 'nowrap')};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: ${({ expanded }) => (expanded ? 'none' : '150px')};
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 `
 

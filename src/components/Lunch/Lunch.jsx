@@ -9,14 +9,26 @@ export default function Lunch() {
       <Title>오늘의 점심 메뉴</Title>
       <Menu>
         <WesternFood>
-          <Title>양식</Title>
+          <SubTitle>양식</SubTitle>
           <MenuImage src={westernImage} alt="플레인 플래터" />
-          <Title>플레인 플래터</Title>
+          <FoodTitle>플레인 플래터</FoodTitle>
+          <Description>
+            다양한 채소와 고기를 곁들인 서양식 플래터입니다. 신선한 재료로 구성되어 있어 건강한 한
+            끼를 제공합니다.
+          </Description>
+          <Price>₩2,000</Price>
+          <Calories>칼로리: 750kcal</Calories>
         </WesternFood>
         <KoreanFood>
-          <Title>한식</Title>
+          <SubTitle>한식</SubTitle>
           <MenuImage src={koreanImage} alt="김치찌개" />
-          <Title>김치찌개</Title>
+          <FoodTitle>김치찌개</FoodTitle>
+          <Description>
+            매콤한 김치와 돼지고기가 어우러진 전통적인 한식 김치찌개입니다. 따뜻하고 매운맛이
+            일품입니다.
+          </Description>
+          <Price>₩3,000</Price>
+          <Calories>칼로리: 600kcal</Calories>
         </KoreanFood>
       </Menu>
     </MenuContainer>
@@ -25,36 +37,85 @@ export default function Lunch() {
 
 const MenuContainer = styled(ShadowyBox)`
   width: 40%;
-  border: 1px solid #e2e8f0;
-  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `
 
-const Title = styled.div`
+const Title = styled.h1`
   font-size: 22px;
   font-weight: bold;
+  margin-bottom: 30px;
+`
+
+const SubTitle = styled.h2`
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
 `
 
 const Menu = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 70px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
 `
 
 const WesternFood = styled.div`
-  margin: 20px;
+  flex: 1;
   text-align: center;
-  border-right: 1px solid #e2e8f0;
-  padding-right: 14px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 `
 
 const KoreanFood = styled.div`
-  margin: 20px;
+  flex: 1;
   text-align: center;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+`
+
+const FoodTitle = styled.h3`
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 15px;
+`
+
+const Description = styled.p`
+  font-size: 14px;
+  line-height: 1.2;
+  color: #4a5568;
+  margin-bottom: 10px;
+`
+
+const Price = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 10px;
+`
+
+const Calories = styled.p`
+  font-size: 14px;
+  color: #718096;
+  margin-bottom: 5px;
 `
 
 const MenuImage = styled.img`
-  width: auto;
-  height: 200px;
-  margin-bottom: 65px;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
 `
