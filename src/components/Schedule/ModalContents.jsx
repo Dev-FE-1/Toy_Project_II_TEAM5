@@ -66,13 +66,6 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
     const timeString = `${taskData.hour}:${taskData.minute}`
     const newTask = {
       title: taskData.task,
-      // time: new Date(
-      //   taskData.year,
-      //   parseInt(taskData.month, 10) - 1,
-      //   parseInt(taskData.day, 10),
-      //   parseInt(taskData.hour, 10),
-      //   parseInt(taskData.minute, 10)
-      // ).toISOString(),
       time: timeString,
       status: taskData.status,
       division: taskData.division,

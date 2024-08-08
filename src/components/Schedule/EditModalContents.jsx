@@ -37,14 +37,9 @@ const EditModal = ({ employeeId, task, onTaskUpdated, onClose }) => {
   const [selectedColor, setSelectedColor] = useState(getDivisionColor(task.division))
   const [hour, minute] = task.time.split(':')
   const [taskData, setTaskData] = useState({
-    // year: task.time.getFullYear(),
-    // month: task.time.getMonth() + 1,
-    // day: task.time.getDate(),
-    // hour: task.time.getHours().toString().padStart(2, '0'),
-    // minute: task.time.getMinutes().toString().padStart(2, '0'),
-    year: task.year || new Date().getFullYear(), // 필요에 따라 설정
-    month: task.month || new Date().getMonth() + 1, // 필요에 따라 설정
-    day: task.day || new Date().getDate(), // 필요에 따라 설정
+    year: task.year || new Date().getFullYear(),
+    month: task.month || new Date().getMonth() + 1,
+    day: task.day || new Date().getDate(),
     hour: hour.padStart(2, '0'),
     minute: minute.padStart(2, '0'),
     title: task.title || '',
@@ -76,13 +71,6 @@ const EditModal = ({ employeeId, task, onTaskUpdated, onClose }) => {
     const timeString = `${taskData.hour}:${taskData.minute}`
     const updatedTask = {
       title: taskData.title || '',
-      // time: new Date(
-      //   // taskData.year,
-      //   // taskData.month - 1,
-      //   // taskData.day,
-      //   parseInt(taskData.hour),
-      //   parseInt(taskData.minute)
-      // ).toISOString(),
       time: timeString,
       status: taskData.status || '',
       division: taskData.division || '',

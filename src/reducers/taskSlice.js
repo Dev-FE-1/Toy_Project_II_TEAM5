@@ -104,18 +104,41 @@ const taskSlice = createSlice({
         state.status = 'failed'
         state.error = action.error.message
       })
+      .addCase(addTask.pending, (state) => {
+        state.status = 'pending'
+      })
       .addCase(addTask.fulfilled, (state, action) => {
         state.data.push(action.payload)
       })
+      .addCase(addTask.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
+      .addCase(updateTask.pending, (state) => {
+        state.status = 'pending'
+      })
       .addCase(updateTask.fulfilled, (state, action) => {
+        state.status = 'succeeded'
         const { taskId, taskData } = action.payload
         const existingTask = state.data.find((task) => task.id === taskId)
         if (existingTask) {
           Object.assign(existingTask, taskData)
         }
       })
+      .addCase(updateTask.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      })
+      .addCase(deleteTask.pending, (state) => {
+        state.status = 'pending'
+      })
       .addCase(deleteTask.fulfilled, (state, action) => {
+        state.status = 'succeeded'
         state.data = state.data.filter((task) => task.id !== action.payload)
+      })
+      .addCase(deleteTask.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
       })
   },
 })
