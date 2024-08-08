@@ -3,6 +3,7 @@ import CalendarContextProvider from '@components/Container/calendar-context'
 import Footer from '@components/Footer/Footer'
 import Header from '@components/Header/Header'
 import Schedule from '@components/Schedule/Schedule'
+import ScheduleList from '@pages/salary-management/ScheduleList'
 import styled from 'styled-components'
 
 function TaskManagementPage() {
@@ -11,7 +12,7 @@ function TaskManagementPage() {
       <Header header="업무 관리" />
       <CalendarContextProvider>
         <ContentContainer>
-          <Calendar />
+          <Calendar ScheduleList={ScheduleList} />
           <Schedule />
         </ContentContainer>
       </CalendarContextProvider>

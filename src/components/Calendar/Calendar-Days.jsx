@@ -30,9 +30,9 @@ const Container = styled.div`
   flex-direction: column;
   border: 1px solid #e9ecef;
   background-color: #fff;
+  font-size: 16px;
 
   .day {
-    font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 5px;
     ${({ $isHoliday, $isPrevMonth }) =>
@@ -49,7 +49,6 @@ const Container = styled.div`
 
   .holiday {
     margin-left: 6px;
-    font-size: 20px;
     font-weight: 500;
   }
 `
