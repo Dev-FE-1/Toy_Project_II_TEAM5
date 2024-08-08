@@ -65,6 +65,7 @@ export default function Schedule() {
     console.log('Fetching tasks for:', { employeeId, month: currentMonth, day: currentDay })
     dispatch(fetchTasks({ employeeId, month: currentMonth, day: currentDay }))
   }, [dispatch, currentMonth, currentDay])
+  console.log(currentMonth, currentDay)
 
   const formattedTasks = useMemo(() => {
     return tasks

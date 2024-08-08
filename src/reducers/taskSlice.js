@@ -1,42 +1,44 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { db } from '@firebase/firebaseConfig'
-import { collection, doc, getDocs, updateDoc, deleteDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, deleteDoc, setDoc, arrayUnion } from 'firebase/firestore'
 
-// Fetch tasks from Firestore
+const removeLeadingZero = (str) => str.replace(/^0+/, '')
+
 export const fetchTasks = createAsyncThunk(
   'tasks/fetchTasks',
   async ({ employeeId, month, day }) => {
-    const tasks = []
-    const querySnapshot = await getDocs(
-      collection(db, 'EMPLOYEES', employeeId, 'TASKS', month, day)
-    )
-    querySnapshot.forEach((doc) => {
-      console.log('Fetched Task:', { id: doc.id, ...doc.data() })
-      tasks.push({ id: doc.id, ...doc.data() })
-    })
-    return tasks
+    const stringMonth = removeLeadingZero(month.toString())
+    const stringDay = removeLeadingZero(day.toString())
+    const docRef = doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth)
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      const data = docSnap.data()
+      return Object.entries(data)
+        .filter(([key]) => key.startsWith(`${stringDay}_`))
+        .map(([key, value]) => ({ id: key.split('_')[1], ...value }))
+    }
+    return []
   }
 )
 
-// Add a new task to Firestore
 export const addTask = createAsyncThunk(
   'tasks/addTask',
   async ({ employeeId, month, day, taskData }) => {
-    // Create a new task document with a unique integer ID for each day
-    const collectionRef = collection(db, 'EMPLOYEES', employeeId, 'TASKS', month, day)
+    const stringMonth = removeLeadingZero(month.toString())
+    const stringDay = removeLeadingZero(day.toString())
+    const docRef = doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth)
+    const newTask = { ...taskData, id: Date.now().toString() } // 고유 ID 생성
 
-    // Get the highest existing task ID to determine the next available ID
-    const querySnapshot = await getDocs(collectionRef)
-    const taskIds = querySnapshot.docs.map((doc) => parseInt(doc.id, 10)).filter((id) => !isNaN(id))
-    const newTaskId = taskIds.length > 0 ? Math.max(...taskIds) + 1 : 1
+    await setDoc(
+      docRef,
+      {
+        [stringDay]: arrayUnion(newTask),
+      },
+      { merge: true }
+    )
 
-    // Create a reference to the new task document
-    const newTaskRef = doc(collectionRef, newTaskId.toString())
-
-    // Set the new task document with the provided data
-    await setDoc(newTaskRef, taskData)
-
-    return { id: newTaskId.toString(), ...taskData }
+    return newTask
   }
 )
 
@@ -44,7 +46,12 @@ export const addTask = createAsyncThunk(
 export const updateTask = createAsyncThunk(
   'tasks/updateTask',
   async ({ employeeId, month, day, taskId, taskData }) => {
-    await updateDoc(doc(db, 'EMPLOYEES', employeeId, 'TASKS', month, day, taskId), taskData)
+    const stringMonth = removeLeadingZero(month.toString())
+    const stringDay = removeLeadingZero(day.toString())
+    await updateDoc(
+      doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth, stringDay, taskId),
+      taskData
+    )
     return { taskId, taskData }
   }
 )
@@ -53,7 +60,9 @@ export const updateTask = createAsyncThunk(
 export const deleteTask = createAsyncThunk(
   'tasks/deleteTask',
   async ({ employeeId, month, day, taskId }) => {
-    await deleteDoc(doc(db, 'EMPLOYEES', employeeId, 'TASKS', month, day, taskId))
+    const stringMonth = removeLeadingZero(month.toString())
+    const stringDay = removeLeadingZero(day.toString())
+    await deleteDoc(doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth, stringDay, taskId))
     return taskId
   }
 )
@@ -71,6 +80,7 @@ const taskSlice = createSlice({
         state.status = 'pending'
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
+        console.log('fetchTasks fulfilled with payload', action.payload)
         state.status = 'succeeded'
         state.data = action.payload
       })
