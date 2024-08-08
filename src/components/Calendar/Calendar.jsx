@@ -1,15 +1,19 @@
+import React from 'react'
 import ShadowyBox from '@components/shared/ShadowyBox'
 import { colors } from '@styles/Colors'
 import styled from 'styled-components'
 import CalendarDays from './Calendar-Days'
 import CalendarNavigation from './Calendar-Navigation'
 import CalendarHeader from './Calendar-header'
+import { useColorMode } from '@chakra-ui/react'
 
 const Calendar = ({ ScheduleList }) => {
+  const { colorMode } = useColorMode()
+
   return (
-    <Container>
+    <Container colorMode={colorMode}>
       <CalendarNavigation />
-      <CalendarContents>
+      <CalendarContents colorMode={colorMode}>
         <CalendarHeader />
         <CalendarDays ScheduleList={ScheduleList} />
       </CalendarContents>
@@ -18,8 +22,6 @@ const Calendar = ({ ScheduleList }) => {
 }
 
 const Container = styled(ShadowyBox)`
-  padding: 20px 40px;
-  padding-bottom: 0;
   flex-grow: 1;
   width: 70%;
   overflow: initial;
@@ -28,7 +30,7 @@ const Container = styled(ShadowyBox)`
 const CalendarContents = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  border: 1px solid #e9ecef;
+  border: 1px solid ${({ colorMode }) => (colorMode === 'light' ? '#e9ecef' : colors.gray[600])};
 `
 
 export default Calendar
