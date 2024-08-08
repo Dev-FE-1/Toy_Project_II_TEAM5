@@ -209,7 +209,7 @@ const Title = styled.div`
 const ScheduleList = styled.div`
   overflow-y: auto;
   width: 100%;
-  max-height: 750px;
+  max-height: 700px;
   padding-top: 10px;
   ${scrollbarStyle}
 `
