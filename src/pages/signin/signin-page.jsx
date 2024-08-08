@@ -172,7 +172,9 @@ function SigninPage() {
               이메일 기억하기
             </ToggleLabel>
           </LoginToggle>
-          <LoginSubmitBtn onClick={handleLogin}>로그인</LoginSubmitBtn>
+          <LoginSubmitBtn onClick={handleLogin} disabled={!email && !password}>
+            로그인
+          </LoginSubmitBtn>
         </LoginWrapper>
         <LoginThumbnail>
           <FlexLogo>Revive</FlexLogo>
@@ -269,18 +271,18 @@ const LoginSubmitBtn = styled.button`
   height: 45px;
   border-radius: 10px;
   border: none;
-  background-color: var(--primary);
+  background-color: ${(props) => (props.disabled ? '#d3d3d3' : 'var(--primary)')};
   color: white;
   margin-top: 30px;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   transition: transform 0.1s;
 
   &:hover {
-    background-color: gray;
+    background-color: ${(props) => (props.disabled ? '#d3d3d3' : 'gray')};
   }
 
   &:active {
-    transform: scale(0.95);
+    transform: ${(props) => (props.disabled ? 'none' : 'scale(0.95)')};
   }
 `
 
