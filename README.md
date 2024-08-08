@@ -175,8 +175,8 @@
   - 정정 신청 삭제 기능 구현
   - 결제 완료된 항목은 삭제 불가 기능 구현
     ![correction](/src/assets/screenshot/correction.png)
-    ![correctionDelete](/src/assets/screenshot/CorrectionDelete.png)
-    ![correctionDelete2](/src/assets/screenshot/CorrectionDelete2.png)
+    ![correctionDelete](/src/assets/screenshot/correctionDelete.png)
+    ![correctionDelete2](/src/assets/screenshot/correctionDelete2.png)
 
 <br>
 
@@ -230,3 +230,22 @@
   - 날씨 데이터를 가져오는 동안 로딩 메시지 표시
   - 날씨 데이터를 가져오는 중 오류가 발생할 경우 사용자에게 오류 메시지를 표시
     ![light](/src/assets/screenshot/light.png)
+
+<br>
+
+### 설치
+
+---
+
+```jsx
+$ npm install
+$ npm install firebase
+```
+
+### 실행
+
+---
+
+```jsx
+$ npm run dev
+```
