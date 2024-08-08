@@ -5,13 +5,13 @@ import CalendarDays from './Calendar-Days'
 import CalendarNavigation from './Calendar-Navigation'
 import CalendarHeader from './Calendar-header'
 
-const Calendar = () => {
+const Calendar = ({ ScheduleList }) => {
   return (
     <Container>
       <CalendarNavigation />
       <CalendarContents>
         <CalendarHeader />
-        <CalendarDays />
+        <CalendarDays ScheduleList={ScheduleList} />
       </CalendarContents>
     </Container>
   )

@@ -3,6 +3,7 @@ import CalendarContextProvider from '@components/Container/calendar-context'
 import Header from '@components/Header/Header'
 import Payslip from '@components/Payslip/Payslip'
 import styled from 'styled-components'
+import ScheduleList from './ScheduleList'
 
 function SalaryManagementPage() {
   return (
@@ -11,7 +12,7 @@ function SalaryManagementPage() {
       <CalendarContextProvider>
         <ContentContainer>
           <ContentContainer>
-            <Calendar />
+            <Calendar ScheduleList={ScheduleList} />
             <Payslip />
           </ContentContainer>
         </ContentContainer>
