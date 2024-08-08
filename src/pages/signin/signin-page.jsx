@@ -271,18 +271,25 @@ const LoginSubmitBtn = styled.button`
   height: 45px;
   border-radius: 10px;
   border: none;
-  background-color: ${(props) => (props.disabled ? '#d3d3d3' : 'var(--primary)')};
+  background-color: var(--primary);
   color: white;
   margin-top: 30px;
-  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  cursor: pointer;
   transition: transform 0.1s;
 
   &:hover {
-    background-color: ${(props) => (props.disabled ? '#d3d3d3' : 'gray')};
+    background-color: gray;
   }
 
   &:active {
-    transform: ${(props) => (props.disabled ? 'none' : 'scale(0.95)')};
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+    background-color: #d3d3d3;
+    transform: none;
   }
 `
 
