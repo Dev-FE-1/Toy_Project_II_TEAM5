@@ -9,7 +9,7 @@ import { addTask } from '@reducers/taskSlice'
 const categories = [
   { name: 'Meeting', color: 'rgba(255, 59, 59, 0.5)' },
   { name: 'Report', color: 'rgb(198, 198, 198)' },
-  { name: 'Prepare', color: 'rgba(255, 150, 27, 0.5)' },
+  { name: 'Prepared', color: 'rgba(255, 150, 27, 0.5)' },
   { name: 'External', color: 'rgba(0, 133, 255, 0.5)' },
 ]
 
