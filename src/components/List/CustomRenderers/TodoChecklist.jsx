@@ -22,7 +22,7 @@ const ColoredCDivision = styled.span`
       background: rgba(255, 59, 59, 0.1);
     `}
   ${(props) =>
-    props.$division === 'Prepare' &&
+    props.$division === 'Prepared' &&
     css`
       background: rgba(255, 150, 27, 0.1);
     `}
