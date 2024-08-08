@@ -6,12 +6,12 @@ import AlertIcon from '@assets/icons/alert.svg'
 import ProfileIcon from '@assets/icons/profile.svg'
 // import { useNavigate } from 'react-router-dom'
 // import { auth } from '/src/firebase/firebaseConfig'
-import useHandleLogout from '@hooks/useHandleLogout'
+import useLogout from '@hooks/useLogout'
 import { Button, useColorMode } from '@chakra-ui/react'
 
 function UserStatus() {
   const { colorMode, toggleColorMode } = useColorMode()
-  const handleLogout = useHandleLogout()
+  const handleLogout = useLogout()
 
   return (
     <Container $gap="20px" $justify="flex-start">
