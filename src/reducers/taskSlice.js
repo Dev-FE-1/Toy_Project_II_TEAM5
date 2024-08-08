@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { db } from '@firebase/firebaseConfig'
-import { doc, getDoc, updateDoc, deleteDoc, setDoc, arrayUnion } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, setDoc, arrayUnion } from 'firebase/firestore'
 
 const removeLeadingZero = (str) => str.replace(/^0+/, '')
 
@@ -46,11 +46,20 @@ export const updateTask = createAsyncThunk(
   async ({ employeeId, month, day, taskId, taskData }) => {
     const stringMonth = removeLeadingZero(month.toString())
     const stringDay = removeLeadingZero(day.toString())
-    await updateDoc(
-      doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth, stringDay, taskId),
-      taskData
-    )
-    return { taskId, taskData }
+    const docRef = doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth)
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      const data = docSnap.data()
+      const tasks = data[stringDay] || []
+      const updatedTasks = tasks.map((task) =>
+        task.id === taskId ? { ...task, ...taskData } : task
+      )
+
+      await updateDoc(docRef, { [stringDay]: updatedTasks })
+
+      return { taskId, taskData }
+    }
   }
 )
 
@@ -60,8 +69,16 @@ export const deleteTask = createAsyncThunk(
   async ({ employeeId, month, day, taskId }) => {
     const stringMonth = removeLeadingZero(month.toString())
     const stringDay = removeLeadingZero(day.toString())
-    await deleteDoc(doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth, stringDay, taskId))
-    return taskId
+    const docRef = doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth)
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+      const data = docSnap.data()
+      const tasks = data[stringDay] || []
+      const updatedTasks = tasks.filter((task) => task.id !== taskId)
+      await updateDoc(docRef, { [stringDay]: updatedTasks })
+      return taskId
+    }
   }
 )
 
