@@ -10,17 +10,7 @@ import useHandleLogout from '@hooks/useHandleLogout'
 
 function UserStatus() {
   const handleLogout = useHandleLogout()
-  // const navigate = useNavigate()
-  // const handleLogout = () => {
-  //   auth
-  //     .signOut()
-  //     .then(() => {
-  //       navigate('/signin')
-  //     })
-  //     .catch((error) => {
-  //       console.error(error)
-  //     })
-  // }
+
   return (
     <Container $gap="20px" $justify="flex-start">
       <Flex $gap="10px">
