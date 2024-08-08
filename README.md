@@ -250,8 +250,6 @@ $ npm install firebase
 $ npm run dev
 ```
 
-<br>
-
 ### 문서
 
 ---
