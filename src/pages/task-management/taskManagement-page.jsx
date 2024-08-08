@@ -7,7 +7,6 @@ import TaskList from '@pages/task-management/TaskList'
 import styled from 'styled-components'
 
 function TaskManagementPage() {
-  console.log('page', TaskList)
   return (
     <PageContainer>
       <Header header="업무 관리" />

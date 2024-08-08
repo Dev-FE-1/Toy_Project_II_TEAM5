@@ -18,7 +18,7 @@ function CalendarDays({ ScheduleList }) {
       key={day}
       $isPrevMonth={isPrevMonth(day)}
       $isHoliday={isHoliday(day)}
-      colorMode={colorMode}
+      $colorMode={colorMode}
     >
       <span className="day">
         {day.getDate()}
@@ -35,21 +35,21 @@ const Container = styled.div`
   padding: 10px;
   display: flex;
   flex-direction: column;
-  border: 1px solid ${({ colorMode }) => (colorMode === 'light' ? '#e9ecef' : colors.gray[600])};
-  background-color: ${({ colorMode }) => (colorMode === 'light' ? '#fff' : colors.gray[800])};
+  border: 1px solid ${({ $colorMode }) => ($colorMode === 'light' ? '#e9ecef' : colors.gray[600])};
+  background-color: ${({ $colorMode }) => ($colorMode === 'light' ? '#fff' : colors.gray[800])};
   font-size: 16px;
 
   .day {
     font-weight: bold;
     margin-bottom: 5px;
-    ${({ $isHoliday, $isPrevMonth, colorMode }) =>
+    ${({ $isHoliday, $isPrevMonth, $colorMode }) =>
       $isHoliday
         ? css`
             color: red;
           `
         : $isPrevMonth &&
           css`
-            color: ${colorMode === 'light' ? colors.gray : colors.gray[400]};
+            color: ${$colorMode === 'light' ? colors.gray : colors.gray[400]};
             font-weight: 400;
           `}
   }

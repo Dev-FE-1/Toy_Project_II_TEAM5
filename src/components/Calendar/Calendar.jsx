@@ -10,9 +10,9 @@ const Calendar = ({ ScheduleList }) => {
   const { colorMode } = useColorMode()
 
   return (
-    <Container colorMode={colorMode}>
+    <Container $colorMode={colorMode}>
       <CalendarNavigation />
-      <CalendarContents colorMode={colorMode}>
+      <CalendarContents $colorMode={colorMode}>
         <CalendarHeader />
         <CalendarDays ScheduleList={ScheduleList} />
       </CalendarContents>
@@ -31,7 +31,7 @@ const Container = styled(ShadowyBox)`
 const CalendarContents = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  border: 1px solid ${({ colorMode }) => (colorMode === 'light' ? '#e9ecef' : colors.gray[600])};
+  border: 1px solid ${({ $colorMode }) => ($colorMode === 'light' ? '#e9ecef' : colors.gray[600])};
   height: 90%;
 `
 
