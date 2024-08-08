@@ -6,7 +6,7 @@ import Footer from '@components/Footer/Footer'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { fetchWorkList } from '@reducers/salarySlice'
-
+import Loading from '@components/shared/Loading'
 function SalaryManagementPage() {
   const dispatch = useDispatch()
   const { data, status, error } = useSelector((state) => state.workList)
@@ -68,7 +68,7 @@ function SalaryManagementPage() {
     setMonth(parseInt(event.target.value, 10))
   }
 
-  if (status === 'loading') return <div>Loading...</div>
+  if (status === 'loading') return <Loading />
   if (status === 'failed') return <div>Error: {error}</div>
   if (!isDataLoaded) return <div>Loading...</div>
 
@@ -77,10 +77,8 @@ function SalaryManagementPage() {
       <Header header="급여 내역" />
       <ContentContainer>
         <StyledCalendar
-          dayNum={processedData.dayNum}
-          firstDay={processedData.firstDay}
           workTimeTable={processedData.workTimeTable}
-          selectedMonth={month} // Pass the selectedMonth to Calendar
+          selectedMonth={month}
           onMonthChange={handleMonthChange}
         />
         <StyledPayslip overTime={processedData.overTime} month={month} />

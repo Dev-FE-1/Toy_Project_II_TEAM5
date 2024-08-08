@@ -12,9 +12,12 @@ import {
   ScheduleItem,
 } from './Calendar.styled'
 
-const Calendar = ({ dayNum, firstDay, workTimeTable, selectedMonth, onMonthChange }) => {
+const Calendar = ({ workTimeTable, selectedMonth, onMonthChange }) => {
   const weekDay = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
-  const daysInMonth = dayNum
+  const dayNum = [31, 29, 31, 30, 31, 30, 31, 31]
+  const firstDayArray = ['MON', 'THU', 'FRI', 'MON', 'WED', 'SAT', 'MON', 'THU']
+  const firstDay = firstDayArray[selectedMonth - 1]
+  const daysInMonth = dayNum[selectedMonth - 1]
   const firstDayOfMonth = weekDay.indexOf(firstDay)
 
   const renderCalendarDays = () => {
