@@ -1,7 +1,9 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { useContext, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { colors } from '@styles/Colors'
+import { CalendarContext } from '@components/Container/calendar-context'
+import { fetchTasks } from '@reducers/taskSlice'
 
 const transformTasksByDate = (tasks) => {
   const transformed = {}
@@ -12,9 +14,31 @@ const transformTasksByDate = (tasks) => {
 }
 
 const TaskList = ({ idx }) => {
-  const { data: tasks } = useSelector((state) => state.tasks)
-  const transformedTasks = transformTasksByDate(tasks)
+  const dispatch = useDispatch()
+  const { month } = useContext(CalendarContext)
+  const { data: tasks, error } = useSelector(({ tasks }) => tasks)
+  const [transformedTasks, setTransformedTasks] = useState({})
+
+  useEffect(() => {
+    const employeeId = 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1'
+    dispatch(fetchTasks({ employeeId, month: month + 1 }))
+  }, [dispatch, month])
+
+  useEffect(() => {
+    if (tasks) {
+      setTransformedTasks(transformTasksByDate(tasks))
+    }
+  }, [tasks])
+
   const dayTasks = transformedTasks[idx] || []
+
+  if (error) {
+    return <Container>Error: {error}</Container>
+  }
+
+  if (!Object.keys(transformedTasks).includes(idx.toString())) {
+    return null // 데이터가 없을 경우 null 반환
+  }
 
   return (
     <Container>
@@ -58,7 +82,7 @@ const TaskItem = styled.li`
     switch (props.className) {
       case 'Meeting':
         return 'rgba(255, 59, 59, 0.5)'
-      case 'Prepare':
+      case 'Prepared':
         return 'rgba(255, 150, 27, 0.5)'
       case 'External':
         return 'rgba(0, 133, 255, 0.5)'

@@ -6,7 +6,6 @@ import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 
 function CalendarDays({ ScheduleList }) {
-  console.log('ScheduleList', ScheduleList)
   const { month, year } = useContext(CalendarContext)
   const { calendarDays } = useCalendar(year, month)
 
