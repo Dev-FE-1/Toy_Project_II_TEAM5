@@ -1,18 +1,37 @@
-import styled from 'styled-components'
+import { useState } from 'react'
+import styled, { css } from 'styled-components'
 import TimeContainer from './TimeContainer'
 
-const ScheduleItem = ({ item }) => (
-  <ItemContainer>
-    <DotLineContainer>
-      <Dot color={item.color} />
-      <Line />
-    </DotLineContainer>
-    <ItemDetails>
-      <TimeContainer time={item.time} duration={item.duration} />
-      <Task>{item.task}</Task>
-    </ItemDetails>
-  </ItemContainer>
-)
+export default function ScheduleItem({ item, isActive, onClick, onEditClick, onDeleteClick }) {
+  const { time, title, color, status } = item
+  console.log('ScheduleItem time:', time)
+  const [isBtnVisible, setIsBtnVisible] = useState(false)
+  const isCancelled = status === '취소됨'
+
+  function handleClick() {
+    setIsBtnVisible(!isBtnVisible)
+  }
+
+  return (
+    <ItemContainer onClick={onClick} $isCancelled={isCancelled}>
+      <DotLineContainer>
+        <Dot color={color} />
+        <Line />
+      </DotLineContainer>
+      <ItemDetails>
+        <TimeContainer
+          time={time}
+          isBtnVisible={isActive}
+          onEditClick={onEditClick}
+          onDeleteClick={onDeleteClick}
+        />
+        <Task onClick={handleClick} $isCancelled={isCancelled}>
+          {title}
+        </Task>
+      </ItemDetails>
+    </ItemContainer>
+  )
+}
 
 const ItemContainer = styled.div`
   width: 100%;
@@ -20,9 +39,6 @@ const ItemContainer = styled.div`
   display: flex;
   flex-direction: row;
   cursor: pointer;
-  /* &:hover {
-    font-weight: 600;
-  } */
 `
 
 const DotLineContainer = styled.div`
@@ -56,10 +72,17 @@ const ItemDetails = styled.div`
 
 const Task = styled.div`
   font-size: 18px;
-  padding-bottom: 25px;
+  padding: 28px 5px 33px;
+  margin: 5px 0;
+  line-height: 21px;
+  transition: 0.3s;
+  ${(props) =>
+    props.$isCancelled &&
+    css`
+      color: #888;
+      text-decoration: line-through;
+    `}
   &:hover {
-    font-weight: 600;
+    background: rgba(158, 227, 219, 0.1);
   }
 `
-
-export default ScheduleItem
