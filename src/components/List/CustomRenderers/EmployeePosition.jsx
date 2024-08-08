@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { colors } from '@styles/Colors'
 
-function EmployeePosition({ position1, position2 }) {
+function EmployeePosition({ item }) {
+  const { position1, position2 } = item
   return (
     <div>
       <p>{position1}</p>

@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components'
 
-function TodoChecklist({ task, division }) {
+function TodoChecklist({ item }) {
+  const { title, division } = item
   return (
     <>
       <ColoredCDivision $division={division}></ColoredCDivision>
-      <span>{task}</span>
+      <span>{title}</span>
     </>
   )
 }

@@ -145,10 +145,6 @@ export default function Schedule() {
     )
   }
 
-  if (status === 'failed') {
-    return <div>데이터를 불러오는 데 실패했습니다.</div>
-  }
-
   return (
     <ScheduleContainer>
       <div style={{ width: '100%' }}>
@@ -213,7 +209,7 @@ const Title = styled.div`
 const ScheduleList = styled.div`
   overflow-y: auto;
   width: 100%;
-  max-height: 750px;
+  max-height: 700px;
   padding-top: 10px;
   ${scrollbarStyle}
 `
