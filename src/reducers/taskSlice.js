@@ -4,21 +4,18 @@ import { doc, getDoc, updateDoc, setDoc, arrayUnion } from 'firebase/firestore'
 
 const removeLeadingZero = (str) => str.replace(/^0+/, '')
 
-export const fetchTasks = createAsyncThunk(
-  'tasks/fetchTasks',
-  async ({ employeeId, month, day }) => {
-    const stringMonth = removeLeadingZero(month.toString())
-    const stringDay = removeLeadingZero(day.toString())
-    const docRef = doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth)
-    const docSnap = await getDoc(docRef)
-
-    if (docSnap.exists()) {
-      const data = docSnap.data()
-      return data[stringDay] || []
-    }
-    return []
-  }
-)
+export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async ({ employeeId, month }) => {
+  const stringMonth = removeLeadingZero(month.toString())
+  // const stringDay = removeLeadingZero(day.toString())
+  const docRef = doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth)
+  const docSnap = await getDoc(docRef)
+  return docSnap.data()
+  // if (docSnap.exists()) {
+  //   const data = docSnap.data()
+  //   return data[stringDay] || []
+  // }
+  // return []
+})
 
 export const addTask = createAsyncThunk(
   'tasks/addTask',
