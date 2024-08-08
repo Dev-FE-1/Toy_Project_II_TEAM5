@@ -151,7 +151,7 @@ export default function Schedule() {
 
   return (
     <ScheduleContainer>
-      <div>
+      <div style={{ width: '100%' }}>
         <Title>오늘의 할 일</Title>
         <ScheduleList>
           {formattedTasks.length > 0 ? (
