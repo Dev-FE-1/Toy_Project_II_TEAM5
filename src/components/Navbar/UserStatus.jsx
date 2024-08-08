@@ -6,7 +6,7 @@ import AlertIcon from '@assets/icons/alert.svg'
 import ProfileIcon from '@assets/icons/profile.svg'
 // import { useNavigate } from 'react-router-dom'
 // import { auth } from '/src/firebase/firebaseConfig'
-import useHandleLogout from '@components/Login/useHandleLogout'
+import useHandleLogout from '@hooks/useHandleLogout'
 
 function UserStatus() {
   const handleLogout = useHandleLogout()
