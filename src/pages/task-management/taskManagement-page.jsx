@@ -1,8 +1,25 @@
-import Header from '@components/Header/Header'
 import Calendar from '@components/Calendar/Calendar'
-import Schedule from '@components/Schedule/Schedule'
-import styled from 'styled-components'
+import CalendarContextProvider from '@components/Container/calendar-context'
 import Footer from '@components/Footer/Footer'
+import Header from '@components/Header/Header'
+import Schedule from '@components/Schedule/Schedule'
+import ScheduleList from '@pages/salary-management/ScheduleList'
+import styled from 'styled-components'
+
+function TaskManagementPage() {
+  return (
+    <PageContainer>
+      <Header header="업무 관리" />
+      <CalendarContextProvider>
+        <ContentContainer>
+          <Calendar ScheduleList={ScheduleList} />
+          <Schedule />
+        </ContentContainer>
+      </CalendarContextProvider>
+      <Footer />
+    </PageContainer>
+  )
+}
 
 const PageContainer = styled.div`
   display: flex;
@@ -13,29 +30,7 @@ const PageContainer = styled.div`
 
 const ContentContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  flex: 1;
   margin: 20px 0;
   gap: 20px;
 `
-const StyledCalendar = styled(Calendar)`
-  width: 90%;
-`
-
-const StyledSchedule = styled(Schedule)`
-  width: 10%;
-`
-
-function TaskManagementPage() {
-  return (
-    <PageContainer>
-      <Header header="업무 관리" />
-      <ContentContainer>
-        <StyledCalendar />
-        <StyledSchedule />
-      </ContentContainer>
-      <Footer />
-    </PageContainer>
-  )
-}
 export default TaskManagementPage

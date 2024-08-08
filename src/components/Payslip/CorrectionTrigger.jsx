@@ -16,8 +16,8 @@ function ButtonTrigger({ onClick }) {
     <StyledButton
       onClick={onClick}
       text="정정 내역"
-      backgroundColor={colors.primary_400}
-      hoverColor={colors.primary_500}
+      $backgroundColor={colors.primary_400}
+      $hoverColor={colors.primary_500}
     />
   )
 }
