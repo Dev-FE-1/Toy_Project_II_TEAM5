@@ -30,7 +30,7 @@ function UserStatus() {
         <Message onClick={handleLogout}>Logout</Message>
       </Flex>
       <img src={SettingIcon} alt="setting" />
-      <img src={AlertIcon} alt="alert" />
+      {/* <img src={AlertIcon} alt="alert" /> */}
       <Button onClick={toggleColorMode}>{colorMode === 'light' ? '🌑' : '🌕'}</Button>
     </Container>
   )
