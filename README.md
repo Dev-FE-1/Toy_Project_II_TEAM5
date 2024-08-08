@@ -249,3 +249,11 @@ $ npm install firebase
 ```jsx
 $ npm run dev
 ```
+
+<br>
+
+### 문서
+
+---
+
+[주요 기능 정의서](https://www.notion.so/1f84c8be71304311993af1f73a56b4f7)
