@@ -4,8 +4,11 @@ import styled from 'styled-components'
 import CalendarDays from './Calendar-Days'
 import CalendarNavigation from './Calendar-Navigation'
 import CalendarHeader from './Calendar-header'
+// import { useSelector } from 'react-redux'
 
 const Calendar = ({ ScheduleList }) => {
+  // const { data: tasks } = useSelector((state) => state.tasks)
+  // console.log('calender', tasks)
   return (
     <Container>
       <CalendarNavigation />

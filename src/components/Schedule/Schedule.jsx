@@ -51,7 +51,6 @@ const getCompletionValue = (status) => {
 export default function Schedule() {
   const dispatch = useDispatch()
   const { data: tasks, status } = useSelector((state) => state.tasks)
-  console.log('schedule.jsx 54', tasks)
   const [activeIndex, setActiveIndex] = useState(null)
   const [editingTask, setEditingTask] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -60,11 +59,15 @@ export default function Schedule() {
 
   useEffect(() => {
     const employeeId = 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1'
-    dispatch(fetchTasks({ employeeId, month: currentMonth, day: currentDay }))
-  }, [dispatch, currentMonth, currentDay])
+    dispatch(fetchTasks({ employeeId, month: currentMonth }))
+  }, [dispatch, currentMonth])
+
+  const dailyTasks = useMemo(() => {
+    return tasks[currentDay] || []
+  }, [tasks, currentDay])
 
   const formattedTasks = useMemo(() => {
-    return tasks
+    return dailyTasks
       .map((task) => {
         return {
           ...task,
@@ -75,7 +78,7 @@ export default function Schedule() {
         }
       })
       .sort((a, b) => a.time.localeCompare(b.time))
-  }, [tasks])
+  }, [dailyTasks])
 
   const handleTaskAdded = (newTask) => {
     dispatch(
