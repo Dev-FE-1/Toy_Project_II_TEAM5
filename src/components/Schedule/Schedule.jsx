@@ -51,6 +51,7 @@ const getCompletionValue = (status) => {
 export default function Schedule() {
   const dispatch = useDispatch()
   const { data: tasks, status } = useSelector((state) => state.tasks)
+  console.log('schedule.jsx 54', tasks)
   const [activeIndex, setActiveIndex] = useState(null)
   const [editingTask, setEditingTask] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -145,10 +146,6 @@ export default function Schedule() {
     )
   }
 
-  if (status === 'failed') {
-    return <div>데이터를 불러오는 데 실패했습니다.</div>
-  }
-
   return (
     <ScheduleContainer>
       <div style={{ width: '100%' }}>
@@ -213,7 +210,7 @@ const Title = styled.div`
 const ScheduleList = styled.div`
   overflow-y: auto;
   width: 100%;
-  max-height: 750px;
+  max-height: 700px;
   padding-top: 10px;
   ${scrollbarStyle}
 `
