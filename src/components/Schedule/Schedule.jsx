@@ -59,11 +59,15 @@ export default function Schedule() {
 
   useEffect(() => {
     const employeeId = 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1'
-    dispatch(fetchTasks({ employeeId, month: currentMonth, day: currentDay }))
-  }, [dispatch, currentMonth, currentDay])
+    dispatch(fetchTasks({ employeeId, month: currentMonth }))
+  }, [dispatch, currentMonth])
+
+  const dailyTasks = useMemo(() => {
+    return tasks[currentDay] || []
+  }, [tasks, currentDay])
 
   const formattedTasks = useMemo(() => {
-    return tasks
+    return dailyTasks
       .map((task) => {
         return {
           ...task,
@@ -74,7 +78,7 @@ export default function Schedule() {
         }
       })
       .sort((a, b) => a.time.localeCompare(b.time))
-  }, [tasks])
+  }, [dailyTasks])
 
   const handleTaskAdded = (newTask) => {
     dispatch(
