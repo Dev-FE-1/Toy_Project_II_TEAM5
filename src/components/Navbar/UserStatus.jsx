@@ -31,7 +31,7 @@ function UserStatus() {
       </Flex>
       <img src={SettingIcon} alt="setting" />
       <img src={AlertIcon} alt="alert" />
-      <Button onClick={toggleColorMode}>{colorMode === `🌑` ? `🌕` : `🌑`}</Button>
+      <Button onClick={toggleColorMode}>{colorMode === 'light' ? '🌑' : '🌕'}</Button>
     </Container>
   )
 }
