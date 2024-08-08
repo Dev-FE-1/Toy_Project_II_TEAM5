@@ -102,7 +102,6 @@ function CorrectionModalContents() {
         {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
         <Flex>
           <SubmitButton onClick={() => setIsOpen(false)}>닫기</SubmitButton>
-          <SubmitButton onClick={() => setIsOpen(false)}>닫기</SubmitButton>
         </Flex>
       </Container>
       {isDeleteConfirmModalOpen && (
