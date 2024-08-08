@@ -20,17 +20,15 @@ function App() {
   return (
     <>
       <Routes>
-        {user && (
-          <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/salary" element={<SalaryManagementPage />} />
-            <Route path="/task" element={<TaskManagementPage />} />
-            <Route path="/test" element={<TestPage />} />
-            <Route path="/admin" element={<AdminPage />} />
-          </Route>
-        )}
+        <Route element={user ? <Layout /> : <Navigate to="/signin" />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/salary" element={<SalaryManagementPage />} />
+          <Route path="/task" element={<TaskManagementPage />} />
+          <Route path="/test" element={<TestPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Route>
         <Route path="/signin" element={user ? <Navigate to="/" /> : <SigninPage />} />
-        <Route path="*" element={user ? <NotFoundPage /> : <Navigate to="/signin" />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   )
