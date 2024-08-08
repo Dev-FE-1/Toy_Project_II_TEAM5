@@ -5,19 +5,24 @@ import isHoliday from '@utils/isHoliday'
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 
-function CalendarDays({ ScheduleList }) {
+function CalendarDays({ onSelectDay }) {
   const { month, year } = useContext(CalendarContext)
   const { calendarDays } = useCalendar(year, month)
 
   const isPrevMonth = (day) => day.getMonth() !== month
 
-  return calendarDays.map((day, idx) => (
-    <Container key={day} $isPrevMonth={isPrevMonth(day)} $isHoliday={isHoliday(day)}>
+  return calendarDays.map((day) => (
+    <Container
+      key={day}
+      $isPrevMonth={isPrevMonth(day)}
+      $isHoliday={isHoliday(day)}
+      onClick={() => onSelectDay(day)}
+    >
       <span className="day">
         {day.getDate()}
         <span className="holiday">{isHoliday(day)?.name}</span>
       </span>
-      {!isHoliday(day) && <ScheduleList idx={idx} />}
+      {/* {!isHoliday(day) && <ScheduleList selectedDay={selectedDay} />} */}
     </Container>
   ))
 }

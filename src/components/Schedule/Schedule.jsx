@@ -51,6 +51,7 @@ const getCompletionValue = (status) => {
 export default function Schedule() {
   const dispatch = useDispatch()
   const { data: tasks, status } = useSelector((state) => state.tasks)
+  console.log('schedule.jsx 54', tasks)
   const [activeIndex, setActiveIndex] = useState(null)
   const [editingTask, setEditingTask] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
