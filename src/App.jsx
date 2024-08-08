@@ -6,7 +6,7 @@ import SalaryManagementPage from '@pages/salary-management/salary-management-pag
 import SigninPage from '@pages/signin/signin-page'
 import TaskManagementPage from '@pages/task-management/taskManagement-page'
 import TestPage from '@pages/test/test-page'
-import useAuthState from '@components/Login/useAuthState'
+import useAuthState from '@hooks/useAuthState'
 import { Route, Routes } from 'react-router-dom'
 import Loading from '@components/shared/Loading'
 
