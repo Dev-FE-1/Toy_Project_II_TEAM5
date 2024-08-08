@@ -136,7 +136,7 @@ export default function Schedule() {
       if (isEditModalOpen) {
         onClick()
       }
-    }, [isEditModalOpen, onClick])
+    }, [onClick])
 
     return null
   }

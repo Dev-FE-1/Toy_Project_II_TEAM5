@@ -1,6 +1,6 @@
+import { useColorMode } from '@chakra-ui/react'
 import { createGlobalStyle } from 'styled-components'
 import { colorVariables } from './Colors'
-import { useColorMode } from '@chakra-ui/react';
 
 const GlobalStylesWrapper = createGlobalStyle`
 
@@ -184,9 +184,9 @@ const GlobalStylesWrapper = createGlobalStyle`
 `
 
 function GlobalStyle() {
-  const { colorMode } = useColorMode();
+  const { colorMode } = useColorMode()
 
-  return <GlobalStylesWrapper theme={{ colorMode }} />;
+  return <GlobalStylesWrapper theme={{ colorMode }} />
 }
 
 export default GlobalStyle

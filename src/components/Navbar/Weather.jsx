@@ -1,39 +1,22 @@
-import { useState, useEffect } from 'react'
 import Flex from '@components/shared/Flex'
+import useWeather from '@hooks/useWeather'
 import { colors } from '@styles/Colors'
+import { format } from 'date-fns/format'
 import styled from 'styled-components'
-// import Thunder from '@assets/icons/thunder.svg'
-import getCurrentWeather from './FetchWeather'
 
 function Weather() {
-  const [weatherData, setWeatherData] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        const data = await getCurrentWeather()
-        setWeatherData(data)
-      } catch (error) {
-        console.error('Error fetching weather:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchWeather()
-  }, [])
+  const { weatherData, loading } = useWeather()
 
   if (loading) {
     return <Container>Loading...</Container>
   }
+
   if (!weatherData) {
     return <Container>Failed to load weather data</Container>
   }
 
   const date = new Date()
-  const options = { month: 'long', day: 'numeric' }
-  const formattedDate = date.toLocaleDateString('en-US', options)
+  const formattedDate = format(date, 'MMMM d')
 
   return (
     <Container $gap="15px">
@@ -73,6 +56,7 @@ const Container = styled(Flex)`
 `
 
 const WeatherImg = styled.img`
+  width: 66px;
   z-index: 1;
 `
 
