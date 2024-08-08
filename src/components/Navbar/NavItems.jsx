@@ -7,6 +7,7 @@ import { colors } from '@styles/Colors'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import useCurrentPath from '@hooks/useCurrentPath'
+import { useColorMode } from '@chakra-ui/react'
 
 function NavItems() {
   return (
@@ -26,9 +27,10 @@ const NavItemsContainer = styled(Flex)`
 function NavItem({ name, path, Icon }) {
   const pathname = useCurrentPath()
   const selected = path === pathname
+  const { colorMode } = useColorMode()
 
   return (
-    <NavItemContainer selected={selected}>
+    <NavItemContainer selected={selected} colorMode={colorMode}>
       <Link to={path}>
         <Flex $gap="6px" $justify="flex-start">
           <IconWithBackground $inverted={selected} Icon={Icon} />
@@ -44,8 +46,16 @@ const NavItemContainer = styled.li`
   padding: 12px 16px;
   box-sizing: border-box;
   font-weight: bold;
-  color: ${({ selected }) => (selected ? colors.black : colors.gray)};
-  background-color: ${({ selected }) => (selected ? colors.white : colors.lightGray)};
+  color: ${({ selected, colorMode }) =>
+    selected ? (colorMode === 'light' ? colors.black : colors.white) : colors.gray};
+  background-color: ${({ selected, colorMode }) =>
+    selected
+      ? colorMode === 'light'
+        ? colors.white
+        : colors.gray[700]
+      : colorMode === 'light'
+        ? colors.lightGray
+        : colors.gray[800]};
 
   &:hover {
     color: ${colors.primary};

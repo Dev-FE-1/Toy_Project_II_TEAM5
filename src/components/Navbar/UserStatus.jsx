@@ -7,8 +7,10 @@ import ProfileIcon from '@assets/icons/profile.svg'
 // import { useNavigate } from 'react-router-dom'
 // import { auth } from '/src/firebase/firebaseConfig'
 import useHandleLogout from '@hooks/useHandleLogout'
+import { Button, useColorMode } from '@chakra-ui/react'
 
 function UserStatus() {
+  const { colorMode, toggleColorMode } = useColorMode()
   const handleLogout = useHandleLogout()
 
   return (
@@ -18,7 +20,8 @@ function UserStatus() {
         <Message onClick={handleLogout}>Logout</Message>
       </Flex>
       <img src={SettingIcon} alt="setting" />
-      <img src={AlertIcon} alt="alert" />
+      {/* <img src={AlertIcon} alt="alert" /> */}
+      <Button onClick={toggleColorMode}>{colorMode === 'light' ? '🌑' : '🌕'}</Button>
     </Container>
   )
 }

@@ -1,24 +1,33 @@
+import { CalendarContext } from '@components/Container/calendar-context'
 import ShadowyBox from '@components/shared/ShadowyBox'
+import useAttendance from '@hooks/useAttandance'
+import calcOverTime from '@utils/calcOverTime'
+import { useContext } from 'react'
 import styled from 'styled-components'
 import PayrollActions from './PayrollAction'
 import PayrollItem from './PayrollItem'
 import PayrollTotal from './PayrollTotal'
 
 export default function Payslip() {
-  const overtime = 16
+  const { year, month } = useContext(CalendarContext)
+  const { data, status } = useAttendance({ month })
+  const overTime = calcOverTime(data?.workTimeTable)
   const overtimeRate = 15822
   const overtimeMultiplier = 1.5
-  const overtimePay = overtime * overtimeRate * overtimeMultiplier
-  const overtimeFormula = `연장 근무 시간(${overtime}시간) * 통상 시급(${overtimeRate.toLocaleString()}원) * ${overtimeMultiplier}`
+  const overtimePay = Math.ceil(overTime * overtimeRate * overtimeMultiplier)
+  const overtimeFormula = `연장 근무 시간(${overTime}시간) * 통상 시급(${overtimeRate.toLocaleString()}원) * ${overtimeMultiplier}`
+
+  const bonusOptions = [200000, 500000, 700000]
+  const randomBonus = bonusOptions[Math.floor(Math.random() * bonusOptions.length)]
 
   const payrollData = {
-    month: 7,
+    month: month,
     baseSalary: 3500000,
     mealAllowance: 300000,
-    overtime,
+    overtime: overTime,
     overtimePay,
     longevityAllowance: 200000,
-    bonus: 200000,
+    bonus: randomBonus,
     get totalPay() {
       return (
         this.baseSalary +
@@ -30,11 +39,15 @@ export default function Payslip() {
     },
   }
 
+  if (status === 'pending') return <PayslipContainer />
+
   return (
     <PayslipContainer>
       <TitleContainer>
         <Title>급여 지급내역</Title>
-        <Month>{payrollData.month}월</Month>
+        <Month>
+          {year} 년 {month + 1}월
+        </Month>
       </TitleContainer>
       <DetailContainer>
         {[
@@ -65,6 +78,7 @@ const PayslipContainer = styled(ShadowyBox)`
   padding: 45px;
   padding: 25px 16px;
   margin-bottom: 10px;
+  height: auto;
 `
 
 const TitleContainer = styled.div`
