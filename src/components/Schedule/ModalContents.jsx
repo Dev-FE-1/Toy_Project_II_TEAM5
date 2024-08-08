@@ -21,11 +21,13 @@ const getDivisionColor = (division) => {
 const getCompletionValue = (status) => {
   switch (status) {
     case '완료됨':
-      return true
+      return 100
     case '취소됨':
-      return false
+      return 0
+    case '진행중':
+      return Math.floor(Math.random() * 99) + 1
     default:
-      return null // 진행중 상태일 때
+      return 0
   }
 }
 
@@ -61,15 +63,17 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
       alert('구분을 선택해주세요.')
       return
     }
+    const timeString = `${taskData.hour}:${taskData.minute}`
     const newTask = {
       title: taskData.task,
-      time: new Date(
-        taskData.year,
-        parseInt(taskData.month, 10) - 1,
-        parseInt(taskData.day, 10),
-        parseInt(taskData.hour, 10),
-        parseInt(taskData.minute, 10)
-      ).toISOString(),
+      // time: new Date(
+      //   taskData.year,
+      //   parseInt(taskData.month, 10) - 1,
+      //   parseInt(taskData.day, 10),
+      //   parseInt(taskData.hour, 10),
+      //   parseInt(taskData.minute, 10)
+      // ).toISOString(),
+      time: timeString,
       status: taskData.status,
       division: taskData.division,
       completion: getCompletionValue(taskData.status),

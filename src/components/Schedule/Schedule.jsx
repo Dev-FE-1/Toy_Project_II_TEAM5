@@ -12,7 +12,7 @@ import Loading from '@components/shared/Loading'
 import Flex from '@components/shared/Flex'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchTasks, addTask, updateTask, deleteTask } from '@reducers/taskSlice.js'
-import { Timestamp } from 'firebase/firestore'
+// import { Timestamp } from 'firebase/firestore'
 
 const getCurrentMonthAndDay = () => {
   const today = new Date()
@@ -66,15 +66,18 @@ export default function Schedule() {
   const formattedTasks = useMemo(() => {
     return tasks
       .map((task) => {
+        // const hours = task.time.getHours().toString().padStart(2, '0')
+        // const minutes = task.time.getMinutes().toString().padStart(2, '0')
         return {
           ...task,
           color: getDivisionColor(task.division),
-          time: task.time instanceof Timestamp ? task.time.toDate() : new Date(task.time),
+          // time: task.time instanceof Timestamp ? task.time.toDate() : new Date(task.time),
+          time: task.time,
           completion: getCompletionValue(task.status),
           title: task.title,
         }
       })
-      .sort((a, b) => a.time.getTime() - b.time.getTime())
+      .sort((a, b) => a.time.localeCompare(b.time))
   }, [tasks])
 
   const handleTaskAdded = (newTask) => {
@@ -85,7 +88,7 @@ export default function Schedule() {
         day: currentDay,
         taskData: {
           ...newTask,
-          time: new Date(newTask.time).toISOString(),
+          // time: new Date(newTask.time).toISOString(),
           completion: getCompletionValue(newTask.status),
           title: newTask.title || 'New Task',
         },
@@ -107,7 +110,8 @@ export default function Schedule() {
         taskId,
         taskData: {
           ...updatedTask,
-          time: new Date(updatedTask.time).toISOString(),
+          // time: new Date(updatedTask.time).toISOString(),
+          time: updatedTask.time,
           completion: getCompletionValue(updatedTask.status),
         },
       })

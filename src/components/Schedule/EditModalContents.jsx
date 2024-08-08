@@ -18,42 +18,75 @@ const getDivisionColor = (division) => {
   return category ? category.color : '#fff'
 }
 
+const getCompletionValue = (status) => {
+  switch (status) {
+    case '완료함':
+      return 100
+    case '취소됨':
+      return 0
+    case '진행중':
+      return Math.floor(Math.random() * 99) + 1
+    default:
+      return 0
+  }
+}
+
 const EditModal = ({ employeeId, task, onTaskUpdated, onClose }) => {
   const { setIsOpen } = useContext(ModalContext)
   const dispatch = useDispatch()
   const [selectedColor, setSelectedColor] = useState(getDivisionColor(task.division))
+  const [hour, minute] = task.time.split(':')
   const [taskData, setTaskData] = useState({
-    year: task.time.getFullYear(),
-    month: task.time.getMonth() + 1,
-    day: task.time.getDate(),
-    hour: task.time.getHours().toString().padStart(2, '0'),
-    minute: task.time.getMinutes().toString().padStart(2, '0'),
+    // year: task.time.getFullYear(),
+    // month: task.time.getMonth() + 1,
+    // day: task.time.getDate(),
+    // hour: task.time.getHours().toString().padStart(2, '0'),
+    // minute: task.time.getMinutes().toString().padStart(2, '0'),
+    year: task.year || new Date().getFullYear(), // 필요에 따라 설정
+    month: task.month || new Date().getMonth() + 1, // 필요에 따라 설정
+    day: task.day || new Date().getDate(), // 필요에 따라 설정
+    hour: hour.padStart(2, '0'),
+    minute: minute.padStart(2, '0'),
     title: task.title || '',
     status: task.status || '',
     division: task.division || '',
+    completion: getCompletionValue(task.status),
   })
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    setTaskData((prev) => ({ ...prev, [name]: value }))
-    if (name === 'division') {
-      const selectedCategory = categories.find((cat) => cat.name === value)
-      setSelectedColor(selectedCategory ? selectedCategory.color : '')
-    }
+    setTaskData((prev) => {
+      const updatedData = { ...prev, [name]: value }
+      if (name === 'division') {
+        const selectedCategory = categories.find((cat) => cat.name === value)
+        setSelectedColor(selectedCategory ? selectedCategory.color : '')
+      }
+      if (name === 'status') {
+        console.log('Status changed to:', value)
+        updatedData.completion = getCompletionValue(value)
+        console.log('Updated completion value:', updatedData.completion)
+      }
+      return updatedData
+    })
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log('handleSubmit called')
+    const timeString = `${taskData.hour}:${taskData.minute}`
     const updatedTask = {
       title: taskData.title || '',
-      time: new Date(
-        taskData.year,
-        taskData.month - 1,
-        taskData.day,
-        parseInt(taskData.hour),
-        parseInt(taskData.minute)
-      ).toISOString(),
+      // time: new Date(
+      //   // taskData.year,
+      //   // taskData.month - 1,
+      //   // taskData.day,
+      //   parseInt(taskData.hour),
+      //   parseInt(taskData.minute)
+      // ).toISOString(),
+      time: timeString,
       status: taskData.status || '',
       division: taskData.division || '',
+      completion: taskData.completion,
     }
 
     try {

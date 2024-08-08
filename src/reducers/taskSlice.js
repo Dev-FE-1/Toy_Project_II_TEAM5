@@ -43,6 +43,7 @@ export const addTask = createAsyncThunk(
 export const updateTask = createAsyncThunk(
   'tasks/updateTask',
   async ({ employeeId, month, day, taskId, taskData }) => {
+    console.log('updateTask called')
     const stringMonth = removeLeadingZero(month.toString())
     const stringDay = removeLeadingZero(day.toString())
     const docRef = doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth)

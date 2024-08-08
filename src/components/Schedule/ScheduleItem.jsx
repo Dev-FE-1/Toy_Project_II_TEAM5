@@ -4,10 +4,11 @@ import TimeContainer from './TimeContainer'
 
 export default function ScheduleItem({ item, isActive, onClick, onEditClick, onDeleteClick }) {
   const { time, title, color, status } = item
-  const formattedTime = new Date(time).toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  })
+  console.log('ScheduleItem time:', time)
+  // const formattedTime = new Date(time).toLocaleTimeString([], {
+  //   hour: '2-digit',
+  //   minute: '2-digit',
+  // })
   const [isBtnVisible, setIsBtnVisible] = useState(false)
   const isCancelled = status === '취소됨'
 
@@ -23,7 +24,7 @@ export default function ScheduleItem({ item, isActive, onClick, onEditClick, onD
       </DotLineContainer>
       <ItemDetails>
         <TimeContainer
-          time={formattedTime}
+          time={time}
           isBtnVisible={isActive}
           onEditClick={onEditClick}
           onDeleteClick={onDeleteClick}
