@@ -145,29 +145,31 @@ export default function Schedule() {
     )
   }
 
-  if (status === 'rejected') {
+  if (status === 'failed') {
     return <div>데이터를 불러오는 데 실패했습니다.</div>
   }
 
   return (
     <ScheduleContainer>
-      <Title>오늘의 할 일</Title>
-      <ScheduleList>
-        {formattedTasks.length > 0 ? (
-          formattedTasks.map((item, index) => (
-            <ScheduleItem
-              key={item.id}
-              item={item}
-              isActive={activeIndex === index}
-              onClick={() => setActiveIndex(index)}
-              onEditClick={() => handleEditClick(item)}
-              onDeleteClick={() => handleDeleteClick(item.id)}
-            />
-          ))
-        ) : (
-          <div>표시할 작업이 없습니다.</div>
-        )}
-      </ScheduleList>
+      <div>
+        <Title>오늘의 할 일</Title>
+        <ScheduleList>
+          {formattedTasks.length > 0 ? (
+            formattedTasks.map((item, index) => (
+              <ScheduleItem
+                key={item.id}
+                item={item}
+                isActive={activeIndex === index}
+                onClick={() => setActiveIndex(index)}
+                onEditClick={() => handleEditClick(item)}
+                onDeleteClick={() => handleDeleteClick(item.id)}
+              />
+            ))
+          ) : (
+            <div>표시할 작업이 없습니다.</div>
+          )}
+        </ScheduleList>
+      </div>
       <ButtonContainer>
         <Modal Trigger={Trigger}>
           <ModalContents employeeId="Zrghj2Jf3CVwQ7jSOmjCXYBBlek1" onTaskAdded={handleTaskAdded} />
@@ -194,8 +196,8 @@ const Center = styled(Flex)`
 const ScheduleContainer = styled(ShadowyBox)`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 45px;
+  justify-content: space-between;
   align-items: flex-start;
   width: 32%;
   margin-bottom: 10px;
@@ -212,7 +214,7 @@ const ScheduleList = styled.div`
   overflow-y: auto;
   width: 100%;
   max-height: 750px;
-  padding-right: 10px;
+  padding-top: 10px;
   ${scrollbarStyle}
 `
 

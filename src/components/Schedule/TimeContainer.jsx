@@ -3,10 +3,13 @@ import { colors } from '@styles/Colors'
 import { FaPencilAlt } from 'react-icons/fa'
 import { FaTrash } from 'react-icons/fa'
 import Flex from '@components/shared/Flex'
+import { CiClock2 } from 'react-icons/ci'
 
 const TimeContainer = ({ time, isBtnVisible, onEditClick, onDeleteClick }) => (
   <TimeDetails>
-    <Time>{time}</Time>
+    <Time>
+      <ClockIcon /> {time}
+    </Time>
     <Btns $isBtnVisible={isBtnVisible}>
       <EditBtn
         onClick={(e) => {
@@ -29,6 +32,8 @@ const TimeDetails = styled.div`
   align-items: center;
   justify-content: space-between;
   overflow: hidden;
+  position: relative;
+  bottom: 5px;
 `
 
 const Time = styled.div`
@@ -47,6 +52,11 @@ const Btns = styled(Flex)`
     `
       right: 0;
     `}
+`
+
+const ClockIcon = styled(CiClock2)`
+  position: relative;
+  top: 3px;
 `
 
 const EditBtn = styled(FaPencilAlt)`
