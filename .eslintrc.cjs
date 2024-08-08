@@ -3,7 +3,6 @@ module.exports = {
   env: {
     browser: true,
     es2020: true,
-    node: true,
   },
   extends: [
     'eslint:recommended',
@@ -27,6 +26,5 @@ module.exports = {
     'react/jsx-no-target-blank': 'off',
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
-    'react/prop-types': 'off',
   },
 }
