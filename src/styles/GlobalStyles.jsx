@@ -1,7 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
 import { colorVariables } from './Colors'
+import { useColorMode } from '@chakra-ui/react';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStylesWrapper = createGlobalStyle`
 
   ${colorVariables}
   :root {
@@ -116,7 +117,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'NanumSquare', sans-serif;
     line-height: 1;
-    background: #f8f9fa;
+    background: ${({ theme }) => (theme.colorMode === 'light' ? '#f8f9fa' : '#1a202c')};
+    transition: background 0.3s ease;
   }
   ol,
   ul {
@@ -174,5 +176,11 @@ const GlobalStyle = createGlobalStyle`
   }
   
 `
+
+function GlobalStyle() {
+  const { colorMode } = useColorMode();
+
+  return <GlobalStylesWrapper theme={{ colorMode }} />;
+}
 
 export default GlobalStyle
