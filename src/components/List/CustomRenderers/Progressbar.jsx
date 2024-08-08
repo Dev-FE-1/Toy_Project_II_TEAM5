@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import { colors } from '@styles/Colors'
 import { ProgressBar } from 'react-step-progress-bar'
 
-const CreateProgressbar = ({ completion }) => {
+const CreateProgressbar = ({ item }) => {
+  const { completion } = item
+
   const [percent, setPercent] = useState(0)
 
   useEffect(() => {

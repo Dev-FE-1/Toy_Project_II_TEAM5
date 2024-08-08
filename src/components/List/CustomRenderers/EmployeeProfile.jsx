@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 import { colors } from '@styles/Colors'
 
-function EmployeeProfile({ profile, name, email }) {
+function EmployeeProfile({ item }) {
+  const { profile, name, email } = item
+
   return (
     <>
       <img src={profile} alt={name} />

@@ -10,7 +10,7 @@ function ContentRow({ items, keys, customRenderers }) {
           {keys.map((key) => (
             <GridContent $align="center" $justify="flex-start" $gap="3px" key={`${index}-${key}`}>
               {customRenderers && customRenderers[key]
-                ? React.createElement(customRenderers[key], item)
+                ? React.createElement(customRenderers[key], { item })
                 : item[key]}
             </GridContent>
           ))}

@@ -2,7 +2,9 @@ import styled, { css } from 'styled-components'
 import { colors } from '@styles/Colors'
 import Flex from '@components/shared/Flex'
 
-const EmployeeStatus = ({ isOnline }) => {
+const EmployeeStatus = ({ item }) => {
+  const { isOnline } = item
+
   return (
     <ColoredStatus $justify="center" $isOnline={isOnline}>
       {isOnline ? 'Online' : 'Offline'}
