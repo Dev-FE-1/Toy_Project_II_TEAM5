@@ -4,11 +4,11 @@ import Flex from '@components/shared/Flex'
 import { useColorMode } from '@chakra-ui/react'
 
 function ContentRow({ items, keys, customRenderers }) {
+  const { colorMode } = useColorMode()
+
   if (!Array.isArray(items)) {
     return null
   }
-  const { colorMode } = useColorMode()
-
   return (
     <GridWrap colorMode={colorMode}>
       {items.map((item, index) => (
