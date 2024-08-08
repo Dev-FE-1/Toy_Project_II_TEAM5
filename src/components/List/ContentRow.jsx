@@ -6,6 +6,9 @@ import { useColorMode } from '@chakra-ui/react'
 function ContentRow({ items, keys, customRenderers }) {
   const { colorMode } = useColorMode()
 
+  if (!Array.isArray(items)) {
+    return null
+  }
   return (
     <GridWrap colorMode={colorMode}>
       {items.map((item, index) => (
