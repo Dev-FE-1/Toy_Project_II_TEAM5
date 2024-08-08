@@ -12,17 +12,7 @@ import { Button, useColorMode } from '@chakra-ui/react'
 function UserStatus() {
   const { colorMode, toggleColorMode } = useColorMode()
   const handleLogout = useHandleLogout()
-  // const navigate = useNavigate()
-  // const handleLogout = () => {
-  //   auth
-  //     .signOut()
-  //     .then(() => {
-  //       navigate('/signin')
-  //     })
-  //     .catch((error) => {
-  //       console.error(error)
-  //     })
-  // }
+
   return (
     <Container $gap="20px" $justify="flex-start">
       <Flex $gap="10px">
