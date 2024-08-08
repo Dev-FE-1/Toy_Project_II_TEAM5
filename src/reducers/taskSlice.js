@@ -4,21 +4,18 @@ import { doc, getDoc, updateDoc, setDoc, arrayUnion } from 'firebase/firestore'
 
 const removeLeadingZero = (str) => str.replace(/^0+/, '')
 
-export const fetchTasks = createAsyncThunk(
-  'tasks/fetchTasks',
-  async ({ employeeId, month, day }) => {
-    const stringMonth = removeLeadingZero(month.toString())
-    const stringDay = removeLeadingZero(day.toString())
-    const docRef = doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth)
-    const docSnap = await getDoc(docRef)
-
-    if (docSnap.exists()) {
-      const data = docSnap.data()
-      return data[stringDay] || []
-    }
-    return []
-  }
-)
+export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async ({ employeeId, month }) => {
+  const stringMonth = removeLeadingZero(month.toString())
+  // const stringDay = removeLeadingZero(day.toString())
+  const docRef = doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth)
+  const docSnap = await getDoc(docRef)
+  return docSnap.data()
+  // if (docSnap.exists()) {
+  //   const data = docSnap.data()
+  //   return data[stringDay] || []
+  // }
+  // return []
+})
 
 export const addTask = createAsyncThunk(
   'tasks/addTask',
@@ -36,7 +33,7 @@ export const addTask = createAsyncThunk(
       { merge: true }
     )
 
-    return newTask
+    return { day: stringDay, task: newTask }
   }
 )
 
@@ -58,7 +55,7 @@ export const updateTask = createAsyncThunk(
 
       await updateDoc(docRef, { [stringDay]: updatedTasks })
 
-      return { taskId, taskData }
+      return { day: stringDay, taskId, taskData }
     } else {
       throw new Error('Document does not exist')
     }
@@ -78,7 +75,7 @@ export const deleteTask = createAsyncThunk(
       const tasks = data[stringDay] || []
       const updatedTasks = tasks.filter((task) => task.id !== taskId)
       await updateDoc(docRef, { [stringDay]: updatedTasks })
-      return taskId
+      return { day: stringDay, taskId }
     }
   }
 )
@@ -86,7 +83,7 @@ export const deleteTask = createAsyncThunk(
 const taskSlice = createSlice({
   name: 'tasks',
   initialState: {
-    data: [],
+    data: {},
     status: 'idle',
     error: null,
   },
@@ -96,7 +93,6 @@ const taskSlice = createSlice({
         state.status = 'pending'
       })
       .addCase(fetchTasks.fulfilled, (state, action) => {
-        console.log('fetchTasks fulfilled with payload', action.payload)
         state.status = 'succeeded'
         state.data = action.payload
       })
@@ -108,7 +104,11 @@ const taskSlice = createSlice({
         state.status = 'pending'
       })
       .addCase(addTask.fulfilled, (state, action) => {
-        state.data.push(action.payload)
+        const { day, task } = action.payload
+        if (!state.data[day]) {
+          state.data[day] = []
+        }
+        state.data[day].push(task)
       })
       .addCase(addTask.rejected, (state, action) => {
         state.status = 'failed'
@@ -119,8 +119,9 @@ const taskSlice = createSlice({
       })
       .addCase(updateTask.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        const { taskId, taskData } = action.payload
-        const existingTask = state.data.find((task) => task.id === taskId)
+        const { day, taskId, taskData } = action.payload
+        const tasks = state.data[day] || []
+        const existingTask = tasks.find((task) => task.id === taskId)
         if (existingTask) {
           Object.assign(existingTask, taskData)
         }
@@ -134,7 +135,8 @@ const taskSlice = createSlice({
       })
       .addCase(deleteTask.fulfilled, (state, action) => {
         state.status = 'succeeded'
-        state.data = state.data.filter((task) => task.id !== action.payload)
+        const { day, taskId } = action.payload
+        state.data[day] = state.data[day].filter((task) => task.id !== taskId)
       })
       .addCase(deleteTask.rejected, (state, action) => {
         state.status = 'failed'

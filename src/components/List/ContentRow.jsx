@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import Flex from '@components/shared/Flex'
 
 function ContentRow({ items, keys, customRenderers }) {
+  if (!Array.isArray(items)) {
+    return null
+  }
   return (
     <GridWrap>
       {items.map((item, index) => (
