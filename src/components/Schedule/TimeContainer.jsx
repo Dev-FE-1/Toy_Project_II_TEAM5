@@ -8,7 +8,7 @@ import { CiClock2 } from 'react-icons/ci'
 const TimeContainer = ({ time, isBtnVisible, onEditClick, onDeleteClick }) => (
   <TimeDetails>
     <Time>
-      <ClockIcon /> {time}
+      <CiClock2 /> {time}
     </Time>
     <Btns $isBtnVisible={isBtnVisible}>
       <EditBtn
@@ -36,7 +36,7 @@ const TimeDetails = styled.div`
   bottom: 5px;
 `
 
-const Time = styled.div`
+const Time = styled(Flex)`
   color: ${colors.gray};
   margin-right: 10px;
 `
@@ -52,11 +52,6 @@ const Btns = styled(Flex)`
     `
       right: 0;
     `}
-`
-
-const ClockIcon = styled(CiClock2)`
-  position: relative;
-  top: 3px;
 `
 
 const EditBtn = styled(FaPencilAlt)`

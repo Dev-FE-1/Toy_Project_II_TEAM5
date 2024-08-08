@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 
 function LoginInputField({ title, type, placeholder, value, onChange }) {

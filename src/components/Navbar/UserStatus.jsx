@@ -6,21 +6,13 @@ import AlertIcon from '@assets/icons/alert.svg'
 import ProfileIcon from '@assets/icons/profile.svg'
 // import { useNavigate } from 'react-router-dom'
 // import { auth } from '/src/firebase/firebaseConfig'
-import useHandleLogout from '@hooks/useHandleLogout'
+import useLogout from '@hooks/useLogout'
+import { Button, useColorMode } from '@chakra-ui/react'
 
 function UserStatus() {
-  const handleLogout = useHandleLogout()
-  // const navigate = useNavigate()
-  // const handleLogout = () => {
-  //   auth
-  //     .signOut()
-  //     .then(() => {
-  //       navigate('/signin')
-  //     })
-  //     .catch((error) => {
-  //       console.error(error)
-  //     })
-  // }
+  const { colorMode, toggleColorMode } = useColorMode()
+  const handleLogout = useLogout()
+
   return (
     <Container $gap="20px" $justify="flex-start">
       <Flex $gap="10px">
@@ -28,7 +20,8 @@ function UserStatus() {
         <Message onClick={handleLogout}>Logout</Message>
       </Flex>
       <img src={SettingIcon} alt="setting" />
-      <img src={AlertIcon} alt="alert" />
+      {/* <img src={AlertIcon} alt="alert" /> */}
+      <Button onClick={toggleColorMode}>{colorMode === 'light' ? '🌑' : '🌕'}</Button>
     </Container>
   )
 }

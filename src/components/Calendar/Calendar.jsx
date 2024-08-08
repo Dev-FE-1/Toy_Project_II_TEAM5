@@ -4,15 +4,15 @@ import styled from 'styled-components'
 import CalendarDays from './Calendar-Days'
 import CalendarNavigation from './Calendar-Navigation'
 import CalendarHeader from './Calendar-header'
-// import { useSelector } from 'react-redux'
+import { useColorMode } from '@chakra-ui/react'
 
 const Calendar = ({ ScheduleList }) => {
-  // const { data: tasks } = useSelector((state) => state.tasks)
-  // console.log('calender', tasks)
+  const { colorMode } = useColorMode()
+
   return (
-    <Container>
+    <Container colorMode={colorMode}>
       <CalendarNavigation />
-      <CalendarContents>
+      <CalendarContents colorMode={colorMode}>
         <CalendarHeader />
         <CalendarDays ScheduleList={ScheduleList} />
       </CalendarContents>
@@ -21,18 +21,18 @@ const Calendar = ({ ScheduleList }) => {
 }
 
 const Container = styled(ShadowyBox)`
-  padding: 20px 40px;
-  padding-bottom: 0;
-  background-color: ${colors.white};
-  flex-grow: 1;
+  /* flex-grow: 1; */
   width: 70%;
   overflow: initial;
+  position: relative;
+  height: auto;
 `
 
 const CalendarContents = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  border: 1px solid #e9ecef;
+  border: 1px solid ${({ colorMode }) => (colorMode === 'light' ? '#e9ecef' : colors.gray[600])};
+  height: 90%;
 `
 
 export default Calendar

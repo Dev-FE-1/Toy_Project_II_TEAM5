@@ -1,151 +1,19 @@
-import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Flex from '@components/shared/Flex.jsx'
-import InputField from '@hooks/InputField.jsx'
-
-//firebase
-import { auth } from '/src/firebase/firebaseConfig'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
-
-// const Bold = styled.div`
-//   // font-weight: 700;
-// `
-
-// const Bold = styled.div`
-//   // font-weight: 700;
-// `
-
-// const Txt32 = styled.div`
-//   font-size: 32px;
-// `
-
-// const Txt14 = styled.div`
-//   font-size: 14px;
-// `
-
-// const Txt12 = styled.div`
-//   font-size: 12px;
-// `
-
-// const LoginTop = styled.div`
-//   display: flex;
-//   flex-direction: column;
-// `
-
-// function Main({ color }) {
-//   return (
-//     <>
-//       <MainTitle color={color}>
-//         <Bold>Welcome Back</Bold>
-//       </MainTitle>
-//     </>
-//   )
-// }
-
-// const LoginEmail = styled.div`
-//   margin: 15px 0;
-//   display: flex;
-//   flex-direction: column;
-// `
-
-// const InputSection = styled.div`
-//   margin: 15px 0;
-//   display: flex;
-//   flex-direction: column;
-//   font-weight: 700;
-//   color: var(--black);
-// `
-
-// const LoginInput = styled.input`
-//   font-size: 16px;
-//   border: 1px solid lightgray;
-//   border-radius: 15px;
-//   width: 100%;
-//   height: 50px;
-//   margin-top: 5px;
-//   padding-left: 15px;
-// `
-
-// const LoginPassword = styled.div`
-//   margin: 15px 0;
-//   display: flex;
-//   flex-direction: column;
-// `
-
-// const LoginPasswordInput = styled.input`
-//   border: 1px solid lightgray;
-//   border-radius: 15px;
-//   width: 100%;
-//   height: 50px;
-//   margin-top: 5px;
-//   padding-left: 5%;
-// `
-
-// const ColoredLoginToggle = styled(LoginToggle)`
-//   color: #fff;
-// `
-
-// function LoginInputField({ title, type, placeholder, value, onChange }) {
-//   return (
-//     <>
-//       <label>{title}</label>
-//       <div>
-//         <LoginInput type={type} placeholder={placeholder} value={value} onChange={onChange} />
-//       </div>
-//     </>
-//   )
-// }
+import InputField from '@components/shared/InputField.jsx'
+import useLogin from '@hooks/useLogin.jsx'
 
 function SigninPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [isChecked, setIsChecked] = useState(false)
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const storedEmail = localStorage.getItem('storedEmail')
-    if (storedEmail) {
-      // localStorage에 사용자 정보가 있으면
-      setEmail(storedEmail) // 1. 가져온다. -> Email input창의 value가 됨
-      setIsChecked(true) // 2. toggle checked -> true인 상태로 페이지 불러옴
-    }
-  }, []) // signin이 최초 로드될 때 1번만 실행
-
-  const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password)
-      if (isChecked) {
-        localStorage.setItem('storedEmail', email)
-      } //로그인 성공 시점에 toggle이 true이면 이메일 저장
-      navigate('/')
-    } catch (error) {
-      setError('유효한 아이디, 비밀번호를 입력해주세요!')
-      setTimeout(() => {
-        setError(null)
-      }, 5000)
-      console.log('login failed')
-    }
-  } //로그인 성공 시 메인페이지로, 실패 시 error 메시지 5초간 출력
-
-  function setEmailValue(e) {
-    setEmail(e.target.value)
-  }
-
-  function setPasswordValue(e) {
-    setPassword(e.target.value)
-  }
-
-  function handleIsToggleChecked(e) {
-    if (e.target.checked === true) {
-      setIsChecked(true)
-    } else {
-      setIsChecked(false)
-      localStorage.removeItem('storedEmail')
-    }
-  } // toggle 상태(checked)가 바뀔 때 실행되는 이벤트, default가 false이므로 첫 실행 시 true가 된다
-
+  const {
+    email,
+    setEmailValue,
+    password,
+    setPasswordValue,
+    error,
+    isChecked,
+    handleLogin,
+    handleIsToggleChecked,
+  } = useLogin()
   return (
     <>
       <LoginContainer>

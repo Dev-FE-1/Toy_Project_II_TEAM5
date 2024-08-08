@@ -30,6 +30,7 @@ const PageContainer = styled.div`
 `
 
 const ContentContainer = styled.div`
+  height: 100%;
   display: flex;
   margin: 20px 0;
   gap: 20px;

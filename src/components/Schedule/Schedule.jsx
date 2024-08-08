@@ -24,7 +24,7 @@ const getDivisionColor = (division) => {
   switch (division) {
     case 'Meeting':
       return 'rgba(255, 59, 59, 0.5)'
-    case 'Prepare':
+    case 'Prepared':
       return 'rgba(255, 150, 27, 0.5)'
     case 'External':
       return 'rgba(0, 133, 255, 0.5)'
