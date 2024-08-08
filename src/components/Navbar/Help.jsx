@@ -69,6 +69,7 @@ const ImageContainer = styled(Flex)`
 `
 
 const Button = styled(Flex)`
+  position: relative;
   width: 100%;
   padding: 10px 0;
   background-color: ${colors.white};
@@ -77,6 +78,7 @@ const Button = styled(Flex)`
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
+  z-index: 1;
 `
 
 function Trigger(props) {
