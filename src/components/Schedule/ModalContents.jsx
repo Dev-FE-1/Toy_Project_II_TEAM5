@@ -69,7 +69,7 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
         parseInt(taskData.day, 10),
         parseInt(taskData.hour, 10),
         parseInt(taskData.minute, 10)
-      ).toISOString(), // ISO 문자열로 변환
+      ).toISOString(),
       status: taskData.status,
       division: taskData.division,
       completion: getCompletionValue(taskData.status),

@@ -1,9 +1,10 @@
 import { useState, useContext } from 'react'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
 import { ModalContext } from '../shared/Modal'
 import Flex from '@components/shared/Flex'
 import Horizon from '@components/shared/Horizon'
-import { updateEmployeeTask } from '@mock/updateEmployeeTasks'
+import { updateTask } from '@reducers/taskSlice'
 
 const categories = [
   { name: 'Meeting', color: 'rgba(255, 59, 59, 0.5)' },
@@ -12,40 +13,59 @@ const categories = [
   { name: 'External', color: 'rgba(0, 133, 255, 0.5)' },
 ]
 
+const getDivisionColor = (division) => {
+  const category = categories.find((cat) => cat.name === division)
+  return category ? category.color : '#fff'
+}
+
 const EditModal = ({ employeeId, task, onTaskUpdated, onClose }) => {
   const { setIsOpen } = useContext(ModalContext)
+  const dispatch = useDispatch()
+  const [selectedColor, setSelectedColor] = useState(getDivisionColor(task.division))
   const [taskData, setTaskData] = useState({
     year: task.time.getFullYear(),
     month: task.time.getMonth() + 1,
     day: task.time.getDate(),
     hour: task.time.getHours().toString().padStart(2, '0'),
     minute: task.time.getMinutes().toString().padStart(2, '0'),
-    task: task.title,
-    status: task.status,
-    division: task.division,
+    title: task.title || '',
+    status: task.status || '',
+    division: task.division || '',
   })
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setTaskData((prev) => ({ ...prev, [name]: value }))
+    if (name === 'division') {
+      const selectedCategory = categories.find((cat) => cat.name === value)
+      setSelectedColor(selectedCategory ? selectedCategory.color : '')
+    }
   }
 
   const handleSubmit = async () => {
     const updatedTask = {
-      task: taskData.title,
+      title: taskData.title || '',
       time: new Date(
         taskData.year,
         taskData.month - 1,
         taskData.day,
         parseInt(taskData.hour),
         parseInt(taskData.minute)
-      ),
-      status: taskData.status,
-      division: taskData.division,
+      ).toISOString(),
+      status: taskData.status || '',
+      division: taskData.division || '',
     }
 
     try {
-      await updateEmployeeTask(employeeId, task.id, updatedTask)
+      await dispatch(
+        updateTask({
+          employeeId,
+          month: taskData.month,
+          day: taskData.day,
+          taskId: task.id,
+          taskData: updatedTask,
+        })
+      ).unwrap()
       onTaskUpdated(task.id, updatedTask)
       setIsOpen(false)
       handleClose()
@@ -64,22 +84,12 @@ const EditModal = ({ employeeId, task, onTaskUpdated, onClose }) => {
       <ModalTitle>일정 수정</ModalTitle>
       <Horizon $width="558px" $ml="20px" />
       <Contents
+        selectedColor={selectedColor}
         taskData={taskData}
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         onClose={handleClose}
       />
-      {/* <ButtonContainer>
-        <Button onClick={handleSubmit}>수정 완료</Button>
-        <Button
-          onClick={() => {
-            setIsOpen(false)
-            onClose()
-          }}
-        >
-          취소
-        </Button>
-      </ButtonContainer> */}
     </Form>
   )
 }
@@ -105,7 +115,7 @@ const ModalTitle = styled.h2`
   padding-left: 41px;
 `
 
-function Contents({ taskData, handleInputChange, handleSubmit, onClose }) {
+function Contents({ selectedColor, taskData, handleInputChange, handleSubmit, onClose }) {
   // const { setIsOpen } = useContext(ModalContext)
   const years = Array.from({ length: 10 }, (_, i) => 2024 + i)
   const months = Array.from({ length: 12 }, (_, i) => 1 + i)
@@ -158,8 +168,10 @@ function Contents({ taskData, handleInputChange, handleSubmit, onClose }) {
           />
         </Flex>
       </Content>
-      <Title>할 일</Title>
-      <Input name="task" value={taskData.task} onChange={handleInputChange} />
+      <Title>
+        할 일<CategoryCircle $selectedColor={selectedColor}></CategoryCircle>
+      </Title>
+      <Input name="title" value={taskData.title} onChange={handleInputChange} />
       <Flex $justify="space-between">
         <Half $gap="15px">
           <FlexTitle>상태</FlexTitle>
@@ -248,6 +260,16 @@ const Input = styled.input`
   margin: 10px 0 20px;
   padding: 0 5px;
   font-size: 18px;
+`
+
+const CategoryCircle = styled.span`
+  position: absolute;
+  bottom: -40px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: ${(props) => props.$selectedColor};
 `
 
 const Button = styled.button`

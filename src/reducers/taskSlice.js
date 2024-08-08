@@ -40,7 +40,6 @@ export const addTask = createAsyncThunk(
   }
 )
 
-// Update a task in Firestore
 export const updateTask = createAsyncThunk(
   'tasks/updateTask',
   async ({ employeeId, month, day, taskId, taskData }) => {
@@ -59,11 +58,12 @@ export const updateTask = createAsyncThunk(
       await updateDoc(docRef, { [stringDay]: updatedTasks })
 
       return { taskId, taskData }
+    } else {
+      throw new Error('Document does not exist')
     }
   }
 )
 
-// Delete a task from Firestore
 export const deleteTask = createAsyncThunk(
   'tasks/deleteTask',
   async ({ employeeId, month, day, taskId }) => {

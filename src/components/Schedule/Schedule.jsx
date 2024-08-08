@@ -14,10 +14,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchTasks, addTask, updateTask, deleteTask } from '@reducers/taskSlice.js'
 import { Timestamp } from 'firebase/firestore'
 
-// Utility function to get current month and day
 const getCurrentMonthAndDay = () => {
   const today = new Date()
-  const month = today.getMonth() + 1 // Months are 0-based in JavaScript
+  const month = today.getMonth() + 1
   const day = today.getDate()
   return { month: month.toString(), day: day.toString() }
 }
@@ -57,33 +56,28 @@ export default function Schedule() {
   const [editingTask, setEditingTask] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
-  // Get current month and day
   const { month: currentMonth, day: currentDay } = getCurrentMonthAndDay()
 
   useEffect(() => {
     const employeeId = 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1'
-    console.log('Fetching tasks for:', { employeeId, month: currentMonth, day: currentDay })
     dispatch(fetchTasks({ employeeId, month: currentMonth, day: currentDay }))
   }, [dispatch, currentMonth, currentDay])
-  console.log(currentMonth, currentDay)
 
   const formattedTasks = useMemo(() => {
     return tasks
       .map((task) => {
-        console.log('Raw task:', task) // 원본 데이터 로깅
         return {
           ...task,
           color: getDivisionColor(task.division),
           time: task.time instanceof Timestamp ? task.time.toDate() : new Date(task.time),
           completion: getCompletionValue(task.status),
-          title: task.title || 'Untitled Task', // title이 없을 경우 기본값 설정
+          title: task.title,
         }
       })
       .sort((a, b) => a.time.getTime() - b.time.getTime())
   }, [tasks])
 
   const handleTaskAdded = (newTask) => {
-    console.log('Adding new task:', newTask)
     dispatch(
       addTask({
         uid: 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1',
@@ -91,7 +85,7 @@ export default function Schedule() {
         day: currentDay,
         taskData: {
           ...newTask,
-          time: new Date(newTask.time).toISOString(), // Convert Date to ISO string
+          time: new Date(newTask.time).toISOString(),
           completion: getCompletionValue(newTask.status),
           title: newTask.title || 'New Task',
         },
@@ -113,7 +107,7 @@ export default function Schedule() {
         taskId,
         taskData: {
           ...updatedTask,
-          time: new Date(updatedTask.time).toISOString(), // Convert Date to ISO string
+          time: new Date(updatedTask.time).toISOString(),
           completion: getCompletionValue(updatedTask.status),
         },
       })
