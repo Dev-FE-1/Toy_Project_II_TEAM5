@@ -14,9 +14,7 @@ export const fetchTasks = createAsyncThunk(
 
     if (docSnap.exists()) {
       const data = docSnap.data()
-      return Object.entries(data)
-        .filter(([key]) => key.startsWith(`${stringDay}_`))
-        .map(([key, value]) => ({ id: key.split('_')[1], ...value }))
+      return data[stringDay] || []
     }
     return []
   }
@@ -28,7 +26,7 @@ export const addTask = createAsyncThunk(
     const stringMonth = removeLeadingZero(month.toString())
     const stringDay = removeLeadingZero(day.toString())
     const docRef = doc(db, 'EMPLOYEES', employeeId, 'TASKS', stringMonth)
-    const newTask = { ...taskData, id: Date.now().toString() } // 고유 ID 생성
+    const newTask = { ...taskData, id: Date.now().toString() }
 
     await setDoc(
       docRef,
