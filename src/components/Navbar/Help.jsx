@@ -1,4 +1,5 @@
 import QuestionMarkIcon from '@assets/icons/question-mark-icon'
+import HelpBg from '@assets/help-bg.svg'
 import Flex from '@components/shared/Flex'
 import IconWithBackground from '@components/shared/IconWithBackground'
 import Modal from '@components/shared/Modal'
@@ -39,6 +40,17 @@ const Container = styled.div`
   border-radius: 15px;
   background-color: ${colors.primary};
   color: ${colors.white};
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    right: 5px;
+    top: -27px;
+    width: 200px;
+    height: 200px;
+    background: url('${HelpBg}') no-repeat center/cover;
+    z-index: 0;
+  }
 `
 const Message = styled.span`
   display: block;
@@ -57,6 +69,7 @@ const ImageContainer = styled(Flex)`
 `
 
 const Button = styled(Flex)`
+  position: relative;
   width: 100%;
   padding: 10px 0;
   background-color: ${colors.white};
@@ -65,6 +78,7 @@ const Button = styled(Flex)`
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
+  z-index: 1;
 `
 
 function Trigger(props) {

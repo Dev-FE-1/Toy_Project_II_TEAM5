@@ -11,6 +11,11 @@ import { useNavigate } from 'react-router-dom'
 // const Bold = styled.div`
 //   // font-weight: 700;
 // `
+import { useNavigate } from 'react-router-dom'
+
+// const Bold = styled.div`
+//   // font-weight: 700;
+// `
 
 // const Txt32 = styled.div`
 //   font-size: 32px;
