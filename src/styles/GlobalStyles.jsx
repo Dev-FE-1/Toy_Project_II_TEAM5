@@ -175,6 +175,12 @@ const GlobalStylesWrapper = createGlobalStyle`
     font-style: normal;
   }
   
+  body {
+    &::-webkit-scrollbar {
+    display: none;
+  }
+  }
+
 `
 
 function GlobalStyle() {
