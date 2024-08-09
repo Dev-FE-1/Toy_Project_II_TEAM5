@@ -5,6 +5,7 @@ import Flex from '@components/shared/Flex'
 import Horizon from '@components/shared/Horizon'
 import { useDispatch } from 'react-redux'
 import { addTask } from '@reducers/taskSlice'
+import { CalendarContext } from '@components/Container/calendar-context'
 
 const categories = [
   { name: 'Meeting', color: 'rgba(255, 59, 59, 0.5)' },
@@ -32,12 +33,13 @@ const getCompletionValue = (status) => {
 }
 
 export default function ModalContents({ employeeId, onTaskAdded }) {
+  const { year, month, day } = useContext(CalendarContext)
   const dispatch = useDispatch()
   const [selectedColor, setSelectedColor] = useState('')
   const [taskData, setTaskData] = useState({
-    year: new Date().getFullYear(),
-    month: (new Date().getMonth() + 1).toString().padStart(2, '0'),
-    day: new Date().getDate().toString().padStart(2, '0'),
+    year,
+    month: (month + 1).toString().padStart(2, '0'),
+    day: day.toString().padStart(2, '0'),
     hour: new Date().getHours().toString().padStart(2, '0'),
     minute: (Math.round(new Date().getMinutes() / 10) * 10).toString().padStart(2, '0'),
     task: '',
