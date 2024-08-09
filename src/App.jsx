@@ -7,12 +7,18 @@ import SalaryManagementPage from '@pages/salary-management/salary-management-pag
 import SigninPage from '@pages/signin/signin-page'
 import TaskManagementPage from '@pages/task-management/taskManagement-page'
 import { Navigate, Route, Routes } from 'react-router-dom'
+import styled from 'styled-components'
+import Flex from '@components/shared/Flex.jsx'
 
 function App() {
   const { user, loading } = useAuthState()
 
   if (loading) {
-    return <Loading />
+    return (
+      <Center>
+        <Loading />
+      </Center>
+    )
   }
 
   return (
@@ -31,3 +37,8 @@ function App() {
 }
 
 export default App
+
+const Center = styled(Flex)`
+  width: 100%;
+  height: 100vh;
+`

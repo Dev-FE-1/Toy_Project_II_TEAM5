@@ -39,17 +39,9 @@ const Container = styled.div`
   border-radius: 15px;
   background-color: ${colors.primary};
   color: ${colors.white};
-  position: relative;
-  &::after {
-    content: '';
-    position: absolute;
-    right: 5px;
-    top: -27px;
-    width: 200px;
-    height: 200px;
-    background: url('${HelpBg}') no-repeat center/cover;
-    z-index: 0;
-  }
+  background-image: url('${HelpBg}');
+  background-repeat: no-repeat;
+  background-position: right;
 `
 const Message = styled.span`
   display: block;
