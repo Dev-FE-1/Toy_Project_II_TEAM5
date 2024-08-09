@@ -10,7 +10,7 @@ import { useColorMode } from '@chakra-ui/react'
 function SideNav() {
   const { colorMode } = useColorMode()
   return (
-    <Nav colorMode={colorMode}>
+    <Nav $colorMode={colorMode}>
       <Logo />
       <Horizon />
       <NavItems />
@@ -28,7 +28,7 @@ const Nav = styled.nav`
   height: 100vh;
   padding: 0 20px;
   box-sizing: border-box;
-  background-color: ${({ colorMode }) => (colorMode === 'light' ? '#f8f9fa' : '#2D3748')};
-  color: ${({ colorMode }) => (colorMode === 'light' ? '#000' : '#fff')};
+  background-color: ${({ $colorMode }) => ($colorMode === 'light' ? '#f8f9fa' : '#2D3748')};
+  color: ${({ $colorMode }) => ($colorMode === 'light' ? '#000' : '#fff')};
 `
 export default SideNav

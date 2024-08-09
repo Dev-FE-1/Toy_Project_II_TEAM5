@@ -34,9 +34,8 @@ function Help() {
 }
 
 const Container = styled.div`
-  margin-top: 80px;
+  margin: 130px 0 50px;
   padding: 16px;
-  margin-bottom: 20px;
   border-radius: 15px;
   background-color: ${colors.primary};
   color: ${colors.white};

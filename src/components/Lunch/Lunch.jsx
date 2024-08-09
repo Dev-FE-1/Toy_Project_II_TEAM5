@@ -18,7 +18,7 @@ export default function Lunch() {
             다양한 채소와 고기를 곁들인 서양식 플래터입니다. 신선한 재료로 구성되어 있어 건강한 한
             끼를 제공합니다.
           </Description>
-          <Price colorMode={colorMode}>₩2,000</Price>
+          <Price $colorMode={colorMode}>₩2,000</Price>
           <Calories>칼로리: 750kcal</Calories>
         </WesternFood>
         <KoreanFood>
@@ -29,7 +29,7 @@ export default function Lunch() {
             매콤한 김치와 돼지고기가 어우러진 전통적인 한식 김치찌개입니다. 따뜻하고 매운맛이
             일품입니다.
           </Description>
-          <Price colorMode={colorMode}>₩3,000</Price>
+          <Price $colorMode={colorMode}>₩3,000</Price>
           <Calories>칼로리: 600kcal</Calories>
         </KoreanFood>
       </Menu>
@@ -114,7 +114,7 @@ const Description = styled.p`
 const Price = styled.p`
   font-size: 18px;
   font-weight: bold;
-  color: ${({ colorMode }) => (colorMode === 'light' ? '#2d3748' : '#e2e8f0')};
+  color: ${({ $colorMode }) => ($colorMode === 'light' ? '#2d3748' : '#e2e8f0')};
   margin-bottom: 10px;
 `
 

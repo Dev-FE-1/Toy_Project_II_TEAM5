@@ -10,15 +10,15 @@ function ContentRow({ items, keys, customRenderers }) {
     return null
   }
   return (
-    <GridWrap colorMode={colorMode}>
+    <GridWrap $colorMode={colorMode}>
       {items.map((item, index) => (
-        <GridContainer $count={keys.length} colorMode={colorMode} key={index}>
+        <GridContainer $count={keys.length} $colorMode={colorMode} key={index}>
           {keys.map((key) => (
             <GridContent
               $align="center"
               $justify="flex-start"
               $gap="3px"
-              colorMode={colorMode}
+              $colorMode={colorMode}
               key={`${index}-${key}`}
             >
               {customRenderers && customRenderers[key]
@@ -43,10 +43,10 @@ const GridContainer = styled.div`
   display: grid;
   grid-template-columns: ${(props) => `2fr repeat(${props.$count - 1}, 1fr)`};
   gap: 10px;
-  border-bottom: 1px solid ${({ colorMode }) => (colorMode === 'light' ? '#f3f7fb' : '#4A5568')};
+  border-bottom: 1px solid ${({ $colorMode }) => ($colorMode === 'light' ? '#f3f7fb' : '#4A5568')};
   height: 100%;
-  background-color: ${({ colorMode }) => (colorMode === 'light' ? '#fff' : '#2D3748')};
-  color: ${({ colorMode }) => (colorMode === 'light' ? '#000' : '#fff')};
+  background-color: ${({ $colorMode }) => ($colorMode === 'light' ? '#fff' : '#2D3748')};
+  color: ${({ $colorMode }) => ($colorMode === 'light' ? '#000' : '#fff')};
 `
 
 const GridContent = styled(Flex)`
@@ -55,7 +55,7 @@ const GridContent = styled(Flex)`
   padding: 5px 0;
   overflow: hidden;
   height: 100%;
-  color: ${({ colorMode }) => (colorMode === 'light' ? '#000' : '#fff')};
+  color: ${({ $colorMode }) => ($colorMode === 'light' ? '#000' : '#fff')};
 `
 
 export default ContentRow
