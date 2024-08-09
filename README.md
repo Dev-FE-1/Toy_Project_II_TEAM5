@@ -52,23 +52,7 @@
 ```
 📦src
  ┣ 📂assets // 정적 파일들
- ┃ ┣ 📂employees
- ┃ ┣ 📂icons
- ┃ ┣ 📂lunch
  ┣ 📂components // 컴포넌트
- ┃ ┣ 📂Calendar //캘린더 합성 컴포넌트로 작성한 예시
- ┃ ┃ ┣ 📜Calendar-Days.jsx
- ┃ ┃ ┣ 📜Calendar-Navigation.jsx
- ┃ ┃ ┣ 📜Calendar-header.jsx
- ┃ ┃ ┣ 📜Calendar.jsx
- ┃ ┃ ┗ 📜Month-Selector.jsx
- ┃ ┣ 📂Constant
- ┃ ┣ 📂Container // 데이터 뿌려주던 컨테이너 컴포넌트
- ┃ ┃ ┗ 📜calendar-context.jsx
- ┃ ┣ 📂Footer
- ┃ ┣ 📂Header
- ┃ ┣ 📂List
- ┃ ┣ 📂Lunch
  ┃ ┣ 📂Navbar
  ┃ ┃ ┣ 📜FetchWeather.jsx
  ┃ ┃ ┣ 📜Help.jsx
@@ -78,21 +62,26 @@
  ┃ ┃ ┣ 📜SideNav.jsx
  ┃ ┃ ┣ 📜UserStatus.jsx
  ┃ ┃ ┗ 📜Weather.jsx
- ┃ ┣ 📂Payslip
- ┃ ┣ 📂Schedule
+ ┃ ┣ 📂Calendar //캘린더 합성 컴포넌트로 작성한 예시
+ ┃ ┃ ┣ 📜Calendar-Days.jsx
+ ┃ ┃ ┣ 📜Calendar-Navigation.jsx
+ ┃ ┃ ┣ 📜Calendar-header.jsx
+ ┃ ┃ ┣ 📜Calendar.jsx
+ ┃ ┃ ┗ 📜Month-Selector.jsx
+ ┃ ┣ 📂Container // 데이터 뿌려주던 컨테이너 컴포넌트
+ ┃ ┃ ┗ 📜calendar-context.jsx
+ ┃ ┣ 📂...
  ┃ ┣ 📂shared // 공통 컴포넌트들
  ┃ ┃ ┣ 📜Button.jsx
  ┃ ┃ ┣ 📜Flex.jsx
  ┃ ┃ ┣ 📜Loading.jsx
  ┃ ┃ ┣ 📜Modal.jsx
- ┃ ┃ ┗ 📜ShadowyBox.jsx
+ ┃ ┃ ┗ 📜...
  ┣ 📂firebase // 파이어베이스 초기화 파일
  ┣ 📂hooks // custom hooks
  ┃ ┣ 📜useAttandance.jsx
- ┃ ┣ 📜useAuthState.jsx
  ┃ ┣ 📜useCalendar.jsx
- ┃ ┣ 📜useLogin.jsx
- ┃ ┣ 📜useLogout.jsx
+ ┃ ┣ 📜...
  ┣ 📂mock // 목 데이터
  ┣ 📂pages
  ┃ ┣ 📂home
@@ -100,20 +89,15 @@
  ┃ ┣ 📂salary-management
  ┃ ┣ 📂signin
  ┃ ┣ 📂task-management
- ┃ ┣ 📂test
  ┣ 📂reducers // 리듀서
- ┃ ┣ 📜salarySlice.js
- ┃ ┣ 📜taskSlice.js
- ┃ ┗ 📜userListSlice.js
+ ┃ ┣ 📜userListSlice.js
+ ┃ ┗ ...
  ┣ 📂styles // 공통 css 파일
- ┃ ┣ 📜Colors.jsx
  ┃ ┣ 📜GlobalStyles.jsx
- ┃ ┣ 📜Theme.jsx
- ┃ ┗ 📜shared.jsx
+ ┃ ┗ 📜...
  ┣ 📂utils / 유틸리티 함수들
- ┃ ┣ 📜calcOverTime.js
  ┃ ┣ 📜isHoliday.js
- ┃ ┗ 📜setDateString.js
+ ┃ ┗ 📜...
  ┣ 📜App.jsx
  ┣ 📜index.css
  ┣ 📜main.jsx
@@ -254,7 +238,6 @@
 
 ```jsx
 $ npm install
-$ npm install firebase
 ```
 
 ### 실행
