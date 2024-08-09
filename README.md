@@ -110,7 +110,7 @@
 
 ### 1. Auth
 
-![login](/src/assets/screenshot/login.png)
+![login](/src/assets/screenshot/signin.png)
 
 ### 1.1. 로그인
 
