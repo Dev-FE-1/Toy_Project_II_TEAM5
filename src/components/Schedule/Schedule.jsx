@@ -1,39 +1,21 @@
-import styled from 'styled-components'
-import ScheduleItem from './ScheduleItem'
-import ShadowyBox from '@components/shared/ShadowyBox'
-import { colors } from '@styles/Colors'
 import StyledButton from '@components/shared/Button'
-import { scrollbarStyle } from '@styles/shared'
-import { useState, useEffect, useMemo } from 'react'
-import Modal from '@components/shared/Modal'
-import ModalContents from './ModalContents'
-import EditModal from './EditModalContents'
-import Loading from '@components/shared/Loading'
 import Flex from '@components/shared/Flex'
+import Loading from '@components/shared/Loading'
+import Modal from '@components/shared/Modal'
+import ShadowyBox from '@components/shared/ShadowyBox'
+import { addTask, deleteTask, fetchTasks, updateTask } from '@reducers/taskSlice.js'
+import { colors } from '@styles/Colors'
+import { scrollbarStyle } from '@styles/shared'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchTasks, addTask, updateTask, deleteTask } from '@reducers/taskSlice.js'
+import styled from 'styled-components'
+import EditModal from './EditModalContents'
+import ModalContents from './ModalContents'
+import ScheduleItem from './ScheduleItem'
+import { DIVISION_COLORS } from '@constants/Task'
+import { CalendarContext } from '@components/Container/calendar-context'
 
-const getCurrentMonthAndDay = () => {
-  const today = new Date()
-  const month = today.getMonth() + 1
-  const day = today.getDate()
-  return { month: month.toString(), day: day.toString() }
-}
-
-const getDivisionColor = (division) => {
-  switch (division) {
-    case 'Meeting':
-      return 'rgba(255, 59, 59, 0.5)'
-    case 'Prepared':
-      return 'rgba(255, 150, 27, 0.5)'
-    case 'External':
-      return 'rgba(0, 133, 255, 0.5)'
-    case 'Report':
-      return 'rgb(198, 198, 198)'
-    default:
-      return '#fff'
-  }
-}
+const getDivisionColor = (division) => DIVISION_COLORS[division]
 
 const getCompletionValue = (status) => {
   switch (status) {
@@ -49,22 +31,24 @@ const getCompletionValue = (status) => {
 }
 
 export default function Schedule() {
+  const { month, day } = useContext(CalendarContext)
   const dispatch = useDispatch()
-  const { data: tasks, status } = useSelector((state) => state.tasks)
+  const { data: tasks, status } = useSelector(({ tasks }) => tasks)
   const [activeIndex, setActiveIndex] = useState(null)
   const [editingTask, setEditingTask] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
-  const { month: currentMonth, day: currentDay } = getCurrentMonthAndDay()
+  // console.log('tasks', tasks)
+
+  const employeeId = 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1'
 
   useEffect(() => {
-    const employeeId = 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1'
-    dispatch(fetchTasks({ employeeId, month: currentMonth }))
-  }, [dispatch, currentMonth])
+    dispatch(fetchTasks({ employeeId, month: month + 1 }))
+  }, [dispatch, month])
 
   const dailyTasks = useMemo(() => {
-    return tasks[currentDay] || []
-  }, [tasks, currentDay])
+    return tasks?.[day] || []
+  }, [tasks, day])
 
   const formattedTasks = useMemo(() => {
     return dailyTasks
@@ -84,8 +68,8 @@ export default function Schedule() {
     dispatch(
       addTask({
         uid: 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1',
-        month: currentMonth,
-        day: currentDay,
+        month: month + 1,
+        day,
         taskData: {
           ...newTask,
           completion: getCompletionValue(newTask.status),
@@ -104,8 +88,8 @@ export default function Schedule() {
     dispatch(
       updateTask({
         employeeId: 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1',
-        month: currentMonth,
-        day: currentDay,
+        month: month + 1,
+        day,
         taskId,
         taskData: {
           ...updatedTask,
@@ -123,8 +107,8 @@ export default function Schedule() {
       dispatch(
         deleteTask({
           employeeId: 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1',
-          month: currentMonth,
-          day: currentDay,
+          month: month + 1,
+          day,
           taskId,
         })
       )
@@ -152,9 +136,9 @@ export default function Schedule() {
   return (
     <ScheduleContainer>
       <div style={{ width: '100%' }}>
-        <Title>오늘의 할 일</Title>
+        <h2>오늘의 할 일</h2>
         <ScheduleList>
-          {formattedTasks.length > 0 ? (
+          {Object.keys(formattedTasks).length > 0 ? (
             formattedTasks.map((item, index) => (
               <ScheduleItem
                 key={item.id}
@@ -202,12 +186,12 @@ const ScheduleContainer = styled(ShadowyBox)`
   width: 32%;
   margin-bottom: 10px;
   ${scrollbarStyle}
-`
 
-const Title = styled.div`
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 40px;
+  & h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
 `
 
 const ScheduleList = styled.div`

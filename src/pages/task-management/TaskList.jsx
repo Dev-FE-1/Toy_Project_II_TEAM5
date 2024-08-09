@@ -1,4 +1,5 @@
 import { CalendarContext } from '@components/Container/calendar-context'
+import { DIVISION_COLORS } from '@constants/Task'
 import useAuthState from '@hooks/useAuthState'
 import useCalendar from '@hooks/useCalendar'
 import { fetchTasks } from '@reducers/taskSlice'
@@ -51,13 +52,6 @@ const Container = styled.ul`
   margin: 0;
   list-style: none;
 `
-
-const DIVISION_COLORS = {
-  Meeting: 'rgba(255, 59, 59, 0.5)',
-  Prepared: 'rgba(255, 150, 27, 0.5)',
-  External: 'rgba(0, 133, 255, 0.5)',
-  Report: 'rgb(198, 198, 198)',
-}
 
 const TaskItem = styled.li`
   padding: 6px 8px;
