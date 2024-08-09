@@ -91,6 +91,8 @@
  ┃ ┣ 📜useAttandance.jsx
  ┃ ┣ 📜useAuthState.jsx
  ┃ ┣ 📜useCalendar.jsx
+ ┃ ┣ 📜useLogin.jsx
+ ┃ ┣ 📜useLogout.jsx
  ┣ 📂mock // 목 데이터
  ┣ 📂pages
  ┃ ┣ 📂home
@@ -134,6 +136,9 @@
 
   - 로그인 페이지 구현
   - 사용자 인증
+  - 사용자 정보 없을 때, 페이지 라우팅 제한 기능 구현
+  - 로그인 폼 미입력 시, 로그인 버튼 비활성화 기능 구현
+  - 이메일 기억하기 기능 구현
 
 ### 1.2. 로그 아웃
 
@@ -184,6 +189,8 @@
 
 ### 3.1. 오늘의 할 일 확인
 
+![schedule](/src/assets/screenshot/schedule.png)
+
 - **기능 설명**: 사용자는 날짜를 바탕으로 오늘의 할 일을 확인할 수 있습니다.
 - **필요 기능**:
 
@@ -197,10 +204,14 @@
   - 캘린더 페이지 구현
   - 업무 추가, 삭제, 수정 기능 구현
   - 업무 파이어베이스에 저장 및 표시
+  - 추가, 삭제, 수정한 업무 캘린더에 반영
+    ![schedule2](/src/assets/screenshot/schedule2.png)
+    ![Schedule3](/src/assets/screenshot/schedule3.png)
+    ![schedule4](/src/assets/screenshot/schedule4.png)
 
 ### 3.3. 저장한 일정 확인
 
-- **기능 설명**: 사용자는 캘린더에서 저장된 일정을 확인할 수 있으며, 일정이 있는 경우 다른 일정과 구분되어 표시됩니다.
+- **기능 설명**: 사용자는 캘린더에서 저장된 일정을 확인할 수 있으며, 일정이 있는 경우 카테고리가다른 일정과는 색상으로 구분되어 표시됩니다.
 - **필요 기능**:
   - 데이터 제공을 위한 컨테이너 컴포넌트 구현
   - 업무 데이터를 가져오는 reducer 작성

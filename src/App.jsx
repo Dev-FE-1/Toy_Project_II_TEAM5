@@ -8,7 +8,7 @@ import SigninPage from '@pages/signin/signin-page'
 import TaskManagementPage from '@pages/task-management/taskManagement-page'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import styled from 'styled-components'
-import Flex from '@components/shared/Flex.jsx'
+import Flex from '@components/shared/Flex'
 
 function App() {
   const { user, loading } = useAuthState()
