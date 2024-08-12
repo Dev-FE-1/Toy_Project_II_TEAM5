@@ -54,9 +54,9 @@ function RequestModalContents() {
         <Title>날짜</Title>
         <Content>
           <Flex $gap="60px" $justify="flex-start">
-            <DateSelect data={years} onChange={setYear} />
-            <DateSelect data={months} onChange={setMonth} />
-            <DateSelect data={days} onChange={setDay} />
+            <DateSelect data={years} setDate={setYear} />
+            <DateSelect data={months} setDate={setMonth} />
+            <DateSelect data={days} setDate={setDay} />
           </Flex>
         </Content>
         <Title>내용</Title>
@@ -84,9 +84,9 @@ function RequestModalContents() {
   )
 }
 
-function DateSelect({ data, onChange }) {
+function DateSelect({ data, setDate }) {
   return (
-    <Select onChange={(e) => onChange(e.target.value)}>
+    <Select onChange={(e) => setDate(e.target.value)}>
       {data.map((date) => (
         <option key={date} value={date}>
           {date}
