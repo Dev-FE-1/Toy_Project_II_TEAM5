@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { colors } from '@styles/Colors'
+import { employees } from '@components/Constant/employees'
 
 function Footer() {
-  const names = ['강호연', '김수민', '이동혁', '이윤환', '최원지']
+  const names = employees.map((employee) => employee.name)
   return (
     <FooterContainer>
       <span>
