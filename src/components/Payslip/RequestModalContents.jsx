@@ -87,9 +87,9 @@ function RequestModalContents() {
 function DateSelect({ data, onChange }) {
   return (
     <Select onChange={(e) => onChange(e.target.value)}>
-      {data.map((x) => (
-        <option key={x} value={x}>
-          {x}
+      {data.map((date) => (
+        <option key={date} value={date}>
+          {date}
         </option>
       ))}
     </Select>
