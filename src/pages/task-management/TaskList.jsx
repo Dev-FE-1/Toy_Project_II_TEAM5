@@ -1,20 +1,19 @@
 import { CalendarContext } from '@components/Container/calendar-context'
 import { DIVISION_COLORS } from '@constants/Task'
 import useAuthState from '@hooks/useAuthState'
-import useCalendar from '@hooks/useCalendar'
 import { fetchTasks } from '@reducers/taskSlice'
 import { colors } from '@styles/Colors'
 import { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { FIRSTDAY } from '@constants/calendar'
 
 const TaskList = ({ idx }) => {
   const { month, year } = useContext(CalendarContext)
-  const { firstDayIndex } = useCalendar(year, month)
+  const firstDayIndex = FIRSTDAY(year, month)
   const dispatch = useDispatch()
   const { data: tasks, error } = useSelector(({ tasks }) => tasks)
 
-  // console.log('task', tasks)
   const { user } = useAuthState()
 
   useEffect(() => {

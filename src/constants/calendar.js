@@ -2,6 +2,8 @@ export const WEEKDAY = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
 
 export const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1)
 
+export const FIRSTDAY = (year, month) => new Date(year, month, 1).getDay()
+
 export const HOLIDAYS = [
   { date: '2024-01-01', name: '신정' },
   { date: '2024-02-09', name: '설날 연휴' },

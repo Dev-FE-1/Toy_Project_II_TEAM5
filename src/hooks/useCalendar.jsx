@@ -1,15 +1,12 @@
-import { WEEKDAY } from '@constants/calendar'
 import { useState, useEffect } from 'react'
+import { FIRSTDAY } from '@constants/calendar'
 
 const useCalendar = (year, month) => {
-  const calendarHeader = WEEKDAY
-
   const [calendarDays, setCalendarDays] = useState([])
 
-  const firstDayIndex = new Date(year, month, 1).getDay()
+  const firstDayIndex = FIRSTDAY(year, month)
 
   useEffect(() => {
-    // 이번달의 1일이 일요일이 아닌 경우에 지난달 마지막 주 추가
     let previousMonthDays = []
     if (firstDayIndex !== 0) {
       previousMonthDays = getLastWeekOfPreviousMonth(year, month)
@@ -20,13 +17,13 @@ const useCalendar = (year, month) => {
     setCalendarDays([...previousMonthDays, ...currentMonthDays])
   }, [year, month, firstDayIndex])
 
-  return { calendarHeader, calendarDays, firstDayIndex }
+  return { calendarDays }
 }
 
 //helper
 const getLastWeekOfPreviousMonth = (year, month) => {
-  const lastDayOfPreviousMonth = new Date(year, month, 0) // 전달의 마지막 날
-  const lastDayOfWeek = lastDayOfPreviousMonth.getDay() // 전달의 마지막 날의 요일
+  const lastDayOfPreviousMonth = new Date(year, month, 0)
+  const lastDayOfWeek = lastDayOfPreviousMonth.getDay()
 
   return Array.from(
     { length: lastDayOfWeek + 1 },

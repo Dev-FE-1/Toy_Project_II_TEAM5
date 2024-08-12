@@ -1,15 +1,15 @@
 import { CalendarContext } from '@components/Container/calendar-context'
 import useAttendance from '@hooks/useAttandance'
-import useCalendar from '@hooks/useCalendar'
 import { colors } from '@styles/Colors'
 import { format } from 'date-fns/format'
 import { useContext } from 'react'
 import styled from 'styled-components'
+import { FIRSTDAY } from '@constants/calendar'
 
 function ScheduleList({ idx }) {
   const { month, year } = useContext(CalendarContext)
   const { data } = useAttendance({ month })
-  const { firstDayIndex } = useCalendar(year, month)
+  const firstDayIndex = FIRSTDAY(year, month)
 
   const hasAttendance = !!data && Object.keys(data).length !== 0
   if (!hasAttendance) return <Container />

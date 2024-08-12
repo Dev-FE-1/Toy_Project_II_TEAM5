@@ -1,8 +1,9 @@
-import useCalendar from '@hooks/useCalendar'
+// import useCalendar from '@hooks/useCalendar'
 import styled from 'styled-components'
+import { WEEKDAY } from '@constants/calendar'
 
 function CalendarHeader() {
-  const { calendarHeader } = useCalendar()
+  const calendarHeader = WEEKDAY
 
   return (
     <>
