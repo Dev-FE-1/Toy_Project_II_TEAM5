@@ -7,16 +7,16 @@ import TodoChecklist from './CustomRenderers/TodoChecklist.jsx'
 import TodoMore from './CustomRenderers/TodoMore.jsx'
 import ListComponent from './ListComponent.jsx'
 import Flex from '@components/shared/Flex.jsx'
+import { TODO_KEYS } from '@constants/Keys.js'
+
+const customRenderers = {
+  task: TodoChecklist,
+  completion: Progressbar,
+  more: TodoMore,
+}
 
 function ToDoList() {
   const { todos, loading, header } = useTodoList()
-
-  const keys = ['task', 'status', 'completion', 'more']
-  const customRenderers = {
-    task: TodoChecklist,
-    completion: Progressbar,
-    more: TodoMore,
-  }
 
   if (loading) {
     return (
@@ -32,7 +32,7 @@ function ToDoList() {
         title="오늘의 할 일"
         headers={header}
         items={todos}
-        keys={keys}
+        keys={TODO_KEYS}
         customRenderers={customRenderers}
       />
     </ListContainer>

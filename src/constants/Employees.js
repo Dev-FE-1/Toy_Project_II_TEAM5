@@ -1,4 +1,4 @@
-export const employees = [
+export const EMPLOYEES = [
   {
     name: '강호연',
     email: 'KimPra2989@revive.com',

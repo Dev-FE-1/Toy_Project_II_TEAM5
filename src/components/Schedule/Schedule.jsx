@@ -38,8 +38,6 @@ export default function Schedule() {
   const [editingTask, setEditingTask] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
-  // console.log('tasks', tasks)
-
   const employeeId = 'Zrghj2Jf3CVwQ7jSOmjCXYBBlek1'
 
   useEffect(() => {
