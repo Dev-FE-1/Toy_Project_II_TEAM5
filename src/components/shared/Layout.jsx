@@ -6,7 +6,7 @@ const Container = styled.div`
   display: flex;
 `
 
-const Content = styled.div`
+const Content = styled.section`
   flex-grow: 1;
   padding: 20px;
   padding-bottom: 0;
