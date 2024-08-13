@@ -1,19 +1,40 @@
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import InputField from '@components/shared/InputField.jsx'
 import useLogin from '@hooks/useLogin'
 import Flex from '@components/shared/Flex.jsx'
 
 export default function LoginForm() {
-  const {
-    email,
-    setEmailValue,
-    password,
-    setPasswordValue,
-    error,
-    isChecked,
-    handleLogin,
-    handleIsToggleChecked,
-  } = useLogin()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [isChecked, setIsChecked] = useState(false)
+
+  const { error, handleLogin } = useLogin(email, password, isChecked)
+
+  useEffect(() => {
+    const storedEmail = localStorage.getItem('storedEmail')
+    if (storedEmail) {
+      setEmail(storedEmail)
+      setIsChecked(true)
+    }
+  }, [])
+
+  function setEmailValue(e) {
+    setEmail(e.target.value)
+  }
+
+  function setPasswordValue(e) {
+    setPassword(e.target.value)
+  }
+
+  const handleIsToggleChecked = (e) => {
+    if (e.target.checked) {
+      setIsChecked(true)
+    } else {
+      setIsChecked(false)
+      localStorage.removeItem('storedEmail')
+    }
+  }
 
   return (
     <LoginWrapper>
@@ -43,7 +64,7 @@ export default function LoginForm() {
           이메일 기억하기
         </ToggleLabel>
       </LoginToggle>
-      <LoginSubmitBtn onClick={handleLogin} disabled={!email && !password}>
+      <LoginSubmitBtn onClick={handleLogin} disabled={!email || !password}>
         로그인
       </LoginSubmitBtn>
     </LoginWrapper>
