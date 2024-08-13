@@ -1,13 +1,10 @@
-import Flex from '@components/shared/Flex'
+import ProfileIcon from '@assets/icons/profile.svg'
+import SettingIcon from '@assets/icons/setting.svg'
 import { colors } from '@styles/Colors'
 import styled from 'styled-components'
-import SettingIcon from '@assets/icons/setting.svg'
-import AlertIcon from '@assets/icons/alert.svg'
-import ProfileIcon from '@assets/icons/profile.svg'
-// import { useNavigate } from 'react-router-dom'
-// import { auth } from '/src/firebase/firebaseConfig'
-import useLogout from '@hooks/useLogout'
 import { Button, useColorMode } from '@chakra-ui/react'
+import useLogout from '@hooks/useLogout'
+import Flex from '@components/shared/Flex'
 
 function UserStatus() {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -20,7 +17,6 @@ function UserStatus() {
         <Message onClick={handleLogout}>Logout</Message>
       </Flex>
       <img src={SettingIcon} alt="setting" />
-      {/* <img src={AlertIcon} alt="alert" /> */}
       <Button onClick={toggleColorMode}>{colorMode === 'light' ? '🌑' : '🌕'}</Button>
     </Container>
   )
@@ -32,11 +28,10 @@ const Container = styled(Flex)`
   width: 100%;
   margin-top: auto;
   padding: 16px 0;
-  color: ${colors.white};
   font-weight: bold;
   border-radius: 14px;
 `
-const Message = styled.span`
+const Message = styled.button`
   color: ${colors.gray};
   font-weight: bold;
   cursor: pointer;

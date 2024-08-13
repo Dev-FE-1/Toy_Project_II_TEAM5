@@ -8,6 +8,16 @@ import Horizon from '@components/shared/Horizon'
 import useFetchCorrections from '@hooks/useFetchCorrection'
 import { db } from '@firebase/firebaseConfig'
 
+function SubmitButton({ children, setIsOpen }) {
+  const handleClick = () => {
+    setIsOpen(false)
+  }
+
+  return <Button onClick={handleClick}>{children}</Button>
+}
+
+const isPaidStatus = (item) => item.status === '결제완료'
+
 function CorrectionModalContents() {
   const { setIsOpen } = useContext(ModalContext)
   const { correctionHistory, setCorrectionHistory, error } = useFetchCorrections()
@@ -46,17 +56,13 @@ function CorrectionModalContents() {
     }))
   }
 
-  function SubmitButton({ children }) {
-    const handleClick = () => {
-      setIsOpen(false)
-    }
-
-    return <Button onClick={handleClick}>{children}</Button>
-  }
-
   const sortedCorrectionHistory = correctionHistory.sort((a, b) => {
-    if (a.status === '결제완료' && b.status !== '결제완료') return 1
-    if (a.status !== '결제완료' && b.status === '결제완료') return -1
+    const isAPaid = isPaidStatus(a)
+    const isBPaid = isPaidStatus(b)
+
+    if (isAPaid && !isBPaid) return 1
+    if (!isAPaid && isBPaid) return -1
+
     return new Date(b.date) - new Date(a.date)
   })
 
@@ -89,7 +95,7 @@ function CorrectionModalContents() {
                 <td>
                   <DeleteButton
                     onClick={() => handleDeleteClick(item.id)}
-                    disabled={item.status === '결제완료'}
+                    disabled={isPaidStatus(item)}
                   >
                     삭제
                   </DeleteButton>
@@ -99,9 +105,8 @@ function CorrectionModalContents() {
           </Tbody>
         </Table>
         {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
-        {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
         <Flex>
-          <SubmitButton onClick={() => setIsOpen(false)}>닫기</SubmitButton>
+          <SubmitButton setIsOpen={setIsOpen}>닫기</SubmitButton>
         </Flex>
       </Container>
       {isDeleteConfirmModalOpen && (
