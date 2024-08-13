@@ -8,6 +8,9 @@ function CalendarContextProvider({ children }) {
   const [month, setMonth] = useState(now.getMonth())
   const [day, setDay] = useState(now.getDate())
   // const [month, setMonth] = useState(6)
+  console.log('Year:', year)
+  console.log('Month:', month)
+  console.log('Day:', day)
 
   return (
     <CalendarContext.Provider value={{ year, setYear, month, setMonth, day, setDay }}>

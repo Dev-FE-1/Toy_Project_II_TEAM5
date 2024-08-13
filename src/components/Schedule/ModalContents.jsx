@@ -6,31 +6,10 @@ import Horizon from '@components/shared/Horizon'
 import { useDispatch } from 'react-redux'
 import { addTask } from '@reducers/taskSlice'
 import { CalendarContext } from '@components/Container/calendar-context'
-
-const categories = [
-  { name: 'Meeting', color: 'rgba(255, 59, 59, 0.5)' },
-  { name: 'Report', color: 'rgb(198, 198, 198)' },
-  { name: 'Prepared', color: 'rgba(255, 150, 27, 0.5)' },
-  { name: 'External', color: 'rgba(0, 133, 255, 0.5)' },
-]
-
-const getDivisionColor = (division) => {
-  const category = categories.find((cat) => cat.name === division)
-  return category ? category.color : '#fff'
-}
-
-const getCompletionValue = (status) => {
-  switch (status) {
-    case '완료됨':
-      return 100
-    case '취소됨':
-      return 0
-    case '진행중':
-      return Math.floor(Math.random() * 99) + 1
-    default:
-      return 0
-  }
-}
+import { DIVISION_COLORS } from '@constants/Task'
+import DateSelect from '@components/shared/DateSelect'
+import { getYears, getMonths, getDays, getHours, getMinutes } from '@utils/getDateTime'
+import getCompletionValue from '@utils/getCompletionValue'
 
 export default function ModalContents({ employeeId, onTaskAdded }) {
   const { year, month, day } = useContext(CalendarContext)
@@ -38,7 +17,7 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
   const [selectedColor, setSelectedColor] = useState('')
   const [taskData, setTaskData] = useState({
     year,
-    month: (month + 1).toString().padStart(2, '0'),
+    month: month + 1,
     day: day.toString().padStart(2, '0'),
     hour: new Date().getHours().toString().padStart(2, '0'),
     minute: (Math.round(new Date().getMinutes() / 10) * 10).toString().padStart(2, '0'),
@@ -52,8 +31,8 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
     const { name, value } = e.target
     setTaskData((prev) => ({ ...prev, [name]: value }))
     if (name === 'division') {
-      const selectedCategory = categories.find((cat) => cat.name === value)
-      setSelectedColor(selectedCategory ? selectedCategory.color : '')
+      const selectedColor = DIVISION_COLORS[value] || 'transparent'
+      setSelectedColor(selectedColor)
     }
   }
 
@@ -65,15 +44,17 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
       alert('구분을 선택해주세요.')
       return
     }
+    const dateString = `${taskData.year}.${taskData.month}.${taskData.day}`
     const timeString = `${taskData.hour}:${taskData.minute}`
     const newTask = {
       title: taskData.task,
       time: timeString,
+      date: dateString,
       status: taskData.status,
       division: taskData.division,
       completion: getCompletionValue(taskData.status),
     }
-    console.log('New Task Data:', newTask)
+
     try {
       const actionResult = await dispatch(
         addTask({
@@ -84,7 +65,7 @@ export default function ModalContents({ employeeId, onTaskAdded }) {
         })
       ).unwrap()
 
-      onTaskAdded({ id: actionResult.id, ...newTask, color: getDivisionColor(newTask.division) })
+      onTaskAdded({ id: actionResult.id, ...newTask, color: DIVISION_COLORS[newTask.division] })
       setIsOpen(false)
     } catch (error) {
       console.error('Error adding task:', error)
@@ -130,24 +111,6 @@ const ModalTitle = styled.h2`
 function Contents({ selectedColor, taskData, handleInputChange, handleSubmit }) {
   const { setIsOpen } = useContext(ModalContext)
 
-  function DateSelect({ name, value, onChange, data }) {
-    return (
-      <Select name={name} value={value} onChange={onChange}>
-        {data.map((x) => (
-          <option key={x} value={x}>
-            {x}
-          </option>
-        ))}
-      </Select>
-    )
-  }
-
-  const years = Array.from({ length: 10 }, (_, i) => 2024 + i)
-  const months = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0'))
-  const days = Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, '0'))
-  const hours = Array.from({ length: 24 }, (_, i) => i.toString().padStart(2, '0'))
-  const minutes = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0'))
-
   function SubmitButton({ children, onClick }) {
     return <Button onClick={onClick}>{children}</Button>
   }
@@ -157,26 +120,41 @@ function Contents({ selectedColor, taskData, handleInputChange, handleSubmit }) 
       <Title>날짜</Title>
       <Content>
         <Flex $gap="60px" $justify="flex-start">
-          <DateSelect name="year" value={taskData.year} onChange={handleInputChange} data={years} />
+          <DateSelect
+            name="year"
+            value={taskData.year}
+            onChange={handleInputChange}
+            data={getYears(2024, 10)}
+          />
           <DateSelect
             name="month"
             value={taskData.month}
             onChange={handleInputChange}
-            data={months}
+            data={getMonths()}
           />
-          <DateSelect name="day" value={taskData.day} onChange={handleInputChange} data={days} />
+          <DateSelect
+            name="day"
+            value={taskData.day}
+            onChange={handleInputChange}
+            data={getDays()}
+          />
         </Flex>
       </Content>
       <Title>시간</Title>
       <Content>
         <Flex $gap="60px" $justify="flex-start">
-          <DateSelect name="hour" value={taskData.hour} onChange={handleInputChange} data={hours} />
+          <DateSelect
+            name="hour"
+            value={taskData.hour}
+            onChange={handleInputChange}
+            data={getHours()}
+          />
           :
           <DateSelect
             name="minute"
             value={taskData.minute}
             onChange={handleInputChange}
-            data={minutes}
+            data={getMinutes()}
           />
         </Flex>
       </Content>
@@ -197,9 +175,9 @@ function Contents({ selectedColor, taskData, handleInputChange, handleSubmit }) 
           <FlexTitle>구분</FlexTitle>
           <Select name="division" value={taskData.division} onChange={handleInputChange}>
             <option value="">선택</option>
-            {categories.map((cat) => (
-              <option key={cat.name} value={cat.name}>
-                {cat.name}
+            {Object.keys(DIVISION_COLORS).map((division) => (
+              <option key={division} value={division}>
+                {division}
               </option>
             ))}
           </Select>

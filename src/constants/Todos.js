@@ -1,4 +1,4 @@
-export const todos = [
+export const TODOS = [
   {
     division: 'meeting',
     checklist: '임상 시험 결과 검토 회의',
