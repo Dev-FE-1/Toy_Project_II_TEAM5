@@ -40,6 +40,7 @@ function useLogin() {
   function setPasswordValue(e) {
     setPassword(e.target.value)
   }
+
   const handleIsToggleChecked = (e) => {
     if (e.target.checked) {
       setIsChecked(true)
