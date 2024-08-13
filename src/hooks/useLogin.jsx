@@ -8,6 +8,7 @@ function useLogin(email, password, isChecked) {
   const navigate = useNavigate()
 
   const handleLogin = async () => {
+    event.preventDefault()
     try {
       await signInWithEmailAndPassword(auth, email, password)
       if (isChecked) {

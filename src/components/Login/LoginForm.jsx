@@ -37,7 +37,7 @@ export default function LoginForm() {
   }
 
   return (
-    <LoginWrapper>
+    <LoginWrapper onSubmit={handleLogin}>
       <Flex $align="flex-start" $direction="column">
         <MainTitle>Welcome Back</MainTitle>
         <SubTitle>이메일과 비밀번호를 입력해주세요.</SubTitle>
@@ -64,14 +64,14 @@ export default function LoginForm() {
           이메일 기억하기
         </ToggleLabel>
       </LoginToggle>
-      <LoginSubmitBtn onClick={handleLogin} disabled={!email || !password}>
+      <LoginSubmitBtn type="submit" disabled={!email || !password}>
         로그인
       </LoginSubmitBtn>
     </LoginWrapper>
   )
 }
 
-const LoginWrapper = styled.div`
+const LoginWrapper = styled.form`
   display: flex;
   flex-direction: column;
   width: 50%;
