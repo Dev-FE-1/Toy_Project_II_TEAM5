@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import LoginForm from '@components/Login/LoginForm'
 import LoginBanner from '@components/Login/LoginBanner'
-import TeamNameFooter from '@components/Login/TeamNameFooter'
 
 function SigninPage() {
   return (
@@ -10,7 +9,6 @@ function SigninPage() {
         <LoginForm />
         <LoginBanner />
       </LoginContainer>
-      <TeamNameFooter />
     </>
   )
 }
