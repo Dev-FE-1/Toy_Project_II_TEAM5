@@ -1,60 +1,14 @@
 import styled from 'styled-components'
-import Flex from '@components/shared/Flex.jsx'
-import InputField from '@components/shared/InputField.jsx'
-import useLogin from '@hooks/useLogin.jsx'
+import LoginForm from '@components/Login/LoginForm'
+import LoginBanner from '@components/Login/LoginBanner'
 
 function SigninPage() {
-  const {
-    email,
-    setEmailValue,
-    password,
-    setPasswordValue,
-    error,
-    isChecked,
-    handleLogin,
-    handleIsToggleChecked,
-  } = useLogin()
   return (
     <>
       <LoginContainer>
-        <LoginWrapper>
-          <Flex $align="flex-start" $direction="column">
-            <MainTitle>Welcome Back</MainTitle>
-            <SubTitle>이메일과 비밀번호를 입력해주세요.</SubTitle>
-          </Flex>
-          <InputField
-            title="Email"
-            type="email"
-            placeholder="이메일을 입력해주세요."
-            value={email}
-            onChange={setEmailValue}
-          />
-          <InputField
-            title="Password"
-            type="password"
-            placeholder="패스워드를 입력해주세요."
-            value={password}
-            onChange={setPasswordValue}
-          />
-          <Alert $visible={error}>{error}</Alert>
-          <LoginToggle>
-            <ToggleCheckbox id="toggle" checked={isChecked} onChange={handleIsToggleChecked} />
-            <ToggleLabel htmlFor="toggle">
-              <ToggleButton className="toggle-button" />
-              이메일 기억하기
-            </ToggleLabel>
-          </LoginToggle>
-          <LoginSubmitBtn onClick={handleLogin} disabled={!email && !password}>
-            로그인
-          </LoginSubmitBtn>
-        </LoginWrapper>
-        <LoginThumbnail>
-          <FlexLogo>Revive</FlexLogo>
-        </LoginThumbnail>
+        <LoginForm />
+        <LoginBanner />
       </LoginContainer>
-      <TeamNameFooter>
-        @2024, Made with FastCampus by 강호연 김수민 이동혁 이윤환 최원지
-      </TeamNameFooter>
     </>
   )
 }
@@ -65,144 +19,6 @@ const LoginContainer = styled.div`
   display: flex;
   // align-items: center;
   justify-content: space-between;
-`
-
-const LoginWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  max-width: 400px;
-  margin: auto;
-`
-
-const MainTitle = styled.span`
-  margin: 10px 0;
-  color: #4fd1c5;
-  font-size: 36px;
-  font-weight: 900;
-`
-
-const LoginToggle = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-`
-
-const SubTitle = styled.span`
-  margin: 10px 0;
-  color: #a0aec0;
-  font-size: 14px;
-  font-weight: 700;
-`
-
-const ToggleCheckbox = styled.input.attrs({ type: 'checkbox' })`
-  display: none;
-
-  &:checked + label .toggle-button {
-    background-color: var(--primary);
-  }
-
-  &:checked + label .toggle-button::before {
-    transform: translateX(20px);
-  }
-`
-
-const ToggleLabel = styled.label`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  font-size: 12px;
-  color: var(--black);
-`
-
-const ToggleButton = styled.span`
-  width: 40px;
-  height: 20px;
-  background-color: #f0f0f1;
-  border-radius: 20px;
-  position: relative;
-  transition: background-color 0.3s;
-  margin-right: 8px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    background-color: #fff;
-    border-radius: 50%;
-    top: 1px;
-    left: 1px;
-    transition: transform 0.3s;
-  }
-`
-
-const LoginSubmitBtn = styled.button`
-  width: 100%;
-  height: 45px;
-  border-radius: 10px;
-  border: none;
-  background-color: var(--primary);
-  color: white;
-  margin-top: 30px;
-  cursor: pointer;
-  transition: transform 0.1s;
-
-  &:hover {
-    background-color: gray;
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-
-  &:disabled {
-    background-color: #d3d3d3;
-    cursor: not-allowed;
-    background-color: #d3d3d3;
-    transform: none;
-  }
-`
-
-const LoginThumbnail = styled.div`
-  width: 50%;
-  height: 100%;
-  background-color: var(--primary);
-  border-radius: 0 0 0 15px;
-  background-image: url(/src/assets/icons/wave-left.svg), url(/src/assets/icons/wave-right.svg);
-  background-repeat: no-repeat, no-repeat;
-  background-position: left, right;
-`
-const FlexLogo = styled(Flex)`
-  height: 100%;
-  color: var(--white);
-  font-size: 64px;
-  font-weight: 900;
-
-  &::before {
-    content: '';
-    display: block;
-    background-image: url('/src/assets/logo2.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 120px;
-    height: 120px;
-  }
-`
-const TeamNameFooter = styled.footer`
-  height: 10vh;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  color: rgba(160, 174, 192, 0.3);
-  padding-right: 50px;
-`
-
-const Alert = styled.div`
-  height: 20px;
-  color: red;
-  visibility: ${(props) => (props.$visible ? 'visible' : 'hidden')};
 `
 
 export default SigninPage

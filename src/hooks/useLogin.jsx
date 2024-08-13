@@ -1,24 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { auth } from '/src/firebase/firebaseConfig'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 
-function useLogin() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+function useLogin(email, password, isChecked) {
   const [error, setError] = useState('')
-  const [isChecked, setIsChecked] = useState(false)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const storedEmail = localStorage.getItem('storedEmail')
-    if (storedEmail) {
-      setEmail(storedEmail)
-      setIsChecked(true)
-    }
-  }, [])
-
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault()
     try {
       await signInWithEmailAndPassword(auth, email, password)
       if (isChecked) {
@@ -33,32 +23,9 @@ function useLogin() {
     }
   }
 
-  function setEmailValue(e) {
-    setEmail(e.target.value)
-  }
-
-  function setPasswordValue(e) {
-    setPassword(e.target.value)
-  }
-  const handleIsToggleChecked = (e) => {
-    if (e.target.checked) {
-      setIsChecked(true)
-    } else {
-      setIsChecked(false)
-      localStorage.removeItem('storedEmail')
-    }
-  }
-
   return {
-    email,
-    setEmailValue,
-    password,
-    setPasswordValue,
     error,
-    isChecked,
-    setIsChecked,
     handleLogin,
-    handleIsToggleChecked,
   }
 }
 
