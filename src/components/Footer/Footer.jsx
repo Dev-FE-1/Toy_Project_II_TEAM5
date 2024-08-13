@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import { colors } from '@styles/Colors'
-import { employees } from '@components/Constant/employees'
+import { EMPLOYEES } from '@constants/Employees'
 
 function Footer() {
-  const names = employees.map((employee) => employee.name)
+  const names = EMPLOYEES.map((employee) => employee.name)
   return (
     <FooterContainer>
       <span>
