@@ -10,14 +10,19 @@ import ListComponent from './ListComponent.jsx'
 import Loading from '@components/shared/Loading'
 import Flex from '@components/shared/Flex.jsx'
 import { useState } from 'react'
+import { EMPLOYEE_KEYS } from '@constants/Keys.js'
+
+const customRenderers = {
+  name: EmployeeProfile,
+  position: EmployeePosition,
+  status: EmployeeStatus,
+}
 
 function EmployeeList() {
   const [loading, setLoading] = useState(true)
   const headers = ['성명', '직책', '현황', '입사일']
-  const keys = ['name', 'position', 'status', 'date']
   const dispatch = useDispatch()
 
-  const status = useSelector(({ employeeList }) => employeeList?.status)
   const employeeList = useSelector(({ employeeList }) => employeeList?.data)
 
   useEffect(() => {
@@ -39,15 +44,6 @@ function EmployeeList() {
     fetchData()
   }, [dispatch])
 
-  console.log('status', status)
-  console.log('data', employeeList)
-
-  const customRenderers = {
-    name: EmployeeProfile,
-    position: EmployeePosition,
-    status: EmployeeStatus,
-  }
-
   if (loading) {
     return (
       <Center>
@@ -62,7 +58,7 @@ function EmployeeList() {
         title="직원 목록"
         items={employeeList}
         headers={headers}
-        keys={keys}
+        keys={EMPLOYEE_KEYS}
         customRenderers={customRenderers}
       />
     </ListContainer>

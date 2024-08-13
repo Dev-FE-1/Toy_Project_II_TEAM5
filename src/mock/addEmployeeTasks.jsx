@@ -10,14 +10,8 @@ const addEmployeeTasks = async (uid, taskData) => {
     const docId = `${formattedDate}-${randomId}`
     const docRef = doc(db, 'EMPLOYEES', uid, 'TASKS', docId)
 
-    let completion = 0
-    if (status === '진행중') {
-      completion = Math.floor(Math.random() * 81) + 10
-    } else if (status === '완료함') {
-      completion = 100
-    } else if (status === '취소됨') {
-      completion = 0
-    }
+    const completion =
+      status === '진행중' ? Math.floor(Math.random() * 81) + 10 : status === '완료함' ? 100 : 0
 
     const newTask = {
       completion,
