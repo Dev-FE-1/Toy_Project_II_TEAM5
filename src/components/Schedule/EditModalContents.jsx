@@ -19,7 +19,7 @@ const EditModal = ({ employeeId, task, onTaskUpdated, onClose }) => {
   const [taskData, setTaskData] = useState({
     year: year.toString(),
     month: month.toString(),
-    day: day.padStart.toString(),
+    day: day.toString(),
     hour: hour.padStart(2, '0'),
     minute: minute.padStart(2, '0'),
     title: task.title || '',
