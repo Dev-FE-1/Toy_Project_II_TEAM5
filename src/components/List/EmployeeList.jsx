@@ -12,6 +12,14 @@ import Flex from '@components/shared/Flex.jsx'
 import { useState } from 'react'
 import { EMPLOYEE_KEYS } from '@constants/Keys.js'
 
+import Employee1 from '@assets/employees/employee1.svg'
+import Employee2 from '@assets/employees/employee2.svg'
+import Employee3 from '@assets/employees/employee3.svg'
+import Employee4 from '@assets/employees/employee4.svg'
+import Employee5 from '@assets/employees/employee5.svg'
+
+const profiles = [Employee1, Employee2, Employee3, Employee4, Employee5]
+
 const customRenderers = {
   name: EmployeeProfile,
   position: EmployeePosition,
@@ -23,7 +31,14 @@ function EmployeeList() {
   const headers = ['성명', '직책', '현황', '입사일']
   const dispatch = useDispatch()
 
-  const employeeList = useSelector(({ employeeList }) => employeeList?.data)
+  const employeeList = useSelector(({ employeeList }) =>
+    employeeList?.data?.map((employee, idx) => ({
+      ...employee,
+      profile: profiles[idx],
+    }))
+  )
+
+  console.log('d', employeeList)
 
   useEffect(() => {
     dispatch(fetchEmployeeList())
