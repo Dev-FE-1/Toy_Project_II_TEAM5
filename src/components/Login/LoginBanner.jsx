@@ -1,10 +1,13 @@
 import Flex from '@components/shared/Flex'
 import styled from 'styled-components'
+import bannerLogo from '@assets/logo2.png'
+import bannerWaveLeft from '@assets/icons/wave-left.svg'
+import bannerWaveRight from '@assets/icons/wave-right.svg'
 
 function LoginBanner() {
   return (
-    <LoginThumbnail>
-      <FlexLogo>Revive</FlexLogo>
+    <LoginThumbnail $waveLeft={bannerWaveLeft} $waveRight={bannerWaveRight}>
+      <FlexLogo $logo={bannerLogo}>Revive</FlexLogo>
     </LoginThumbnail>
   )
 }
@@ -14,8 +17,8 @@ const LoginThumbnail = styled.div`
   height: 100%;
   background-color: var(--primary);
   border-radius: 0 0 0 15px;
-  background-image: url(/src/assets/icons/wave-left.svg), url(/src/assets/icons/wave-right.svg);
-  background-repeat: no-repeat, no-repeat;
+  background-image: url(${(props) => props.$waveLeft}), url(${(props) => props.$waveRight});
+  background-repeat: no-repeat;
   background-position: left, right;
 `
 const FlexLogo = styled(Flex)`
@@ -27,7 +30,7 @@ const FlexLogo = styled(Flex)`
   &::before {
     content: '';
     display: block;
-    background-image: url('/src/assets/logo2.png');
+    background-image: url(${(props) => props.$logo});
     background-size: contain;
     background-repeat: no-repeat;
     width: 120px;
