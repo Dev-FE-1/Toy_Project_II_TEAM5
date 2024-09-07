@@ -32,7 +32,6 @@ export const fetchEmployeeList = createAsyncThunk('user/fetchEmployee', async ()
   const employeesList = docSnap.docs.map((doc) => ({
     ...doc.data(),
   }))
-  // console.log('list', employeesList)
 
   return employeesList
 })
